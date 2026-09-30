@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "title": "대만여행 2026",
+    "dates": "2026-10-05 ~ 2026-10-09",
+    "people": 4,
+    "budgetKRW": 1600000,
+    "exchangeRateKRWPerTWD": 42.78
+  },
+  "trains": [
+    {
+      "date": "10/5",
+      "route": "Taipei → Hualien",
+      "departure": "약 16:00",
+      "status": "예정",
+      "note": "예약 후 정확한 열차번호/출발·도착시각 입력"
+    },
+    {
+      "date": "10/8",
+      "route": "Hualien → Taipei",
+      "departure": "11:00",
+      "status": "예정",
+      "note": "10:30 전후 화롄역 도착 목표"
+    }
+  ],
+  "checklist": [
+    {
+      "done": false,
+      "item": "여권",
+      "owner": "각자",
+      "note": "유효기간 확인"
+    },
+    {
+      "done": false,
+      "item": "TWAC 작성",
+      "owner": "총무",
+      "note": "4명분"
+    },
+    {
+      "done": false,
+      "item": "자전거 의류",
+      "owner": "각자",
+      "note": ""
+    },
+    {
+      "done": false,
+      "item": "충전기 / 보조배터리",
+      "owner": "각자",
+      "note": ""
+    },
+    {
+      "done": false,
+      "item": "상비약",
+      "owner": "공동",
+      "note": ""
+    },
+    {
+      "done": false,
+      "item": "우비",
+      "owner": "각자",
+      "note": ""
+    }
+  ],
+  "days": [
+    {
+      "id": "d1",
+      "date": "10/5",
+      "title": "타오위안 → 타이베이 → 화롄",
+      "tags": [
+        "이동",
+        "먹방"
+      ],
+      "items": [
+        [
+          "도착 후",
+          "입국심사 → 수하물 → Airport MRT",
+          "TWAC 완료. 공항 MRT는 Apple Pay·Samsung Pay 등 비접촉 결제 가능."
+        ],
+        [
+          "오후",
+          "Taipei Main → 우육면 → 망고빙수 → 밀크티",
+          "16시 전후 화롄행 열차 예정. 15:20~15:30에는 TRA 구역 복귀 권장."
+        ],
+        [
+          "약 16:00",
+          "Taipei → Hualien",
+          "지정석 열차. 화롄 도착 후 숙소 체크인 → 동대문야시장."
+        ]
+      ],
+      "links": [
+        [
+          "🚆 TRA 예약",
+          "https://www.railway.gov.tw/tra-tip-web/tip/tip001/tip123/query?lang=EN_US"
+        ],
+        [
+          "🥣 우육면",
+          "https://www.google.com/maps/search/?api=1&query=beef+noodles+Taipei+Main+Station"
+        ],
+        [
+          "🥭 망고빙수",
+          "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Taipei"
+        ]
+      ]
+    },
+    {
+      "id": "d2",
+      "date": "10/6",
+      "title": "화롄 해안 라이딩",
+      "tags": [
+        "라이딩"
+      ],
+      "items": [
+        [
+          "오전~15:30",
+          "화롄 → 칠성탄 → 북부 해안 → 복귀",
+          "관광 겸 중거리 라이딩."
+        ],
+        [
+          "16:30 이후",
+          "샤워 → 시내 관광 → 칠성탄 일몰 → 동대문야시장",
+          "늦으면 실내관광 생략."
+        ]
+      ],
+      "links": [
+        [
+          "🌊 칠성탄",
+          "https://www.google.com/maps/search/?api=1&query=Qixingtan+Scenic+Area+Hualien"
+        ],
+        [
+          "🌙 동대문야시장",
+          "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
+        ]
+      ]
+    },
+    {
+      "id": "d3",
+      "date": "10/7",
+      "title": "화동종곡 메인 라이딩",
+      "tags": [
+        "메인 라이딩"
+      ],
+      "items": [
+        [
+          "오전~15:30",
+          "수펑 / 리위탄 / 화동종곡 방향",
+          "컨디션에 따라 80~120km 조정."
+        ],
+        [
+          "저녁",
+          "화롄 시내 먹거리 투어",
+          "炸蛋蔥油餅, 완탕, 공정포자, 묘구홍차 → 동대문야시장."
+        ]
+      ],
+      "links": [
+        [
+          "🚴 리위탄",
+          "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+Hualien"
+        ]
+      ]
+    },
+    {
+      "id": "d4",
+      "date": "10/8",
+      "title": "화롄 → 타이베이 → 베이터우 → 시내 라이딩",
+      "tags": [
+        "회복",
+        "온천",
+        "선택 라이딩"
+      ],
+      "items": [
+        [
+          "05:45~08:15",
+          "선택 A · 새벽 리위탄 라이딩",
+          "눈이 자연스럽게 뜨고 컨디션 좋을 때만. 왕복 약 40~50km 예상."
+        ],
+        [
+          "07:30~09:00",
+          "선택 B · 산책 + 카페 브런치",
+          "피곤하거나 비 오면 회복 우선."
+        ],
+        [
+          "10:30",
+          "화롄역 도착 목표",
+          "11:00 열차 탑승 준비."
+        ],
+        [
+          "11:00",
+          "Hualien → Taipei",
+          "타이베이 도착 후 짐 보관/숙소 → 점심."
+        ],
+        [
+          "오후",
+          "신베이터우 유황온천",
+          "지열곡/온천공원 산책 → 온천. 이후 몸 상태 확인."
+        ],
+        [
+          "17:00~20:00",
+          "컨디션 좋으면 YouBike 관광 라이딩",
+          "중정기념당 → 북문/시먼 → 다다오청 → 단수이강 자전거길 → 닝샤야시장. 피곤하면 MRT/도보로 축소."
+        ],
+        [
+          "20:00~",
+          "닝샤야시장",
+          "마지막 밤 먹방 → 숙소."
+        ]
+      ],
+      "links": [
+        [
+          "🚴 리위탄",
+          "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+Hualien"
+        ],
+        [
+          "♨️ 베이터우",
+          "https://www.google.com/maps/search/?api=1&query=Beitou+Thermal+Valley+Taipei"
+        ],
+        [
+          "🚲 중정기념당",
+          "https://www.google.com/maps/search/?api=1&query=Chiang+Kai-shek+Memorial+Hall+Taipei"
+        ],
+        [
+          "🌙 닝샤야시장",
+          "https://www.google.com/maps/search/?api=1&query=Ningxia+Night+Market+Taipei"
+        ]
+      ]
+    },
+    {
+      "id": "d5",
+      "date": "10/9",
+      "title": "타이베이 → 타오위안공항",
+      "tags": [
+        "귀국"
+      ],
+      "items": [
+        [
+          "아침",
+          "짧은 산책 또는 아침식사",
+          "시간 여유 있을 때만."
+        ],
+        [
+          "약 09:20~",
+          "Taipei Main → Airport MRT",
+          "13:20 국제선. 공항 10:20 전후 도착 목표."
+        ]
+      ],
+      "links": [
+        [
+          "✈️ Airport MRT",
+          "https://www.tymetro.com.tw/tymetro-new/en/"
+        ]
+      ]
+    }
+  ]
+}

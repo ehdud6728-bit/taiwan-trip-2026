@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>대만여행 2026</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--p:#2563eb;--line:#e5e7eb}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;background:var(--bg);color:var(--text)}
+.app{max-width:760px;margin:auto;padding-bottom:92px}
+.hero{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;padding:18px;position:sticky;top:0;z-index:20}
+.hero h1{margin:0 0 5px;font-size:20px}.hero p{margin:0;opacity:.85;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.stat{background:#ffffff1f;border:1px solid #ffffff26;border-radius:12px;padding:9px;text-align:center}.stat b{display:block;font-size:14px}.stat span{font-size:10px;opacity:.8}
+.nav{display:flex;gap:7px;overflow:auto;padding:10px 12px;background:#f6f7fbeb;position:sticky;top:105px;z-index:15;border-bottom:1px solid var(--line)}
+.nav button{border:0;border-radius:999px;background:#fff;padding:9px 12px;font-weight:800;white-space:nowrap}.nav .active{background:var(--p);color:#fff}
+.section{padding:12px}.card{background:#fff;border:1px solid #edf0f4;border-radius:16px;padding:14px;margin-bottom:11px;box-shadow:0 8px 22px #0f172a10}
+.card h2{font-size:17px;margin:0 0 10px}
+.badge{display:inline-block;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;margin:0 4px 8px 0}
+.timeline{border-left:3px solid #bfdbfe;padding-left:14px;margin-left:4px}.item{position:relative;padding:0 0 14px}.item:before{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#2563eb;left:-21px;top:5px;border:3px solid white}
+.time{font-size:11px;color:#2563eb;font-weight:900}.title{font-weight:850;margin:3px 0}.desc{font-size:12px;color:#5b6472;line-height:1.55}
+.btnrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.btn{border:0;border-radius:10px;padding:9px 10px;font-size:11px;font-weight:850;background:#eff6ff;color:#1d4ed8;text-decoration:none}.dark{background:#0f172a;color:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.kv{padding:10px;background:#f8fafc;border:1px solid #eef2f7;border-radius:12px}.kv small{display:block;color:#64748b;margin-bottom:3px}.kv strong{font-size:14px}
+.listrow{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:12px}
+.notice{font-size:11px;color:#64748b;line-height:1.45}.expense{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #e5e7eb;font-size:12px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fffffff2;border-top:1px solid var(--line);z-index:30}.bottom .inner{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:7px 8px calc(7px + env(safe-area-inset-bottom))}
+.bottom button{background:none;border:0;font-size:10px;font-weight:800;color:#475569}.bottom span{display:block;font-size:18px}
+.fab{position:fixed;right:18px;bottom:82px;z-index:45;border:0;border-radius:999px;padding:14px 17px;background:#111827;color:#fff;font-weight:900;box-shadow:0 10px 30px #0f172a3b}
+.sheet{position:fixed;inset:0;background:#0f172a7a;z-index:60;display:none;align-items:flex-end}.sheet.show{display:flex}.panel{width:100%;max-width:760px;margin:auto;background:#fff;border-radius:22px 22px 0 0;padding:16px}
+.big{font-size:30px;font-weight:900;border:0;border-bottom:2px solid #dbeafe;padding:10px 2px;text-align:right;width:100%}
+.chips{display:flex;gap:6px;overflow:auto;padding:5px 0}.chip{border:1px solid #dbe3ec;background:#fff;border-radius:999px;padding:8px 10px;white-space:nowrap;font-weight:800}.chip.active{background:#2563eb;color:#fff;border-color:#2563eb}
+input,select{border:1px solid #dbe1e8;border-radius:10px;padding:10px;font-size:13px}.actions{display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:10px}.actions button{padding:12px;border:0;border-radius:11px;font-weight:900}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <h1>🇹🇼 대만여행 2026</h1>
+  <p id="meta">불러오는 중…</p>
+  <div class="stats">
+    <div class="stat"><b>40만원</b><span>1인 공동경비</span></div>
+    <div class="stat"><b id="spentTop">0원</b><span>누적 사용</span></div>
+    <div class="stat"><b id="remainTop">160만원</b><span>남은 공동경비</span></div>
+  </div>
+</header>
+
+<div class="nav" id="nav"></div>
+<main id="main"></main>
+
+<button class="fab" onclick="openExpense()">＋ 경비</button>
+
+<div class="sheet" id="sheet" onclick="if(event.target.id==='sheet')closeExpense()">
+ <div class="panel">
+  <h2 style="margin:0 0 8px">🧾 빠른 경비 입력</h2>
+  <div style="display:flex;gap:8px;align-items:end">
+   <div style="flex:1"><small>금액</small><input id="amt" class="big" type="number" inputmode="decimal" placeholder="0"></div>
+   <select id="cur"><option>TWD</option><option>KRW</option></select>
+  </div>
+  <small style="display:block;margin-top:10px">분류</small><div class="chips" id="cats"></div>
+  <small style="display:block;margin-top:8px">결제수단</small><div class="chips" id="pays"></div>
+  <input id="memo" style="width:100%;margin-top:8px" placeholder="메모(선택) 예: 우육면 4명">
+  <div class="actions"><button onclick="closeExpense()">취소</button><button style="background:#0f172a;color:#fff" onclick="saveExpense()">저장</button></div>
+ </div>
+</div>
+
+<div class="bottom"><div class="inner">
+ <button onclick="show('d1')"><span>📅</span>일정</button>
+ <button onclick="show('check')"><span>🎒</span>준비물</button>
+ <button onclick="show('train')"><span>🚆</span>열차</button>
+ <button onclick="show('money')"><span>💰</span>경비</button>
+</div></div>
+</div>
+
+<script>
+let DATA=null,active='d1',cat='식비',pay='현금';
+const cats=['식비','야시장','교통','카페/간식','온천/입장','편의점','기타'];
+const pays=['현금','총무카드','개인카드','모바일페이'];
+
+async function load(){
+  DATA=await fetch('trip-data.json?v='+Date.now()).then(r=>r.json());
+  document.getElementById('meta').textContent=DATA.meta.dates+' · '+DATA.meta.people+'명';
+  renderNav(); renderChips(); renderMoney(); show('d1');
+}
+
+function renderNav(){
+  document.getElementById('nav').innerHTML=
+    DATA.days.map(d=>`<button id="n-${d.id}" onclick="show('${d.id}')">${d.date}</button>`).join('')+
+    `<button id="n-check" onclick="show('check')">준비물</button>
+     <button id="n-train" onclick="show('train')">열차</button>
+     <button id="n-money" onclick="show('money')">경비</button>`;
+}
+
+function show(id){
+  active=id;
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+  const b=document.getElementById('n-'+id); if(b)b.classList.add('active');
+  const d=DATA.days.find(x=>x.id===id);
+  if(d){
+    document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+      ${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}
+      <h2>${d.date} · ${d.title}</h2>
+      <div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>
+      <div class="btnrow">${d.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div>
+    </div></section>`;
+    return;
+  }
+  if(id==='check')renderCheck();
+  if(id==='train')renderTrain();
+  if(id==='money')renderMoneyPage();
+}
+
+function renderCheck(){
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>🎒 준비물</h2>
+    <p class="notice">현재는 trip-data.json의 공용 목록입니다. Google Sheets 연동 후 팀원 공동수정형으로 바꿀 수 있습니다.</p>
+    ${DATA.checklist.map(x=>`<div class="listrow"><input type="checkbox" ${x.done?'checked':''} disabled><div><b>${x.item}</b><div class="notice">${x.note||''}</div></div><span>${x.owner}</span></div>`).join('')}
+  </div></section>`;
+}
+
+function renderTrain(){
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>🚆 열차시간</h2>
+    ${DATA.trains.map(x=>`<div class="listrow"><span>${x.date}</span><div><b>${x.route}</b><div class="notice">${x.note}</div></div><strong>${x.departure}</strong></div>`).join('')}
+    <p class="notice">예약 확정 후 trip-data.json만 수정하면 같은 웹주소에서 최신 시간이 표시됩니다.</p>
+  </div></section>`;
+}
+
+function getE(){try{return JSON.parse(localStorage.getItem('tw_expenses_v3')||'[]')}catch(e){return[]}}
+function setE(a){localStorage.setItem('tw_expenses_v3',JSON.stringify(a));renderMoney()}
+
+function renderMoney(){
+  const a=getE(), rate=DATA?DATA.meta.exchangeRateKRWPerTWD:42.78, budget=DATA?DATA.meta.budgetKRW:1600000;
+  const total=Math.round(a.reduce((s,x)=>s+x.krw,0));
+  document.getElementById('spentTop').textContent=total.toLocaleString()+'원';
+  document.getElementById('remainTop').textContent=Math.max(0,budget-total).toLocaleString()+'원';
+  if(active==='money')renderMoneyPage();
+}
+
+function renderMoneyPage(){
+  const a=getE(), budget=DATA.meta.budgetKRW;
+  const total=Math.round(a.reduce((s,x)=>s+x.krw,0));
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>💰 공동경비</h2>
+    <div class="grid2">
+      <div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div>
+      <div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div>
+    </div>
+    <div class="btnrow"><button class="btn dark" onclick="openExpense()">＋ 경비 입력</button><button class="btn" onclick="exportCsv()">CSV 내보내기</button></div>
+    <div style="margin-top:8px">${a.length?a.map((x,i)=>`<div class="expense"><div><b>${x.cat}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${x.pay}${x.memo?' · '+x.memo:''} · ${x.local}</div></div><button onclick="delE(${i})" style="border:0;background:none;color:#dc2626">삭제</button></div>`).join(''):'<p class="notice">아직 입력한 경비가 없습니다.</p>'}</div>
+  </div></section>`;
+}
+
+function renderChips(){
+  document.getElementById('cats').innerHTML=cats.map((x,i)=>`<button class="chip ${i===0?'active':''}" onclick="pick('cat',this,'${x}')">${x}</button>`).join('');
+  document.getElementById('pays').innerHTML=pays.map((x,i)=>`<button class="chip ${i===0?'active':''}" onclick="pick('pay',this,'${x}')">${x}</button>`).join('');
+}
+
+function pick(t,b,v){
+  b.parentElement.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); if(t==='cat')cat=v; else pay=v;
+}
+
+function openExpense(){document.getElementById('sheet').classList.add('show');setTimeout(()=>document.getElementById('amt').focus(),100)}
+function closeExpense(){document.getElementById('sheet').classList.remove('show')}
+
+function saveExpense(){
+  const raw=parseFloat(document.getElementById('amt').value||0); if(!raw)return;
+  const cur=document.getElementById('cur').value, rate=DATA.meta.exchangeRateKRWPerTWD;
+  const memo=document.getElementById('memo').value.trim();
+  const krw=cur==='KRW'?raw:raw*rate;
+  const a=getE();
+  a.unshift({raw,cur,krw,cat,pay,memo,local:new Date().toLocaleString('ko-KR')});
+  setE(a); document.getElementById('amt').value=''; document.getElementById('memo').value=''; closeExpense();
+}
+
+function delE(i){const a=getE();a.splice(i,1);setE(a)}
+
+function exportCsv(){
+  const a=getE(); if(!a.length)return alert('경비 내역이 없습니다.');
+  const rows=[['시간','분류','결제수단','금액','통화','KRW환산','메모'],...a.slice().reverse().map(x=>[x.local,x.cat,x.pay,x.raw,x.cur,Math.round(x.krw),x.memo])];
+  const csv='\uFEFF'+rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),u=URL.createObjectURL(blob),aa=document.createElement('a');
+  aa.href=u; aa.download='대만여행_공동경비.csv'; aa.click(); setTimeout(()=>URL.revokeObjectURL(u),500);
+}
+load();
+</script>
+</body>
+</html>
