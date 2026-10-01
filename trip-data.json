@@ -84,6 +84,11 @@
           "약 16:00",
           "Taipei → Hualien",
           "지정석 열차. 화롄 도착 후 숙소 체크인 → 동대문야시장."
+        ],
+        [
+          "야시장 꼭 먹기",
+          "동대문야시장 추천",
+          "4명이 나눠 먹기: 숯불 옥수수 → 마카오 후추 구아바오 → 원주민 대나무밥/마카오 소시지 → 숯불 오징어 → 굴전 → 취두부. 배가 남으면 큐브 스테이크."
         ]
       ],
       "links": [
@@ -98,6 +103,38 @@
         [
           "🥭 망고빙수",
           "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Taipei"
+        ],
+        [
+          "🌽 동마이쥐 숯불 옥수수 A34",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=3887"
+        ],
+        [
+          "🌶 마카오 후추 구아바오 D19",
+          "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+        ],
+        [
+          "🍢 원주민 대나무밥·마카오 소시지",
+          "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+        ],
+        [
+          "🦑 아메이족 숯불 오징어 A44",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4151"
+        ],
+        [
+          "🦪 굴전 A38",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=243&s=4342"
+        ],
+        [
+          "🧈 취두부 F57",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4349"
+        ],
+        [
+          "🥩 큐브 스테이크 F56",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4364"
+        ],
+        [
+          "📍 동대문야시장 지도",
+          "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
         ]
       ]
     },
@@ -118,6 +155,16 @@
           "16:30 이후",
           "샤워 → 시내 관광 → 칠성탄 일몰 → 동대문야시장",
           "늦으면 실내관광 생략."
+        ],
+        [
+          "야시장 꼭 먹기",
+          "동대문야시장 추천",
+          "4명이 나눠 먹기: 숯불 옥수수 → 마카오 후추 구아바오 → 원주민 대나무밥/마카오 소시지 → 숯불 오징어 → 굴전 → 취두부. 배가 남으면 큐브 스테이크."
+        ],
+        [
+          "추천 정차",
+          "칠성탄 → 가쓰오박물관 → 화롄항 경관교 → Pacific Park",
+          "사진·화장실·간식 보급을 겸한 정차 포인트. 전부 들르기보다 컨디션에 따라 2~3곳 선택."
         ]
       ],
       "links": [
@@ -128,32 +175,176 @@
         [
           "🌙 동대문야시장",
           "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
+        ],
+        [
+          "🌽 동마이쥐 숯불 옥수수 A34",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=3887"
+        ],
+        [
+          "🌶 마카오 후추 구아바오 D19",
+          "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+        ],
+        [
+          "🍢 원주민 대나무밥·마카오 소시지",
+          "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+        ],
+        [
+          "🦑 아메이족 숯불 오징어 A44",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4151"
+        ],
+        [
+          "🦪 굴전 A38",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=243&s=4342"
+        ],
+        [
+          "🧈 취두부 F57",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4349"
+        ],
+        [
+          "🥩 큐브 스테이크 F56",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4364"
+        ],
+        [
+          "📍 동대문야시장 지도",
+          "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
+        ],
+        [
+          "🗺 화롄 자전거 전체 노선도",
+          "assets/hualien-bike-network-map.jpeg"
+        ],
+        [
+          "🌊 칠성탄 해변",
+          "https://www.google.com/maps/search/?api=1&query=Qixingtan+Beach+Hualien"
+        ],
+        [
+          "🐟 칠성탄 가쓰오 박물관",
+          "https://www.google.com/maps/search/?api=1&query=Chihsing+Tan+Katsuo+Museum+Hualien"
+        ],
+        [
+          "🌉 화롄항 경관교",
+          "https://www.google.com/maps/search/?api=1&query=Hualien+Port+Landscape+Bridge"
+        ],
+        [
+          "🌴 Pacific Park",
+          "https://www.google.com/maps/search/?api=1&query=Pacific+Park+Hualien"
+        ],
+        [
+          "📸 Shuguang Bridge",
+          "https://www.google.com/maps/search/?api=1&query=Shuguang+Bridge+Hualien"
+        ],
+        [
+          "🚲 Liangtan Bike Path 공식",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=159&s=3376"
         ]
       ]
     },
     {
       "id": "d3",
       "date": "10/7",
-      "title": "화동종곡 메인 라이딩",
+      "title": "화동종곡 북부 · 약 80km 라이딩",
       "tags": [
-        "메인 라이딩"
+        "메인 라이딩",
+        "약 80km"
       ],
       "items": [
         [
           "오전~15:30",
-          "수펑 / 리위탄 / 화동종곡 방향",
-          "컨디션에 따라 80~120km 조정."
+          "화롄 → 수펑(Shoufeng) → 화동종곡 북부 → 화롄 복귀",
+          "목표 거리는 약 80km. 화동종곡 전체 종주가 아니라 화롄 쪽 북부 구간을 달리는 코스."
+        ],
+        [
+          "라이딩 중",
+          "화동종곡 풍경 감상",
+          "화동종곡(East Rift Valley)은 화롄과 타이둥 사이에서 중앙산맥과 해안산맥 사이로 길게 이어지는 계곡 지대. 논·산·마을 풍경이 특징."
         ],
         [
           "저녁",
           "화롄 시내 먹거리 투어",
           "炸蛋蔥油餅, 완탕, 공정포자, 묘구홍차 → 동대문야시장."
+        ],
+        [
+          "야시장 꼭 먹기",
+          "동대문야시장 추천",
+          "4명이 나눠 먹기: 숯불 옥수수 → 마카오 후추 구아바오 → 원주민 대나무밥/마카오 소시지 → 숯불 오징어 → 굴전 → 취두부. 배가 남으면 큐브 스테이크."
+        ],
+        [
+          "추천 정차",
+          "리위탄 → 리촨 양식장 → 윈산수/바이바오강 중 선택",
+          "80km 목표이므로 전부 들르지 말고 1~2곳만 선택. 리위탄은 활새우, 리촨은 황금조개가 대표 먹거리."
         ]
       ],
       "links": [
         [
-          "🚴 리위탄",
+          "🗺 화동종곡 공식 안내",
+          "https://www.erv-nsa.gov.tw/en/"
+        ],
+        [
+          "📍 화동종곡 지도",
+          "https://www.google.com/maps/search/?api=1&query=East+Rift+Valley+Hualien"
+        ],
+        [
+          "🚲 화롄 자전거 코스",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=161&s=3388"
+        ],
+        [
+          "🌽 동마이쥐 숯불 옥수수 A34",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=3887"
+        ],
+        [
+          "🌶 마카오 후추 구아바오 D19",
+          "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+        ],
+        [
+          "🍢 원주민 대나무밥·마카오 소시지",
+          "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+        ],
+        [
+          "🦑 아메이족 숯불 오징어 A44",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4151"
+        ],
+        [
+          "🦪 굴전 A38",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=243&s=4342"
+        ],
+        [
+          "🧈 취두부 F57",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4349"
+        ],
+        [
+          "🥩 큐브 스테이크 F56",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4364"
+        ],
+        [
+          "📍 동대문야시장 지도",
+          "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
+        ],
+        [
+          "🗺 화롄 자전거 전체 노선도",
+          "assets/hualien-bike-network-map.jpeg"
+        ],
+        [
+          "🏞 리위탄",
           "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+Hualien"
+        ],
+        [
+          "🦐 리위탄 활새우 요리",
+          "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+live+jumping+prawns+Hualien"
+        ],
+        [
+          "🐚 리촨 양식장·황금조개",
+          "https://www.google.com/maps/search/?api=1&query=Lichuan+Aquafarm+Hualien"
+        ],
+        [
+          "🌾 윈산수 꿈의호수",
+          "https://www.google.com/maps/search/?api=1&query=Yunshanshui+Dream+Lake+Hualien"
+        ],
+        [
+          "🌿 바이바오강 자전거 생태길",
+          "https://www.google.com/maps/search/?api=1&query=Baibao+River+Bike+Path+Hualien"
+        ],
+        [
+          "🗺 화동종곡 공식 추천명소",
+          "https://www.erv-nsa.gov.tw/en/attractions/must-visit"
         ]
       ]
     },
@@ -219,6 +410,22 @@
         [
           "🌙 닝샤야시장",
           "https://www.google.com/maps/search/?api=1&query=Ningxia+Night+Market+Taipei"
+        ],
+        [
+          "🗺 화롄 자전거 전체 노선도",
+          "assets/hualien-bike-network-map.jpeg"
+        ],
+        [
+          "🌅 리위탄 새벽 풍경",
+          "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+Hualien"
+        ],
+        [
+          "🚲 리위탄 순환 자전거길",
+          "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=186&s=3386"
+        ],
+        [
+          "🦐 리위탄 활새우 요리",
+          "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+live+jumping+prawns+Hualien"
         ]
       ]
     },
