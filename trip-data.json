@@ -161,6 +161,36 @@
           ]
         },
         {
+          "title": "🥟 딤섬·만두",
+          "links": [
+            [
+              "好正點港式點心 — 렌탈샵 근처 딤섬",
+              "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE+%E5%9C%8B%E8%81%AF%E4%B8%80%E8%B7%AF100%E8%99%9F"
+            ],
+            [
+              "周家蒸餃小籠包 — 샤오롱바오·찐만두",
+              "https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E5%AE%B6%E8%92%B8%E9%A4%83%E5%B0%8F%E7%B1%A0%E5%8C%85+%E8%8A%B1%E8%93%AE+%E5%85%AC%E6%AD%A3%E8%A1%97"
+            ],
+            [
+              "公正包子 — 화롄식 만두·바오",
+              "https://www.google.com/maps/search/?api=1&query=%E5%85%AC%E6%AD%A3%E5%8C%85%E5%AD%90+%E8%8A%B1%E8%93%AE+%E4%B8%AD%E5%B1%B1%E8%B7%AF"
+            ]
+          ]
+        },
+        {
+          "title": "🪿 거위요리",
+          "links": [
+            [
+              "花蓮鵝肉 阿城 — 아청 거위고기",
+              "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E9%B5%9D%E8%82%89+%E9%98%BF%E5%9F%8E+%E5%BB%BA%E5%9C%8B%E8%B7%AF85%E8%99%9F"
+            ],
+            [
+              "鵝肉先生 — Mr. Goose",
+              "https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E8%82%89%E5%85%88%E7%94%9F+%E6%9E%97%E6%A3%AE%E5%BA%97+%E8%8A%B1%E8%93%AE"
+            ]
+          ]
+        },
+        {
           "title": "🚆 이동·열차",
           "links": [
             [
@@ -272,6 +302,11 @@
           "추천 정차",
           "칠성탄 → 신청성 옛거리 → 타이루거 입구·Visitor Center",
           "전부 오래 머무르기보다 사진·커피·간식 위주로 짧게 정차."
+        ],
+        [
+          "아침 추천",
+          "짠두유 + 요우티아오",
+          "鹹豆漿(셴더우장)은 따뜻한 두유에 간장·식초·파·유탸오 등을 곁들이는 짭짤한 조식. 油條(요우티아오)는 찍어 먹거나 燒餅油條로 같이 먹기."
         ]
       ],
       "links": [
@@ -388,6 +423,48 @@
           ]
         },
         {
+          "title": "🍽 화롄 꼭 먹기",
+          "links": [
+            [
+              "好正點港式點心 — 렌탈샵 근처 딤섬",
+              "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE+%E5%9C%8B%E8%81%AF%E4%B8%80%E8%B7%AF100%E8%99%9F"
+            ],
+            [
+              "周家蒸餃小籠包 — 샤오롱바오·찐만두",
+              "https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E5%AE%B6%E8%92%B8%E9%A4%83%E5%B0%8F%E7%B1%A0%E5%8C%85+%E8%8A%B1%E8%93%AE+%E5%85%AC%E6%AD%A3%E8%A1%97"
+            ],
+            [
+              "公正包子 — 화롄식 만두·바오",
+              "https://www.google.com/maps/search/?api=1&query=%E5%85%AC%E6%AD%A3%E5%8C%85%E5%AD%90+%E8%8A%B1%E8%93%AE+%E4%B8%AD%E5%B1%B1%E8%B7%AF"
+            ],
+            [
+              "花蓮鵝肉 阿城 — 아청 거위고기",
+              "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E9%B5%9D%E8%82%89+%E9%98%BF%E5%9F%8E+%E5%BB%BA%E5%9C%8B%E8%B7%AF85%E8%99%9F"
+            ],
+            [
+              "鵝肉先生 — Mr. Goose",
+              "https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E8%82%89%E5%85%88%E7%94%9F+%E6%9E%97%E6%A3%AE%E5%BA%97+%E8%8A%B1%E8%93%AE"
+            ]
+          ]
+        },
+        {
+          "title": "🥣 대만식 아침",
+          "links": [
+            [
+              "鹹豆漿 — 짠두유(셴더우장)",
+              "https://www.google.com/maps/search/?api=1&query=%E9%B9%B9%E8%B1%86%E6%BC%BF+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ],
+            [
+              "油條 — 요우티아오",
+              "https://www.google.com/maps/search/?api=1&query=%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ],
+            [
+              "燒餅油條 — 샤오빙+요우티아오",
+              "https://www.google.com/maps/search/?api=1&query=%E7%87%92%E9%A4%85%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ]
+          ]
+        },
+        {
           "title": "☕ 카페·휴식",
           "links": [
             [
@@ -495,6 +572,11 @@
           "숙소·렌탈",
           "화롄 숙소 / 자전거 렌탈샵",
           "숙소: No. 13, Haibin Street, Hualien City, Taiwan 970 · 렌탈샵: No. 127, Guolian 1st Rd., Guolian Vill., Hualien City, Hualien County 970"
+        ],
+        [
+          "아침 추천",
+          "짠두유 + 요우티아오",
+          "鹹豆漿(셴더우장)은 따뜻한 두유에 간장·식초·파·유탸오 등을 곁들이는 짭짤한 조식. 油條(요우티아오)는 찍어 먹거나 燒餅油條로 같이 먹기."
         ]
       ],
       "links": [
@@ -594,6 +676,23 @@
           ]
         },
         {
+          "title": "🥣 대만식 아침",
+          "links": [
+            [
+              "鹹豆漿 — 짠두유(셴더우장)",
+              "https://www.google.com/maps/search/?api=1&query=%E9%B9%B9%E8%B1%86%E6%BC%BF+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ],
+            [
+              "油條 — 요우티아오",
+              "https://www.google.com/maps/search/?api=1&query=%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ],
+            [
+              "燒餅油條 — 샤오빙+요우티아오",
+              "https://www.google.com/maps/search/?api=1&query=%E7%87%92%E9%A4%85%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ]
+          ]
+        },
+        {
           "title": "🍜 먹거리",
           "links": [
             [
@@ -607,6 +706,43 @@
             [
               "鼎吉大腸鮮蚵麵線 207 — 곱창·굴 면선",
               "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E5%90%89%E5%A4%A7%E8%85%B8%E9%AE%AE%E8%9A%B5%E9%BA%B5%E7%B7%9A+%E8%8A%B1%E8%93%AE"
+            ],
+            [
+              "鯉魚潭阿房小吃活跳蝦 — 활도약새우",
+              "https://www.google.com/maps/search/?api=1&query=%E9%AF%89%E9%AD%9A%E6%BD%AD%E9%98%BF%E6%88%BF%E5%B0%8F%E5%90%83%E6%B4%BB%E8%B7%B3%E8%9D%A6"
+            ],
+            [
+              "潭大陸小吃館 — 새우튀김·활도약새우",
+              "https://www.google.com/maps/search/?api=1&query=%E6%BD%AD%E5%A4%A7%E9%99%B8%E5%B0%8F%E5%90%83%E9%A4%A8+%E9%AF%89%E9%AD%9A%E6%BD%AD"
+            ],
+            [
+              "立川漁場 — 황금조개·생선요리",
+              "https://www.google.com/maps/search/?api=1&query=%E7%AB%8B%E5%B7%9D%E6%BC%81%E5%A0%B4+%E8%8A%B1%E8%93%AE+%E5%A3%BD%E8%B1%90"
+            ]
+          ]
+        },
+        {
+          "title": "🥟 화롄 시내 복귀 후",
+          "links": [
+            [
+              "好正點港式點心 — 렌탈샵 근처 딤섬",
+              "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE+%E5%9C%8B%E8%81%AF%E4%B8%80%E8%B7%AF100%E8%99%9F"
+            ],
+            [
+              "周家蒸餃小籠包 — 샤오롱바오·찐만두",
+              "https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E5%AE%B6%E8%92%B8%E9%A4%83%E5%B0%8F%E7%B1%A0%E5%8C%85+%E8%8A%B1%E8%93%AE+%E5%85%AC%E6%AD%A3%E8%A1%97"
+            ],
+            [
+              "公正包子 — 화롄식 만두·바오",
+              "https://www.google.com/maps/search/?api=1&query=%E5%85%AC%E6%AD%A3%E5%8C%85%E5%AD%90+%E8%8A%B1%E8%93%AE+%E4%B8%AD%E5%B1%B1%E8%B7%AF"
+            ],
+            [
+              "花蓮鵝肉 阿城 — 아청 거위고기",
+              "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E9%B5%9D%E8%82%89+%E9%98%BF%E5%9F%8E+%E5%BB%BA%E5%9C%8B%E8%B7%AF85%E8%99%9F"
+            ],
+            [
+              "鵝肉先生 — Mr. Goose",
+              "https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E8%82%89%E5%85%88%E7%94%9F+%E6%9E%97%E6%A3%AE%E5%BA%97+%E8%8A%B1%E8%93%AE"
             ]
           ]
         },
@@ -712,6 +848,11 @@
           "숙소 이동",
           "화롄 숙소 체크아웃 → 타이베이 숙소",
           "화롄: No. 13, Haibin Street, Hualien City, Taiwan 970 → 타이베이: No. 80, Huayin Street, 建明里, Taipei City 103"
+        ],
+        [
+          "아침 추천",
+          "짠두유 + 요우티아오",
+          "鹹豆漿(셴더우장)은 따뜻한 두유에 간장·식초·파·유탸오 등을 곁들이는 짭짤한 조식. 油條(요우티아오)는 찍어 먹거나 燒餅油條로 같이 먹기."
         ]
       ],
       "links": [
@@ -763,6 +904,23 @@
             [
               "화롄 자전거 전체 노선도",
               "assets/hualien-bike-network-map.jpeg"
+            ]
+          ]
+        },
+        {
+          "title": "🥣 대만식 아침",
+          "links": [
+            [
+              "鹹豆漿 — 짠두유(셴더우장)",
+              "https://www.google.com/maps/search/?api=1&query=%E9%B9%B9%E8%B1%86%E6%BC%BF+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ],
+            [
+              "油條 — 요우티아오",
+              "https://www.google.com/maps/search/?api=1&query=%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+            ],
+            [
+              "燒餅油條 — 샤오빙+요우티아오",
+              "https://www.google.com/maps/search/?api=1&query=%E7%87%92%E9%A4%85%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
             ]
           ]
         },
