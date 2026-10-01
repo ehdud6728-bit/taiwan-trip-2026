@@ -136,6 +136,80 @@
           "📍 동대문야시장 지도",
           "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
         ]
+      ],
+      "linkSections": [
+        {
+          "title": "🍜 타이베이 도착 먹거리",
+          "links": [
+            [
+              "우육면",
+              "https://www.google.com/maps/search/?api=1&query=beef+noodles+Taipei+Main+Station"
+            ],
+            [
+              "망고빙수",
+              "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Taipei"
+            ],
+            [
+              "버블 밀크티",
+              "https://www.google.com/maps/search/?api=1&query=bubble+milk+tea+Taipei+Main+Station"
+            ]
+          ]
+        },
+        {
+          "title": "🚆 이동·열차",
+          "links": [
+            [
+              "TRA 공식 예약",
+              "https://www.railway.gov.tw/tra-tip-web/tip/tip001/tip123/query?lang=EN_US"
+            ],
+            [
+              "타이베이 메인역",
+              "https://www.google.com/maps/search/?api=1&query=Taipei+Main+Station"
+            ]
+          ]
+        },
+        {
+          "title": "🌙 화롄 첫날 · 동대문야시장",
+          "links": [
+            [
+              "숯불 옥수수 A34",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=3887"
+            ],
+            [
+              "마카오 후추 구아바오 D19",
+              "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+            ],
+            [
+              "원주민 대나무밥·마카오 소시지",
+              "https://tour-hualien.hl.gov.tw/en/News_Content.aspx?n=134&s=8065&sms=12366"
+            ],
+            [
+              "아메이족 숯불 오징어 A44",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4151"
+            ],
+            [
+              "굴전 A38",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=243&s=4342"
+            ],
+            [
+              "취두부 F57",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4349"
+            ],
+            [
+              "큐브 스테이크 F56",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=175&s=4364"
+            ]
+          ]
+        },
+        {
+          "title": "🗺 지도",
+          "links": [
+            [
+              "동대문야시장 지도",
+              "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
+            ]
+          ]
+        }
       ]
     },
     {
