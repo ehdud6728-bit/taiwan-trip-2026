@@ -237,35 +237,41 @@
     {
       "id": "d2",
       "date": "10/6",
-      "title": "화롄 해안 라이딩",
+      "title": "북부해안 + 타이루거 입구 맛보기 라이딩",
       "tags": [
-        "라이딩"
+        "해안 라이딩",
+        "타이루거 옵션"
       ],
       "items": [
         [
-          "오전~15:30",
-          "화롄 → 칠성탄 → 북부 해안 → 복귀",
-          "관광 겸 중거리 라이딩."
+          "오전",
+          "화롄 → 칠성탄 → 북부해안",
+          "해안 자전거길을 따라 북쪽으로 이동. 칠성탄에서 사진·간식·화장실 정차."
         ],
         [
-          "16:30 이후",
-          "샤워 → 시내 관광 → 칠성탄 일몰 → 동대문야시장",
-          "늦으면 실내관광 생략."
+          "중간",
+          "신청성(Xincheng) → 타이루거 입구",
+          "컨디션이 좋으면 신청성에서 타이루거 입구·Visitor Center 부근까지 이어서 달리기."
         ],
         [
-          "야시장 꼭 먹기",
-          "동대문야시장 추천",
-          "4명이 나눠 먹기: 숯불 옥수수 → 마카오 후추 구아바오 → 원주민 대나무밥/마카오 소시지 → 숯불 오징어 → 굴전 → 취두부. 배가 남으면 큐브 스테이크."
+          "약 45~60분",
+          "타이루거 맛보기 라이딩",
+          "Taroko Bridge·Visitor Center 주변을 중심으로 짧게 왕복. 협곡 깊숙이 들어가는 구간은 당일 도로통제·낙석·공사 상황 확인 후 결정."
+        ],
+        [
+          "복귀",
+          "북부해안 → 칠성탄 → 화롄",
+          "15:30 전후 복귀 목표. 피로하거나 통제가 있으면 타이루거 구간은 생략하고 해안 코스만 진행."
+        ],
+        [
+          "저녁",
+          "화롄 시내 / 동대문야시장",
+          "라이딩 후 샤워·휴식 후 야시장 먹거리."
         ],
         [
           "추천 정차",
-          "칠성탄 → 가쓰오박물관 → 화롄항 경관교 → Pacific Park",
-          "사진·화장실·간식 보급을 겸한 정차 포인트. 전부 들르기보다 컨디션에 따라 2~3곳 선택."
-        ],
-        [
-          "숙소·렌탈",
-          "화롄 숙소 / 자전거 렌탈샵",
-          "숙소: No. 13, Haibin Street, Hualien City, Taiwan 970 · 렌탈샵: No. 127, Guolian 1st Rd., Guolian Vill., Hualien City, Hualien County 970"
+          "칠성탄 → 신청성 옛거리 → 타이루거 입구·Visitor Center",
+          "전부 오래 머무르기보다 사진·커피·간식 위주로 짧게 정차."
         ]
       ],
       "links": [
@@ -340,7 +346,7 @@
       ],
       "linkSections": [
         {
-          "title": "📸 볼거리",
+          "title": "🌊 북부해안 볼거리",
           "links": [
             [
               "칠성탄 해변",
@@ -357,15 +363,70 @@
             [
               "Pacific Park",
               "https://www.google.com/maps/search/?api=1&query=Pacific+Park+Hualien"
-            ],
-            [
-              "Shuguang Bridge",
-              "https://www.google.com/maps/search/?api=1&query=Shuguang+Bridge+Hualien"
             ]
           ]
         },
         {
-          "title": "🍜 먹거리",
+          "title": "⛰ 타이루거 맛보기",
+          "links": [
+            [
+              "Taroko Visitor Center",
+              "https://www.google.com/maps/search/?api=1&query=Taroko+Visitor+Center+Hualien"
+            ],
+            [
+              "Taroko Bridge",
+              "https://www.google.com/maps/search/?api=1&query=Taroko+Bridge+Hualien"
+            ],
+            [
+              "타이루거 입구",
+              "https://www.google.com/maps/search/?api=1&query=Taroko+Gorge+Entrance+Hualien"
+            ],
+            [
+              "신청성(Xincheng) 옛거리",
+              "https://www.google.com/maps/search/?api=1&query=Xincheng+Old+Street+Hualien"
+            ]
+          ]
+        },
+        {
+          "title": "☕ 카페·휴식",
+          "links": [
+            [
+              "Taroko Visitor Center 휴식·커피",
+              "https://www.taroko.gov.tw/en/titlelist/news(n)/4019"
+            ],
+            [
+              "신청성 카페 검색",
+              "https://www.google.com/maps/search/?api=1&query=cafe+Xincheng+Hualien+Taroko"
+            ],
+            [
+              "칠성탄 카페 검색",
+              "https://www.google.com/maps/search/?api=1&query=cafe+Qixingtan+Hualien"
+            ]
+          ]
+        },
+        {
+          "title": "🛡 도로상황·공식정보",
+          "links": [
+            [
+              "타이루거 최신 도로통제",
+              "https://www.taroko.gov.tw/en/titlelist/news(n)/4520"
+            ],
+            [
+              "Taroko Visitor Center 공식",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=168&s=4268"
+            ],
+            [
+              "화롄 자전거 전체 노선도",
+              "assets/hualien-bike-network-map.jpeg"
+            ],
+            [
+              "Liangtan Bike Path 공식",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=159&s=3376"
+            ]
+          ]
+        },
+        {
+          "title": "🍜 화롄 복귀 후 먹거리",
           "links": [
             [
               "동대문야시장",
@@ -382,41 +443,11 @@
           ]
         },
         {
-          "title": "☕ 카페·휴식",
-          "links": [
-            [
-              "화롄 시내 카페 검색",
-              "https://www.google.com/maps/search/?api=1&query=specialty+coffee+Hualien+City"
-            ],
-            [
-              "칠성탄 카페 검색",
-              "https://www.google.com/maps/search/?api=1&query=cafe+Qixingtan+Hualien"
-            ]
-          ]
-        },
-        {
-          "title": "🗺 지도·공식정보",
-          "links": [
-            [
-              "화롄 자전거 전체 노선도",
-              "assets/hualien-bike-network-map.jpeg"
-            ],
-            [
-              "Liangtan Bike Path 공식",
-              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=159&s=3376"
-            ]
-          ]
-        },
-        {
           "title": "🏨 숙소 · 렌탈",
           "links": [
             [
               "화롄 숙소 지도",
               "https://www.google.com/maps/search/?api=1&query=No.+13%2C+Haibin+Street%2C+Hualien+City%2C+Taiwan+970"
-            ],
-            [
-              "화롄 숙소 주소 복사",
-              "https://www.google.com/maps/search/?api=1&query=No.+13,+Haibin+Street,+Hualien+City,+Taiwan+970"
             ],
             [
               "자전거 렌탈샵 지도",

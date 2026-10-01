@@ -547,8 +547,69 @@ function renderMoneyPage(){
     return;
   }
   let a=SHARED.expenses||[],budget=DATA.meta.budgetKRW,total=Math.round(a.reduce((s,x)=>s+(Number(x.krw)||0),0));
-  document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>💰 공동경비</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'이 기기 임시 저장'}</div><div class="grid2"><div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div><div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div></div><div class="btnrow"><button class="btn dark" onclick="openExpense()">＋ 경비 입력</button><button class="btn" onclick="refreshMoney()">↻</button><button class="btn" onclick="exportCsv()">CSV</button></div>${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<button onclick="delE(${x.row})" style="border:0;background:none;color:#dc2626">삭제</button>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}</div></section>`;
+  document.getElementById('main').innerHTML=`<section class="section">
+    <div class="card">
+      <h2>💰 공동경비</h2>
+      <div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'이 기기 임시 저장'}</div>
+      <div class="grid2">
+        <div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div>
+        <div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div>
+      </div>
+      <div class="btnrow">
+        <button class="btn dark" onclick="openExpense()">＋ 경비 입력</button>
+        <button class="btn" onclick="refreshMoney()">↻ 새로고침</button>
+        <button class="btn" onclick="exportCsv()">CSV</button>
+      </div>
+      <div style="margin-top:8px">
+        ${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<button onclick="delE(${x.row})" style="border:0;background:none;color:#dc2626">삭제</button>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h2>🏧 ATM · 현금인출</h2>
+      <div class="link-sections">
+        <div class="link-sector">
+          <h3>✈️ 타오위안 공항</h3>
+          <div class="notice" style="margin-bottom:8px">도착층 은행 ATM에서 인출 가능. 카드사 해외 ATM 수수료와 별개로 현지 ATM 수수료가 표시될 수 있습니다.</div>
+          <div class="btnrow">
+            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ATM+Taoyuan+International+Airport">공항 ATM 지도</a>
+          </div>
+        </div>
+
+        <div class="link-sector">
+          <h3>🚉 타이베이 메인역 주변</h3>
+          <div class="notice" style="margin-bottom:8px">Taipei Main Station 또는 인근 Cathay United Bank ATM 후보.</div>
+          <div class="btnrow">
+            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ATM+Taipei+Main+Station">타이베이 메인역 ATM</a>
+            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+77+Boai+Road+Taipei">Cathay Bo'ai Rd 지점</a>
+          </div>
+        </div>
+
+        <div class="link-sector">
+          <h3>🚉 화롄역 주변</h3>
+          <div class="notice" style="margin-bottom:8px">화롄역 ATM 또는 Cathay United Bank 화롄 지점 이용.</div>
+          <div class="btnrow">
+            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ATM+Hualien+Station">화롄역 ATM</a>
+            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+163+Minguo+Road+Hualien">Cathay 화롄 지점</a>
+          </div>
+        </div>
+
+        <div class="link-sector">
+          <h3>⚠️ 인출할 때 꼭 확인</h3>
+          <div class="notice">
+            1. 카드 삽입 → PIN<br>
+            2. 계좌 선택 시 보통 <b>Default Account</b><br>
+            3. 금액 선택<br>
+            4. 환율변환 화면이 나오면 <b>Defer Conversion</b> 또는 <b>Decline Conversion</b><br>
+            5. 통화 선택은 <b>TWD</b><br><br>
+            <b>원화(KRW) 환율변환을 선택하지 않는 게 핵심입니다.</b> ATM 자체 수수료가 표시되면 그 화면이 최종 기준입니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
 }
+
 async function refreshMoney(){
   if(!ready()){renderMoney();renderMoneyPage();return;}
   SHARED_LOADED=false;
