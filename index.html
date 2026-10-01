@@ -351,6 +351,39 @@ body{padding-bottom:105px!important}
 .food-meta-row{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;color:#334155}
 .food-meta-row b{flex:0 0 68px;color:#0f172a}
 
+
+/* 맛집 지역 구분: 스크롤 중 현재 지역을 계속 표시 */
+.food-region{
+  position:relative;
+  margin:0 0 26px!important;
+  padding:0 0 8px;
+  border-radius:20px;
+}
+.food-region h3{
+  position:sticky;
+  top:0;
+  z-index:8;
+  margin:0 -2px 12px!important;
+  padding:11px 14px;
+  border-radius:14px;
+  background:rgba(239,246,255,.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 4px 14px rgba(37,99,235,.10);
+  border:1px solid #dbeafe;
+  color:#1d4ed8;
+  font-size:16px!important;
+  font-weight:900;
+}
+.food-region:not(:first-child){
+  padding-top:8px;
+  border-top:2px solid #eef2f7;
+}
+.food-card{
+  margin-left:4px!important;
+  margin-right:4px!important;
+}
+
 </style>
 </head>
 <body>
