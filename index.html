@@ -319,10 +319,21 @@ function renderStay(){
   </div></section>`;
 }
 
-function renderCheck(){let a=SHARED.checklist||[];document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🎒 준비물</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div><div class="btnrow"><button class="btn dark" onclick="addChecklist()">＋ 준비물</button><button class="btn" onclick="loadShared().then(renderCheck)">↻</button></div>${a.map(x=>`<div class="listrow"><input type="checkbox" ${x.done?'checked':''} onchange="toggleCheck(${x.row||0},this.checked)"><div><b>${esc(x.item)}</b><div class="notice">${esc(x.note||'')}</div></div><div style="text-align:right">${esc(x.owner||'')}${x.row?`<br><button class="rowbtn danger" onclick="delCheck(${x.row})">삭제</button>`:''}</div></div>`).join('')}</div></section>`}
-function toggleCheck(row,done){if(row)postShared({action:'setChecklist',row,done},renderCheck)}
+function getLocalChecklistState(){try{return JSON.parse(localStorage.getItem('tw_check_state_v1')||'{}')}catch(e){return{}}}
+function setLocalChecklistState(key,done){let s=getLocalChecklistState();s[key]=!!done;localStorage.setItem('tw_check_state_v1',JSON.stringify(s))}
+function checklistKey(x){return 'item:'+(x.item||'')+'|owner:'+(x.owner||'')}
+function renderCheck(){
+  let a=SHARED.checklist||[],s=getLocalChecklistState();
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>🎒 준비물</h2>
+    <div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'목록은 공용 · 체크는 내 기기에만 저장':'체크는 내 기기에만 저장'}</div>
+    <div class="btnrow"><button class="btn dark" onclick="addChecklist()">＋ 준비물</button><button class="btn" onclick="loadShared().then(renderCheck)">↻</button></div>
+    ${a.map(x=>{let key=checklistKey(x),checked=!!s[key];return `<div class="listrow"><input type="checkbox" ${checked?'checked':''} onchange="toggleCheckLocal('${encodeURIComponent(key)}',this.checked)"><div><b>${esc(x.item)}</b><div class="notice">${esc(x.note||'')}</div></div><div style="text-align:right">${esc(x.owner||'')}${x.row?`<br><button class="rowbtn danger" onclick="delCheck(${x.row})">삭제</button>`:''}</div></div>`}).join('')}
+  </div></section>`;
+}
+function toggleCheckLocal(encodedKey,done){setLocalChecklistState(decodeURIComponent(encodedKey),done)}
 function addChecklist(){let item=prompt('준비물');if(!item)return;postShared({action:'addChecklist',item,owner:prompt('담당','각자')||'',note:prompt('메모','')||''},renderCheck)}
-function delCheck(row){if(confirm('삭제할까요?'))postShared({action:'deleteChecklist',row},renderCheck)}
+function delCheck(row){if(confirm('이 준비물 항목을 공용 목록에서 삭제할까요?'))postShared({action:'deleteChecklist',row},renderCheck)}
 function renderTrain(){let a=SHARED.trains||[];document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🚆 열차시간</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(x.departure||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(x.arrival)}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}</div></section>`}
 function editTrain(row){let x=SHARED.trains.find(v=>v.row===row);if(!x)return;postShared({action:'updateTrain',row,departure:prompt('출발시간',x.departure||'')??x.departure,arrival:prompt('도착시간',x.arrival||'')??x.arrival,trainNo:prompt('열차번호',x.trainNo||'')??x.trainNo,status:prompt('예약상태',x.status||'')??x.status,note:prompt('메모',x.note||'')??x.note},renderTrain)}
 function getLocal(){try{return JSON.parse(localStorage.getItem('tw_expenses_v3')||'[]')}catch(e){return[]}}
