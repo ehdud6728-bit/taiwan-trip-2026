@@ -212,6 +212,10 @@ body{padding-bottom:96px}
 .atm-shot img{width:100%;display:block;border-radius:14px}
 .atm-shot h4{margin:0 0 8px;font-size:15px;font-weight:900;color:#0f172a}
 .atm-shot .caption{margin-top:8px;font-size:13px;line-height:1.5;color:#475569}
+.atm-rank{display:grid;gap:10px}
+.atm-rank-item{border:1px solid #e5edf6;border-radius:16px;padding:12px;background:#fff}
+.atm-rank-item b{display:block;margin-bottom:5px;font-size:14px}
+.atm-rank-item .sub{font-size:12px;line-height:1.5;color:#64748b}
 
 </style>
 </head>
@@ -473,33 +477,54 @@ function renderTrain(){
     return;
   }
   let a=SHARED.trains||[];
-  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
-    <h2>🚆 열차시간</h2>
-    <div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>
-    <div class="btnrow">
-      <button class="btn" onclick="refreshTrain()">↻ 새로고침</button>
-    </div>
-    ${a.map(x=>`<div class="listrow">
-      <span>${esc(x.date)}</span>
-      <div>
-        <b>${esc(x.route)}</b>
-        <div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div>
-      </div>
-      <div style="text-align:right">
-        <strong>${esc(displayTrainTime(x.departure)||'미정')}</strong>
-        ${x.arrival?`<div class="notice">→ ${esc(displayTrainTime(x.arrival))}</div>`:''}
-        ${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}
-      </div>
-    </div>`).join('')}
-  </div></section>`;
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🚆 열차시간</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(displayTrainTime(x.departure)||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(displayTrainTime(x.arrival))}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}</div></section>`;
 }
-async function refreshTrain(){
-  if(!ready()){renderTrain();return;}
-  SHARED_LOADED=false;
-  renderTrain();
-  const ok=await loadShared(true);
-  if(ok)LAST_SHARED_SIG=sharedSignature(SHARED);
-  renderTrain();
+let TRAIN_EDIT_ROW=null;
+let TRAIN_PERIOD={dep:'AM',arr:'AM'};
+function parse24(v){
+  const s=String(v||'').trim();
+  const m=s.match(/(\d{1,2}):(\d{2})/);
+  if(!m)return {period:'AM',hour:'12',minute:'00'};
+  let h=parseInt(m[1],10), min=m[2], period=h>=12?'PM':'AM';
+  let h12=h%12; if(h12===0)h12=12;
+  return {period,hour:String(h12),minute:min};
+}
+function ensureTimeOptions(){
+  ['depHour','arrHour'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && !el.options.length){
+      for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=String(i);o.textContent=String(i);el.appendChild(o)}
+    }
+  });
+  ['depMinute','arrMinute'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && !el.options.length){
+      for(let i=0;i<60;i+=5){let v=String(i).padStart(2,'0'),o=document.createElement('option');o.value=v;o.textContent=v;el.appendChild(o)}
+    }
+  });
+}
+function setPeriod(which,period){
+  TRAIN_PERIOD[which]=period;
+  const am=document.getElementById(which+'AM'), pm=document.getElementById(which+'PM');
+  if(am)am.classList.toggle('active',period==='AM');
+  if(pm)pm.classList.toggle('active',period==='PM');
+}
+function applyTime(which,value){
+  ensureTimeOptions();
+  const t=parse24(value);
+  setPeriod(which,t.period);
+  document.getElementById(which+'Hour').value=t.hour;
+  let m=parseInt(t.minute||'0',10);
+  m=Math.max(0,Math.min(55,Math.round(m/5)*5));
+  document.getElementById(which+'Minute').value=String(m).padStart(2,'0');
+}
+function to24(which){
+  let h=parseInt(document.getElementById(which+'Hour').value||'12',10);
+  const m=document.getElementById(which+'Minute').value||'00';
+  const period=TRAIN_PERIOD[which]||'AM';
+  if(period==='AM' && h===12)h=0;
+  if(period==='PM' && h!==12)h+=12;
+  return String(h).padStart(2,'0')+':'+m;
 }
 function editTrain(row){
   const x=SHARED.trains.find(v=>v.row===row); if(!x)return;
@@ -546,10 +571,7 @@ function renderMoneyPage(){
     document.getElementById('main').innerHTML=`<section class="section"><div class="card">
       <h2>💰 공동경비</h2>
       <div class="syncbar"><span class="dot"></span>Google Sheet에서 경비를 불러오는 중...</div>
-      <div class="grid2">
-        <div class="kv"><small>누적 사용</small><strong>—</strong></div>
-        <div class="kv"><small>남은 경비</small><strong>—</strong></div>
-      </div>
+      <div class="grid2"><div class="kv"><small>누적 사용</small><strong>—</strong></div><div class="kv"><small>남은 경비</small><strong>—</strong></div></div>
     </div></section>`;
     return;
   }
@@ -558,76 +580,35 @@ function renderMoneyPage(){
     <div class="card">
       <h2>💰 공동경비</h2>
       <div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'이 기기 임시 저장'}</div>
-      <div class="grid2">
-        <div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div>
-        <div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div>
-      </div>
-      <div class="btnrow">
-        <button class="btn dark" onclick="openExpense()">＋ 경비 입력</button>
-        <button class="btn" onclick="refreshMoney()">↻ 새로고침</button>
-        <button class="btn" onclick="exportCsv()">CSV</button>
-      </div>
-      <div style="margin-top:8px">
-        ${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<button onclick="delE(${x.row})" style="border:0;background:none;color:#dc2626">삭제</button>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}
-      </div>
+      <div class="grid2"><div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div><div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div></div>
+      <div class="btnrow"><button class="btn dark" onclick="openExpense()">＋ 경비 입력</button><button class="btn" onclick="refreshMoney()">↻ 새로고침</button><button class="btn" onclick="exportCsv()">CSV</button></div>
+      <div style="margin-top:8px">${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<button onclick="delE(${x.row})" style="border:0;background:none;color:#dc2626">삭제</button>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}</div>
     </div>
 
     <div class="card" style="margin-top:14px">
       <h2>🏧 ATM · 현금인출</h2>
       <div class="link-sections">
         <div class="link-sector">
-          <h3>✈️ 타오위안 공항</h3>
-          <div class="notice" style="margin-bottom:8px">도착층 은행 ATM에서 인출 가능. 카드사 해외 ATM 수수료와 별개로 현지 ATM 수수료가 표시될 수 있습니다.</div>
-          <div class="btnrow">
-            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ATM+Taoyuan+International+Airport">공항 ATM 지도</a>
+          <h3>✅ 추천 ATM 우선순위</h3>
+          <div class="atm-rank">
+            <div class="atm-rank-item"><b>1순위 · Cathay United Bank 國泰世華</b><div class="sub">여행자 사용 사례에서 현지 ATM 수수료가 없었다는 보고가 많아 우선 검색. 초록 나무 로고가 특징.</div></div>
+            <div class="atm-rank-item"><b>2순위 · Bank of Taiwan 臺灣銀行</b><div class="sub">공항·도심에서 찾기 쉬운 국영은행. 해외카드 인출 시 수수료가 표시되지 않았다는 여행자 사례가 있어 두 번째 후보로 추천.</div></div>
+            <div class="atm-rank-item"><b>후순위 · CTBC 中國信託</b><div class="sub">7-Eleven 등에 많아 편리하지만 해외카드에 현지 ATM 수수료가 붙는 사례가 있어 먼저 Cathay/Bank of Taiwan을 찾아보는 편이 좋음.</div></div>
           </div>
         </div>
 
-        <div class="link-sector">
-          <h3>🚉 타이베이 메인역 주변</h3>
-          <div class="notice" style="margin-bottom:8px">Taipei Main Station 또는 인근 Cathay United Bank ATM 후보.</div>
-          <div class="btnrow">
-            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ATM+Taipei+Main+Station">타이베이 메인역 ATM</a>
-            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+77+Boai+Road+Taipei">Cathay Bo'ai Rd 지점</a>
-          </div>
-        </div>
+        <div class="link-sector"><h3>✈️ 타오위안 공항</h3><div class="notice" style="margin-bottom:8px">도착층에서 먼저 <b>Bank of Taiwan</b> 또는 <b>Cathay United</b> ATM을 찾아보세요. 화면에 별도 ATM 수수료가 나오면 다른 기기를 비교해도 됩니다.</div><div class="btnrow"><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bank+of+Taiwan+ATM+Taoyuan+International+Airport">Bank of Taiwan 공항 ATM</a><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+ATM+Taoyuan+International+Airport">Cathay 공항 ATM</a></div></div>
 
-        <div class="link-sector">
-          <h3>🚉 화롄역 주변</h3>
-          <div class="notice" style="margin-bottom:8px">화롄역 ATM 또는 Cathay United Bank 화롄 지점 이용.</div>
-          <div class="btnrow">
-            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ATM+Hualien+Station">화롄역 ATM</a>
-            <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+163+Minguo+Road+Hualien">Cathay 화롄 지점</a>
-          </div>
-        </div>
+        <div class="link-sector"><h3>🚉 타이베이 메인역 주변</h3><div class="notice" style="margin-bottom:8px">Taipei Main Station 주변에서 두 은행을 우선 검색.</div><div class="btnrow"><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+ATM+Taipei+Main+Station">Cathay ATM</a><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bank+of+Taiwan+ATM+Taipei+Main+Station">Bank of Taiwan ATM</a><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+77+Boai+Road+Taipei">Cathay Bo'ai Rd 지점</a></div></div>
 
-        <div class="link-sector">
-          <h3>⚠️ 인출할 때 꼭 확인</h3>
-          <div class="notice">
-            1. 카드 삽입 → PIN<br>
-            2. 계좌 선택 시 보통 <b>Default Account</b><br>
-            3. 금액 선택<br>
-            4. 환율변환 화면이 나오면 <b>Defer Conversion</b> 또는 <b>Decline Conversion</b><br>
-            5. 통화 선택은 <b>TWD</b><br><br>
-            <b>원화(KRW) 환율변환을 선택하지 않는 게 핵심입니다.</b> ATM 자체 수수료가 표시되면 그 화면이 최종 기준입니다.
-          </div>
-        </div>
+        <div class="link-sector"><h3>🚉 화롄역 주변</h3><div class="notice" style="margin-bottom:8px">화롄에서도 Cathay United → Bank of Taiwan 순으로 검색해보는 방식.</div><div class="btnrow"><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+ATM+Hualien">Cathay ATM</a><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bank+of+Taiwan+ATM+Hualien">Bank of Taiwan ATM</a><a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cathay+United+Bank+163+Minguo+Road+Hualien">Cathay 화롄 지점</a></div></div>
 
-        <div class="link-sector">
-          <h3>🖼 ATM 예시 이미지</h3>
-          <div class="atm-gallery">
-            <div class="atm-shot">
-              <h4>예시 1 · Cathay United Bank ATM 찾기</h4>
-              <img src="assets/atm-cathay-example.jpg" alt="Cathay United Bank ATM 예시">
-              <div class="caption">초록 나무 로고와 <b>Cathay United Bank ATM</b> 간판을 찾으면 됩니다. 여행 중에는 공항·역 주변에서 이 간판이 보이면 후보 ATM으로 보면 됩니다.</div>
-            </div>
-            <div class="atm-shot">
-              <h4>예시 2 · 실제 인출 순서 요약</h4>
-              <img src="assets/atm-guide-steps.jpg" alt="대만 ATM 인출 순서 예시">
-              <div class="caption"><b>초록 나무 간판 찾기 → 카드 → 비밀번호 → Default Account → 금액 선택 → Defer Conversion → 인출</b> 순서로 진행하면 됩니다.</div>
-            </div>
-          </div>
-        </div>
+        <div class="link-sector"><h3>⚠️ 인출할 때 꼭 확인</h3><div class="notice">1. 카드 삽입 → PIN<br>2. 계좌 선택 시 보통 <b>Default Account</b><br>3. 금액 선택<br>4. 환율변환 화면이 나오면 <b>Defer Conversion</b> 또는 <b>Decline Conversion</b><br>5. 통화 선택은 <b>TWD</b><br><br><b>KRW 환율변환(DCC)을 선택하지 않는 것이 핵심.</b> 현지 ATM 수수료가 화면에 별도로 표시되면 그 안내가 최종 기준입니다.</div></div>
+
+        <div class="link-sector"><h3>🖼 ATM 예시 이미지</h3><div class="atm-gallery">
+          <div class="atm-shot"><h4>예시 1 · Cathay United Bank ATM 찾기</h4><img src="assets/atm-cathay-example.jpg" alt="Cathay United Bank ATM 예시"><div class="caption">초록 나무 로고와 <b>Cathay United Bank ATM</b> 간판을 찾으면 됩니다.</div></div>
+          <div class="atm-shot"><h4>예시 2 · 인출 순서 요약</h4><img src="assets/atm-guide-steps.jpg" alt="대만 ATM 인출 순서 예시"><div class="caption"><b>초록 나무 간판 → 카드 → PIN → Default Account → 금액 → Defer Conversion → 인출</b></div></div>
+        </div></div>
       </div>
     </div>
   </section>`;
