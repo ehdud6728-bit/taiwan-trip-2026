@@ -959,6 +959,31 @@
           ]
         },
         {
+          "title": "🍜 타이베이 도착 후 추천",
+          "links": [
+            [
+              "劉山東牛肉麵 — 타이베이 메인역 우육면",
+              "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E5%B1%B1%E6%9D%B1%E7%89%9B%E8%82%89%E9%BA%B5+Taipei"
+            ],
+            [
+              "金峰魯肉飯 — 중정기념당 루러우판",
+              "https://www.google.com/maps/search/?api=1&query=%E9%87%91%E5%B3%B0%E9%AD%AF%E8%82%89%E9%A3%AF+Taipei"
+            ],
+            [
+              "鼎泰豐 — 샤오롱바오·딤섬",
+              "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E6%B3%B0%E8%B1%90+Taipei"
+            ],
+            [
+              "西門町 망고빙수",
+              "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Ximending+Taipei"
+            ],
+            [
+              "西門町 버블티",
+              "https://www.google.com/maps/search/?api=1&query=bubble+tea+Ximending+Taipei"
+            ]
+          ]
+        },
+        {
           "title": "🥞 계란파전 · 炸蛋蔥油餅",
           "links": [
             [
@@ -1038,6 +1063,31 @@
               "https://www.google.com/maps/search/?api=1&query=No.+80%2C+Huayin+Street%2C+%E5%BB%BA%E6%98%8E%E9%87%8C%2C+Taipei+City+103"
             ]
           ]
+        },
+        {
+          "title": "🌙 닝샤야시장·다다오청 먹거리",
+          "links": [
+            [
+              "方家雞肉飯 — 닭고기덮밥",
+              "https://www.google.com/maps/search/?api=1&query=%E6%96%B9%E5%AE%B6%E9%9B%9E%E8%82%89%E9%A3%AF+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+            ],
+            [
+              "劉芋仔 — 타로볼",
+              "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E8%8A%8B%E4%BB%94+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+            ],
+            [
+              "蚵仔煎 — 굴전",
+              "https://www.google.com/maps/search/?api=1&query=%E8%9A%B5%E4%BB%94%E7%85%8E+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+            ],
+            [
+              "慈聖宮美食街 — 다다오청 로컬 먹거리",
+              "https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%A8%BB%E5%9F%95+%E6%85%88%E8%81%96%E5%AE%AE+%E7%BE%8E%E9%A3%9F+%E5%8F%B0%E5%8C%97"
+            ],
+            [
+              "迪化街 — 전통과자·차·기념품",
+              "https://www.google.com/maps/search/?api=1&query=%E8%BF%AA%E5%8C%96%E8%A1%97+dessert+tea+Taipei"
+            ]
+          ]
         }
       ]
     },
@@ -1073,11 +1123,41 @@
       ],
       "linkSections": [
         {
+          "title": "🥣 출국일 아침 추천",
+          "links": [
+            [
+              "阜杭豆漿 — 짠두유·요우티아오·샤오빙",
+              "https://www.google.com/maps/search/?api=1&query=%E9%98%9C%E6%9D%AD%E8%B1%86%E6%BC%BF+Taipei"
+            ],
+            [
+              "타이베이 메인역 대만식 아침",
+              "https://www.google.com/maps/search/?api=1&query=Taiwanese+breakfast+Taipei+Main+Station"
+            ],
+            [
+              "劉山東牛肉麵 — 시간이 되면 이른 점심",
+              "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E5%B1%B1%E6%9D%B1%E7%89%9B%E8%82%89%E9%BA%B5+Taipei"
+            ]
+          ]
+        },
+        {
           "title": "🏨 마지막날 숙소",
           "links": [
             [
               "타이베이 숙소 지도",
               "https://www.google.com/maps/search/?api=1&query=No.+80%2C+Huayin+Street%2C+%E5%BB%BA%E6%98%8E%E9%87%8C%2C+Taipei+City+103"
+            ]
+          ]
+        },
+        {
+          "title": "☕ 공항 가기 전 간단히",
+          "links": [
+            [
+              "화인제·타이베이 메인역 카페",
+              "https://www.google.com/maps/search/?api=1&query=cafe+Huayin+Street+Taipei+Main+Station"
+            ],
+            [
+              "타이베이 메인역 베이커리·간식",
+              "https://www.google.com/maps/search/?api=1&query=bakery+Taipei+Main+Station"
             ]
           ]
         }
@@ -1211,22 +1291,82 @@
       "region": "타이베이",
       "items": [
         {
-          "name": "타이베이 우육면",
-          "food": "牛肉麵",
-          "desc": "도착 첫날 먹기 좋은 대만 대표 면요리.",
-          "map": "https://www.google.com/maps/search/?api=1&query=beef+noodles+Taipei+Main+Station"
+          "name": "劉山東牛肉麵",
+          "food": "우육면",
+          "desc": "타이베이 메인역·화인제 숙소에서 접근하기 좋은 오래된 우육면집. 도착·출국 전 한 끼로 편함.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E5%B1%B1%E6%9D%B1%E7%89%9B%E8%82%89%E9%BA%B5+Taipei"
         },
         {
-          "name": "망고빙수",
-          "food": "芒果冰",
-          "desc": "도착 후 디저트로 먹기 좋은 대만 대표 빙수.",
-          "map": "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Taipei"
+          "name": "富宏牛肉麵",
+          "food": "우육면",
+          "desc": "시먼딩 북쪽에서 늦게까지 우육면을 먹기 좋은 곳. 진한 국물과 푸짐한 양으로 유명한 편.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%AF%8C%E5%AE%8F%E7%89%9B%E8%82%89%E9%BA%B5+Taipei"
         },
         {
-          "name": "버블티",
-          "food": "珍珠奶茶",
-          "desc": "타이베이 이동 중 간단하게 마시기 좋은 대표 음료.",
-          "map": "https://www.google.com/maps/search/?api=1&query=bubble+tea+Taipei+Main+Station"
+          "name": "阜杭豆漿",
+          "food": "짠두유 · 요우티아오 · 샤오빙",
+          "desc": "타이베이 대표 전통 아침식사. 10/9 출국일 아침에 일찍 움직인다면 좋은 선택.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%98%9C%E6%9D%AD%E8%B1%86%E6%BC%BF+Taipei"
+        },
+        {
+          "name": "金峰魯肉飯",
+          "food": "루러우판 · 동파육 계열 반찬",
+          "desc": "중정기념당 근처 대표 루러우판집. 10/8 시내 이동 동선에 붙이기 좋음.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%87%91%E5%B3%B0%E9%AD%AF%E8%82%89%E9%A3%AF+Taipei"
+        },
+        {
+          "name": "鼎泰豐",
+          "food": "샤오롱바오 · 딤섬",
+          "desc": "시간이 맞으면 타이베이에서 한 번쯤 먹기 좋은 대표 샤오롱바오. 지점이 여러 곳이라 동선 맞춰 선택.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E6%B3%B0%E8%B1%90+Taipei"
+        },
+        {
+          "name": "西門町 芒果冰",
+          "food": "망고빙수",
+          "desc": "시먼딩 산책 중 후식으로 넣기 좋은 망고빙수.",
+          "map": "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Ximending+Taipei"
+        },
+        {
+          "name": "西門町 珍珠奶茶",
+          "food": "버블티 · 밀크티",
+          "desc": "시먼딩 이동 중 간단하게 마시기 좋은 대만 대표 음료.",
+          "map": "https://www.google.com/maps/search/?api=1&query=bubble+tea+Ximending+Taipei"
+        },
+        {
+          "name": "寧夏夜市 方家雞肉飯",
+          "food": "닭고기덮밥 · 루러우판",
+          "desc": "닝샤야시장에서 든든하게 먹기 좋은 밥 메뉴.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%96%B9%E5%AE%B6%E9%9B%9E%E8%82%89%E9%A3%AF+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+        },
+        {
+          "name": "寧夏夜市 劉芋仔",
+          "food": "타로볼 · 튀긴 토란",
+          "desc": "닝샤야시장에서 유명한 디저트 간식. 여러 명이 하나씩 나눠 먹기 좋음.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E8%8A%8B%E4%BB%94+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+        },
+        {
+          "name": "寧夏夜市 蚵仔煎",
+          "food": "굴전",
+          "desc": "굴·달걀·전분을 함께 부친 대만 야시장 대표 음식.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%9A%B5%E4%BB%94%E7%85%8E+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+        },
+        {
+          "name": "大稻埕 慈聖宮美食街",
+          "food": "돼지고기·해산물·로컬 반찬",
+          "desc": "다다오청 산책 중 로컬식 점심이나 간식을 골라 먹기 좋은 전통 먹거리 구역.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%A8%BB%E5%9F%95+%E6%85%88%E8%81%96%E5%AE%AE+%E7%BE%8E%E9%A3%9F+%E5%8F%B0%E5%8C%97"
+        },
+        {
+          "name": "迪化街 디저트·차",
+          "food": "전통 과자 · 차 · 건과일",
+          "desc": "다다오청 디화제에서 기념품과 간식을 함께 보기 좋은 구간.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%BF%AA%E5%8C%96%E8%A1%97+dessert+tea+Taipei"
+        },
+        {
+          "name": "北投 시장·온천 주변",
+          "food": "온천라면 · 대만식 소吃",
+          "desc": "베이터우 온천 일정 전후 간단히 먹을 수 있는 식당들을 모아보기 좋은 지역.",
+          "map": "https://www.google.com/maps/search/?api=1&query=Beitou+food+Taipei"
         }
       ]
     }
