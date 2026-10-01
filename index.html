@@ -214,7 +214,7 @@ body{padding-bottom:96px}
 </div>
 
 <script>
-let DATA=null,active='d1',cat='식비',pay='현금',SHARED={checklist:[],trains:[],expenses:[]};
+let DATA=null,active='d1',cat='식비',pay='현금',SHARED={checklist:[],trains:[],expenses:[]},SHARED_LOADED=false;
 const SHEETS_API_URL='https://script.google.com/macros/s/AKfycbz7r_9lHuw-whMyaSm2pm9lOO__SXbtcS3gWEwM4sipHiI1maRHW8MVxQJb0zD78v6T/exec';
 const cats=['식비','야시장','교통','카페/간식','온천/입장','편의점','기타'];
 const pays=['현금','총무카드','개인카드','모바일페이'];
@@ -232,16 +232,29 @@ async function load(){
     // First render immediately from local/static data so the app never stays blank.
     SHARED.checklist=DATA.checklist||[];
     SHARED.trains=DATA.trains||[];
-    SHARED.expenses=getLocal();
-    renderMoney();
+
+    // Expenses are shared Google Sheet data.
+    // Do not briefly show stale localStorage values when the shared API is configured.
+    if(ready()){
+      SHARED.expenses=[];
+      setMoneyLoading();
+    }else{
+      SHARED.expenses=getLocal();
+      SHARED_LOADED=true;
+      renderMoney();
+    }
+
     show('d1');
 
-    // Then refresh shared data from Google Sheet in the background.
+    // Refresh shared data from Google Sheet.
     if(ready()){
       const ok=await loadShared();
       if(ok){
         renderMoney();
         if(['check','train','money'].includes(active)) show(active);
+      }else{
+        setMoneyUnavailable();
+        if(active==='money') renderMoneyPage();
       }
     }
   }catch(err){
@@ -267,6 +280,7 @@ function loadShared(){
         SHARED.checklist=r.checklist||[];
         SHARED.trains=r.trains||[];
         SHARED.expenses=r.expenses||[];
+        SHARED_LOADED=true;
         finish(true);
       }else finish(false);
     };
@@ -337,8 +351,40 @@ function delCheck(row){if(confirm('이 준비물 항목을 공용 목록에서 �
 function renderTrain(){let a=SHARED.trains||[];document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🚆 열차시간</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(x.departure||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(x.arrival)}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}</div></section>`}
 function editTrain(row){let x=SHARED.trains.find(v=>v.row===row);if(!x)return;postShared({action:'updateTrain',row,departure:prompt('출발시간',x.departure||'')??x.departure,arrival:prompt('도착시간',x.arrival||'')??x.arrival,trainNo:prompt('열차번호',x.trainNo||'')??x.trainNo,status:prompt('예약상태',x.status||'')??x.status,note:prompt('메모',x.note||'')??x.note},renderTrain)}
 function getLocal(){try{return JSON.parse(localStorage.getItem('tw_expenses_v3')||'[]')}catch(e){return[]}}
+function setMoneyLoading(){
+  const spent=document.getElementById('spentTop'), remain=document.getElementById('remainTop');
+  if(spent) spent.textContent='불러오는 중';
+  if(remain) remain.textContent='불러오는 중';
+}
+function setMoneyUnavailable(){
+  const spent=document.getElementById('spentTop'), remain=document.getElementById('remainTop');
+  if(spent) spent.textContent='연결 확인';
+  if(remain) remain.textContent='연결 확인';
+}
 function renderMoney(){let a=SHARED.expenses||[],budget=DATA?DATA.meta.budgetKRW:1600000,total=Math.round(a.reduce((s,x)=>s+(Number(x.krw)||0),0));document.getElementById('spentTop').textContent=total.toLocaleString()+'원';document.getElementById('remainTop').textContent=Math.max(0,budget-total).toLocaleString()+'원';if(active==='money')renderMoneyPage()}
-function renderMoneyPage(){let a=SHARED.expenses||[],budget=DATA.meta.budgetKRW,total=Math.round(a.reduce((s,x)=>s+(Number(x.krw)||0),0));document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>💰 공동경비</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'이 기기 임시 저장'}</div><div class="grid2"><div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div><div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div></div><div class="btnrow"><button class="btn dark" onclick="openExpense()">＋ 경비 입력</button><button class="btn" onclick="loadShared().then(()=>{renderMoney();renderMoneyPage()})">↻</button><button class="btn" onclick="exportCsv()">CSV</button></div>${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<button onclick="delE(${x.row})" style="border:0;background:none;color:#dc2626">삭제</button>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}</div></section>`}
+function renderMoneyPage(){
+  if(ready() && !SHARED_LOADED){
+    document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+      <h2>💰 공동경비</h2>
+      <div class="syncbar"><span class="dot"></span>Google Sheet에서 경비를 불러오는 중...</div>
+      <div class="grid2">
+        <div class="kv"><small>누적 사용</small><strong>—</strong></div>
+        <div class="kv"><small>남은 경비</small><strong>—</strong></div>
+      </div>
+    </div></section>`;
+    return;
+  }
+  let a=SHARED.expenses||[],budget=DATA.meta.budgetKRW,total=Math.round(a.reduce((s,x)=>s+(Number(x.krw)||0),0));
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>💰 공동경비</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'이 기기 임시 저장'}</div><div class="grid2"><div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div><div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div></div><div class="btnrow"><button class="btn dark" onclick="openExpense()">＋ 경비 입력</button><button class="btn" onclick="refreshMoney()">↻</button><button class="btn" onclick="exportCsv()">CSV</button></div>${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<button onclick="delE(${x.row})" style="border:0;background:none;color:#dc2626">삭제</button>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}</div></section>`;
+}
+async function refreshMoney(){
+  if(!ready()){renderMoney();renderMoneyPage();return;}
+  SHARED_LOADED=false;
+  renderMoneyPage();
+  const ok=await loadShared();
+  if(ok){renderMoney();renderMoneyPage();}
+  else{setMoneyUnavailable();renderMoneyPage();}
+}
 function renderChips(){document.getElementById('cats').innerHTML=cats.map((x,i)=>`<button class="chip ${i===0?'active':''}" onclick="pick('cat',this,'${x}')">${x}</button>`).join('');document.getElementById('pays').innerHTML=pays.map((x,i)=>`<button class="chip ${i===0?'active':''}" onclick="pick('pay',this,'${x}')">${x}</button>`).join('')}
 function pick(t,b,v){b.parentElement.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');t==='cat'?cat=v:pay=v}
 function openExpense(){document.getElementById('sheet').classList.add('show');setTimeout(()=>document.getElementById('amt').focus(),100)}function closeExpense(){document.getElementById('sheet').classList.remove('show')}
