@@ -197,6 +197,15 @@ body{padding-bottom:96px}
 .train-modal-actions .cancel{background:#f1f5f9;color:#334155}
 .train-modal-actions .save{background:#2563eb;color:#fff}
 
+
+.time-picker-row{display:grid;grid-template-columns:1fr;gap:8px}
+.ampm{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ampm button{min-height:42px;border:1px solid #dbe3ee;border-radius:12px;background:#f8fafc;color:#64748b;font-size:14px;font-weight:900}
+.ampm button.active{background:#2563eb;border-color:#2563eb;color:#fff;box-shadow:0 5px 14px #2563eb33}
+.hm-selects{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
+.hm-selects select{min-height:46px;font-size:18px!important;font-weight:800;text-align:center}
+.hm-colon{font-size:22px;font-weight:900;color:#475569}
+
 </style>
 </head>
 <body>
@@ -443,6 +452,11 @@ async function refreshChecklist(){
 function toggleCheckLocal(encodedKey,done){setLocalChecklistState(decodeURIComponent(encodedKey),done)}
 function addChecklist(){let item=prompt('준비물');if(!item)return;postShared({action:'addChecklist',item,owner:prompt('담당','각자')||'',note:prompt('메모','')||''},renderCheck)}
 function delCheck(row){if(confirm('이 준비물 항목을 공용 목록에서 삭제할까요?'))postShared({action:'deleteChecklist',row},renderCheck)}
+function displayTrainTime(v){
+  const s=String(v||'');
+  const m=s.match(/(\d{1,2}):(\d{2})/);
+  return m ? String(m[1]).padStart(2,'0')+':'+m[2] : s;
+}
 function renderTrain(){
   if(ready() && !SHARED_LOADED){
     document.getElementById('main').innerHTML=`<section class="section"><div class="card">
@@ -452,22 +466,65 @@ function renderTrain(){
     return;
   }
   let a=SHARED.trains||[];
-  document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🚆 열차시간</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(x.departure||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(x.arrival)}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}</div></section>`;
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🚆 열차시간</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(displayTrainTime(x.departure)||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(displayTrainTime(x.arrival))}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}</div></section>`;
 }
 let TRAIN_EDIT_ROW=null;
-function normTime(v){
+let TRAIN_PERIOD={dep:'AM',arr:'AM'};
+function parse24(v){
   const s=String(v||'').trim();
   const m=s.match(/(\d{1,2}):(\d{2})/);
-  if(!m)return '';
-  return String(m[1]).padStart(2,'0')+':'+m[2];
+  if(!m)return {period:'AM',hour:'12',minute:'00'};
+  let h=parseInt(m[1],10), min=m[2], period=h>=12?'PM':'AM';
+  let h12=h%12; if(h12===0)h12=12;
+  return {period,hour:String(h12),minute:min};
+}
+function ensureTimeOptions(){
+  ['depHour','arrHour'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && !el.options.length){
+      for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=String(i);o.textContent=String(i);el.appendChild(o)}
+    }
+  });
+  ['depMinute','arrMinute'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && !el.options.length){
+      for(let i=0;i<60;i+=5){let v=String(i).padStart(2,'0'),o=document.createElement('option');o.value=v;o.textContent=v;el.appendChild(o)}
+    }
+  });
+}
+function setPeriod(which,period){
+  TRAIN_PERIOD[which]=period;
+  const am=document.getElementById(which+'AM'), pm=document.getElementById(which+'PM');
+  if(am)am.classList.toggle('active',period==='AM');
+  if(pm)pm.classList.toggle('active',period==='PM');
+}
+function applyTime(which,value){
+  ensureTimeOptions();
+  const t=parse24(value);
+  setPeriod(which,t.period);
+  document.getElementById(which+'Hour').value=t.hour;
+  let m=parseInt(t.minute||'0',10);
+  m=Math.max(0,Math.min(55,Math.round(m/5)*5));
+  document.getElementById(which+'Minute').value=String(m).padStart(2,'0');
+}
+function to24(which){
+  let h=parseInt(document.getElementById(which+'Hour').value||'12',10);
+  const m=document.getElementById(which+'Minute').value||'00';
+  const period=TRAIN_PERIOD[which]||'AM';
+  if(period==='AM' && h===12)h=0;
+  if(period==='PM' && h!==12)h+=12;
+  return String(h).padStart(2,'0')+':'+m;
 }
 function editTrain(row){
   const x=SHARED.trains.find(v=>v.row===row); if(!x)return;
   TRAIN_EDIT_ROW=row;
-  document.getElementById('trDeparture').value=normTime(x.departure);
-  document.getElementById('trArrival').value=normTime(x.arrival);
+  ensureTimeOptions();
+  applyTime('dep',x.departure);
+  applyTime('arr',x.arrival);
   document.getElementById('trTrainNo').value=x.trainNo||'';
-  document.getElementById('trStatus').value=x.status||'예약 필요';
+  const statusEl=document.getElementById('trStatus');
+  statusEl.value=x.status||'예약 필요';
+  if(!statusEl.value)statusEl.value='예약 필요';
   document.getElementById('trNote').value=x.note||'';
   document.getElementById('trainModal').classList.add('show');
 }
@@ -477,8 +534,8 @@ function closeTrainModal(){
 }
 function saveTrainEdit(){
   if(!TRAIN_EDIT_ROW)return;
-  const departure=document.getElementById('trDeparture').value;
-  const arrival=document.getElementById('trArrival').value;
+  const departure=to24('dep');
+  const arrival=to24('arr');
   const trainNo=document.getElementById('trTrainNo').value.trim();
   const status=document.getElementById('trStatus').value;
   const note=document.getElementById('trNote').value.trim();
@@ -537,10 +594,26 @@ load();
     <h3>🚆 열차시간 수정</h3>
     <div class="train-form">
       <label>출발시간
-        <input id="trDeparture" type="time">
+        <div class="time-picker-row">
+          <div class="ampm">
+            <button type="button" id="depAM" onclick="setPeriod('dep','AM')">오전</button>
+            <button type="button" id="depPM" onclick="setPeriod('dep','PM')">오후</button>
+          </div>
+          <div class="hm-selects">
+            <select id="depHour"></select><span class="hm-colon">:</span><select id="depMinute"></select>
+          </div>
+        </div>
       </label>
       <label>도착시간
-        <input id="trArrival" type="time">
+        <div class="time-picker-row">
+          <div class="ampm">
+            <button type="button" id="arrAM" onclick="setPeriod('arr','AM')">오전</button>
+            <button type="button" id="arrPM" onclick="setPeriod('arr','PM')">오후</button>
+          </div>
+          <div class="hm-selects">
+            <select id="arrHour"></select><span class="hm-colon">:</span><select id="arrMinute"></select>
+          </div>
+        </div>
       </label>
       <label class="full">열차번호
         <input id="trTrainNo" type="text" inputmode="numeric" placeholder="예: 273">
