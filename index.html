@@ -466,54 +466,33 @@ function renderTrain(){
     return;
   }
   let a=SHARED.trains||[];
-  document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🚆 열차시간</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(displayTrainTime(x.departure)||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(displayTrainTime(x.arrival))}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}</div></section>`;
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>🚆 열차시간</h2>
+    <div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>
+    <div class="btnrow">
+      <button class="btn" onclick="refreshTrain()">↻ 새로고침</button>
+    </div>
+    ${a.map(x=>`<div class="listrow">
+      <span>${esc(x.date)}</span>
+      <div>
+        <b>${esc(x.route)}</b>
+        <div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div>
+      </div>
+      <div style="text-align:right">
+        <strong>${esc(displayTrainTime(x.departure)||'미정')}</strong>
+        ${x.arrival?`<div class="notice">→ ${esc(displayTrainTime(x.arrival))}</div>`:''}
+        ${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}
+      </div>
+    </div>`).join('')}
+  </div></section>`;
 }
-let TRAIN_EDIT_ROW=null;
-let TRAIN_PERIOD={dep:'AM',arr:'AM'};
-function parse24(v){
-  const s=String(v||'').trim();
-  const m=s.match(/(\d{1,2}):(\d{2})/);
-  if(!m)return {period:'AM',hour:'12',minute:'00'};
-  let h=parseInt(m[1],10), min=m[2], period=h>=12?'PM':'AM';
-  let h12=h%12; if(h12===0)h12=12;
-  return {period,hour:String(h12),minute:min};
-}
-function ensureTimeOptions(){
-  ['depHour','arrHour'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el && !el.options.length){
-      for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=String(i);o.textContent=String(i);el.appendChild(o)}
-    }
-  });
-  ['depMinute','arrMinute'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el && !el.options.length){
-      for(let i=0;i<60;i+=5){let v=String(i).padStart(2,'0'),o=document.createElement('option');o.value=v;o.textContent=v;el.appendChild(o)}
-    }
-  });
-}
-function setPeriod(which,period){
-  TRAIN_PERIOD[which]=period;
-  const am=document.getElementById(which+'AM'), pm=document.getElementById(which+'PM');
-  if(am)am.classList.toggle('active',period==='AM');
-  if(pm)pm.classList.toggle('active',period==='PM');
-}
-function applyTime(which,value){
-  ensureTimeOptions();
-  const t=parse24(value);
-  setPeriod(which,t.period);
-  document.getElementById(which+'Hour').value=t.hour;
-  let m=parseInt(t.minute||'0',10);
-  m=Math.max(0,Math.min(55,Math.round(m/5)*5));
-  document.getElementById(which+'Minute').value=String(m).padStart(2,'0');
-}
-function to24(which){
-  let h=parseInt(document.getElementById(which+'Hour').value||'12',10);
-  const m=document.getElementById(which+'Minute').value||'00';
-  const period=TRAIN_PERIOD[which]||'AM';
-  if(period==='AM' && h===12)h=0;
-  if(period==='PM' && h!==12)h+=12;
-  return String(h).padStart(2,'0')+':'+m;
+async function refreshTrain(){
+  if(!ready()){renderTrain();return;}
+  SHARED_LOADED=false;
+  renderTrain();
+  const ok=await loadShared(true);
+  if(ok)LAST_SHARED_SIG=sharedSignature(SHARED);
+  renderTrain();
 }
 function editTrain(row){
   const x=SHARED.trains.find(v=>v.row===row); if(!x)return;
