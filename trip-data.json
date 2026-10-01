@@ -1083,5 +1083,152 @@
         }
       ]
     }
+  ],
+  "foodGuide": [
+    {
+      "region": "화롄 시내",
+      "items": [
+        {
+          "name": "炸蛋蔥油餅 黃車",
+          "food": "계란파전 · 炸蛋蔥油餅",
+          "desc": "반숙 계란이 들어간 바삭한 총유빙. 화롄 대표 간식.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E9%BB%83%E8%BB%8A+%E8%8A%B1%E8%93%AE+%E5%BE%A9%E8%88%88%E8%A1%97102%E8%99%9F"
+        },
+        {
+          "name": "老牌炸蛋蔥油餅",
+          "food": "계란파전",
+          "desc": "황차와 함께 유명한 오래된 화롄 계란파전집. 줄이 짧은 곳을 골라도 좋음.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%80%81%E7%89%8C%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E8%8A%B1%E8%93%AE"
+        },
+        {
+          "name": "好正點港式點心",
+          "food": "딤섬",
+          "desc": "자전거 렌탈샵과 가까워 수령·반납 전후에 들르기 좋은 홍콩식 딤섬집.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE"
+        },
+        {
+          "name": "周家蒸餃小籠包",
+          "food": "샤오롱바오 · 찐만두",
+          "desc": "도톰한 피와 육즙감이 있는 화롄식 만두를 먹기 좋은 곳.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E5%AE%B6%E8%92%B8%E9%A4%83%E5%B0%8F%E7%B1%A0%E5%8C%85+%E8%8A%B1%E8%93%AE"
+        },
+        {
+          "name": "公正包子",
+          "food": "바오 · 만두",
+          "desc": "여럿이 나눠 먹기 좋은 화롄 대표 간식집.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%85%AC%E6%AD%A3%E5%8C%85%E5%AD%90+%E8%8A%B1%E8%93%AE"
+        },
+        {
+          "name": "花蓮鵝肉 阿城",
+          "food": "거위고기",
+          "desc": "화롄 로컬식 거위요리를 생강채와 소스에 곁들여 먹기 좋은 곳.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E9%B5%9D%E8%82%89+%E9%98%BF%E5%9F%8E"
+        },
+        {
+          "name": "鵝肉先生",
+          "food": "거위고기",
+          "desc": "관광객에게도 잘 알려진 대표 거위 전문점. 여러 반찬과 함께 주문하기 좋음.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E8%82%89%E5%85%88%E7%94%9F+%E8%8A%B1%E8%93%AE"
+        },
+        {
+          "name": "화롄 대만식 아침",
+          "food": "鹹豆漿 · 油條 · 燒餅油條",
+          "desc": "짠두유(셴더우장)에 요우티아오를 곁들이거나 샤오빙에 끼워 먹는 대만식 조식.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%B9%B9%E8%B1%86%E6%BC%BF+%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+        }
+      ]
+    },
+    {
+      "region": "동대문야시장",
+      "items": [
+        {
+          "name": "東大門夜市 炸蛋蔥油餅 C26",
+          "food": "계란파전",
+          "desc": "야시장 안에서 편하게 먹을 수 있는 계란 총유빙.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+C26"
+        },
+        {
+          "name": "原住民竹筒飯 · 馬告香腸",
+          "food": "대나무밥 · 마가오 소시지",
+          "desc": "화롄 원주민 향신료 마가오를 경험하기 좋은 야시장 메뉴.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%AB%B9%E7%AD%92%E9%A3%AF+%E9%A6%AC%E5%91%8A%E9%A6%99%E8%85%B8"
+        },
+        {
+          "name": "東大門夜市 炭烤玉米",
+          "food": "숯불 옥수수",
+          "desc": "달고 짭짤한 소스를 발라 구워내는 대만 야시장 대표 간식.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%AD%E7%83%A4%E7%8E%89%E7%B1%B3"
+        },
+        {
+          "name": "東大門夜市 蚵仔煎",
+          "food": "굴전",
+          "desc": "굴과 달걀, 전분 반죽을 함께 부쳐 먹는 대만 야시장 대표 음식.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E8%9A%B5%E4%BB%94%E7%85%8E"
+        }
+      ]
+    },
+    {
+      "region": "칠성탄 · 신청성 · 타이루거",
+      "items": [
+        {
+          "name": "신청성 카페 거리",
+          "food": "커피 · 디저트",
+          "desc": "북부해안 라이딩 중 타이루거 들어가기 전 쉬기 좋은 구간.",
+          "map": "https://www.google.com/maps/search/?api=1&query=cafe+Xincheng+Hualien+Taroko"
+        },
+        {
+          "name": "칠성탄 카페",
+          "food": "커피 · 간식",
+          "desc": "해변 정차와 함께 커피나 디저트를 먹기 좋은 선택지.",
+          "map": "https://www.google.com/maps/search/?api=1&query=cafe+Qixingtan+Hualien"
+        }
+      ]
+    },
+    {
+      "region": "리위탄 · 수펑",
+      "items": [
+        {
+          "name": "鯉魚潭阿房小吃活跳蝦",
+          "food": "활도약새우",
+          "desc": "리위탄 라이딩 중 먹기 좋은 현지식 새우요리.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%AF%89%E9%AD%9A%E6%BD%AD%E9%98%BF%E6%88%BF%E5%B0%8F%E5%90%83%E6%B4%BB%E8%B7%B3%E8%9D%A6"
+        },
+        {
+          "name": "潭大陸小吃館",
+          "food": "새우튀김 · 활도약새우",
+          "desc": "리위탄 주변에서 여러 명이 열초·새우요리를 나눠 먹기 좋은 곳.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%BD%AD%E5%A4%A7%E9%99%B8%E5%B0%8F%E5%90%83%E9%A4%A8+%E9%AF%89%E9%AD%9A%E6%BD%AD"
+        },
+        {
+          "name": "立川漁場",
+          "food": "황금조개 · 생선요리",
+          "desc": "수펑 대표 양식장 식당. 라이딩 중 점심 정차로 잘 맞음.",
+          "map": "https://www.google.com/maps/search/?api=1&query=%E7%AB%8B%E5%B7%9D%E6%BC%81%E5%A0%B4+%E8%8A%B1%E8%93%AE+%E5%A3%BD%E8%B1%90"
+        }
+      ]
+    },
+    {
+      "region": "타이베이",
+      "items": [
+        {
+          "name": "타이베이 우육면",
+          "food": "牛肉麵",
+          "desc": "도착 첫날 먹기 좋은 대만 대표 면요리.",
+          "map": "https://www.google.com/maps/search/?api=1&query=beef+noodles+Taipei+Main+Station"
+        },
+        {
+          "name": "망고빙수",
+          "food": "芒果冰",
+          "desc": "도착 후 디저트로 먹기 좋은 대만 대표 빙수.",
+          "map": "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Taipei"
+        },
+        {
+          "name": "버블티",
+          "food": "珍珠奶茶",
+          "desc": "타이베이 이동 중 간단하게 마시기 좋은 대표 음료.",
+          "map": "https://www.google.com/maps/search/?api=1&query=bubble+tea+Taipei+Main+Station"
+        }
+      ]
+    }
   ]
 }

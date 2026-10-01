@@ -225,6 +225,15 @@ body{padding-bottom:96px}
 .transport-card .tip b{color:#0f172a}
 .transport-card .phrase{margin-top:9px;padding:9px 10px;border-radius:12px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:800}
 
+
+.food-region{margin:0 0 18px}
+.food-region h3{margin:0 0 10px;font-size:18px}
+.food-card{border:1px solid #e5edf6;border-radius:18px;padding:14px;margin:10px 0;background:#fff}
+.food-card .food-name{font-size:16px;font-weight:900;color:#0f172a}
+.food-card .food-type{margin-top:5px;font-size:14px;font-weight:800;color:#2563eb}
+.food-card .food-desc{margin-top:7px;font-size:13px;line-height:1.55;color:#475569}
+.food-card .food-map{display:inline-block;margin-top:10px}
+
 </style>
 </head>
 <body>
@@ -310,7 +319,26 @@ document.addEventListener('visibilitychange',()=>{
   }
 });
 
-async function load(){
+async 
+function showFood(){
+  setActiveBottom && setActiveBottom('food');
+  const guide=DATA.foodGuide||[];
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>🍜 대만 맛집 가이드</h2>
+    <p class="notice">일정 아래의 오늘 추천 음식은 그대로 유지하고, 여기서는 여행 전체 맛집을 지역별로 모아봅니다.</p>
+    ${guide.map(g=>`<div class="food-region">
+      <h3>📍 ${esc(g.region)}</h3>
+      ${(g.items||[]).map(x=>`<div class="food-card">
+        <div class="food-name">${esc(x.name)}</div>
+        <div class="food-type">${esc(x.food)}</div>
+        <div class="food-desc">${esc(x.desc)}</div>
+        <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
+      </div>`).join('')}
+    </div>`).join('')}
+  </div></section>`;
+}
+
+function load(){
   try{
     DATA=await fetch('trip-data.json?v='+Date.now()).then(r=>{
       if(!r.ok) throw new Error('trip-data load failed');
