@@ -25,7 +25,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.kv{padding:10px;background:#f8fafc;border:1px solid #eef2f7;border-radius:12px}.kv small{display:block;color:#64748b;margin-bottom:3px}.kv strong{font-size:14px}
 .listrow{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;padding:9px 0;border-bottom:1px dashed #e5e7eb;font-size:12px}
 .notice{font-size:11px;color:#64748b;line-height:1.45}.expense{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #e5e7eb;font-size:12px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fffffff2;border-top:1px solid var(--line);z-index:30}.bottom .inner{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:7px 8px calc(7px + env(safe-area-inset-bottom))}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fffffff2;border-top:1px solid var(--line);z-index:30}.bottom .inner{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);padding:7px 8px calc(7px + env(safe-area-inset-bottom))}
 .bottom button{background:none;border:0;font-size:10px;font-weight:800;color:#475569}.bottom span{display:block;font-size:18px}
 .fab{position:fixed;right:18px;bottom:82px;z-index:45;border:0;border-radius:999px;padding:14px 17px;background:#111827;color:#fff;font-weight:900;box-shadow:0 10px 30px #0f172a3b}
 .sheet{position:fixed;inset:0;background:#0f172a7a;z-index:60;display:none;align-items:flex-end}.sheet.show{display:flex}.panel{width:100%;max-width:760px;margin:auto;background:#fff;border-radius:22px 22px 0 0;padding:16px}
@@ -45,7 +45,7 @@ input,select{border:1px solid #dbe1e8;border-radius:10px;padding:10px;font-size:
 
 
 /* bottom navigation: 4 utility tabs */
-.bottom-nav,.dock,.bottomnav{grid-template-columns:repeat(4,1fr)!important}
+.bottom-nav,.dock,.bottomnav{grid-template-columns:repeat(5,1fr)!important}
 
 
 /* ===== Mobile app polish v2 ===== */
@@ -226,8 +226,8 @@ body{padding-bottom:96px}
 .transport-card .phrase{margin-top:9px;padding:9px 10px;border-radius:12px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:800}
 
 
-.food-region{margin:0 0 18px}
-.food-region h3{margin:0 0 10px;font-size:18px}
+.food-region{margin:18px 0 22px}
+.food-region h3{margin:0 0 10px;font-size:17px}
 .food-card{border:1px solid #e5edf6;border-radius:18px;padding:14px;margin:10px 0;background:#fff}
 .food-card .food-name{font-size:16px;font-weight:900;color:#0f172a}
 .food-card .food-type{margin-top:5px;font-size:14px;font-weight:800;color:#2563eb}
@@ -271,6 +271,7 @@ body{padding-bottom:96px}
 <button id="u-check" onclick="show('check')"><span class="ico">🎒</span><span class="label">준비물</span></button>
 <button id="u-train" onclick="show('train')"><span class="ico">🚆</span><span class="label">열차</span></button>
 <button id="u-money" onclick="show('money')"><span class="ico">💰</span><span class="label">경비</span></button>
+<button id="u-food" onclick="show('food')"><span class="ico">🍜</span><span class="label">맛집</span></button>
 <button id="u-stay" onclick="show('stay')"><span class="ico">🏨</span><span class="label">숙소·렌탈</span></button>
 </div>
 </div>
@@ -319,26 +320,7 @@ document.addEventListener('visibilitychange',()=>{
   }
 });
 
-async 
-function showFood(){
-  setActiveBottom && setActiveBottom('food');
-  const guide=DATA.foodGuide||[];
-  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
-    <h2>🍜 대만 맛집 가이드</h2>
-    <p class="notice">일정 아래의 오늘 추천 음식은 그대로 유지하고, 여기서는 여행 전체 맛집을 지역별로 모아봅니다.</p>
-    ${guide.map(g=>`<div class="food-region">
-      <h3>📍 ${esc(g.region)}</h3>
-      ${(g.items||[]).map(x=>`<div class="food-card">
-        <div class="food-name">${esc(x.name)}</div>
-        <div class="food-type">${esc(x.food)}</div>
-        <div class="food-desc">${esc(x.desc)}</div>
-        <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
-      </div>`).join('')}
-    </div>`).join('')}
-  </div></section>`;
-}
-
-function load(){
+async function load(){
   try{
     DATA=await fetch('trip-data.json?v='+Date.now()).then(r=>{
       if(!r.ok) throw new Error('trip-data load failed');
@@ -434,7 +416,25 @@ function show(id){active=id;
   document.querySelectorAll('.bottom button').forEach(x=>x.classList.remove('active'));
   let b=document.getElementById('n-'+id); if(b)b.classList.add('active');
   let u=document.getElementById('u-'+id); if(u)u.classList.add('active');
-  let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='stay')renderStay()}
+  let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='food')renderFood();if(id==='stay')renderStay()}
+
+
+function renderFood(){
+  const guide=(DATA&&DATA.foodGuide)||[];
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>🍜 대만 맛집 가이드</h2>
+    <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 여기서는 여행 전체 맛집을 지역별로 한 번에 볼 수 있습니다.</p>
+    ${guide.map(g=>`<div class="food-region">
+      <h3>📍 ${esc(g.region)}</h3>
+      ${(g.items||[]).map(x=>`<div class="food-card">
+        <div class="food-name">${esc(x.name)}</div>
+        <div class="food-type">${esc(x.food)}</div>
+        <div class="food-desc">${esc(x.desc)}</div>
+        <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
+      </div>`).join('')}
+    </div>`).join('')}
+  </div></section>`;
+}
 
 function renderStay(){
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
