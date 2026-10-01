@@ -10,8 +10,24 @@ function out_(obj, cb) {
   return ContentService.createTextOutput(body).setMimeType(ContentService.MimeType.JSON);
 }
 function fmt_(v) {
-  return Object.prototype.toString.call(v)==="[object Date]"
-    ? Utilities.formatDate(v,"Asia/Taipei","yyyy-MM-dd HH:mm:ss") : v;
+  if (Object.prototype.toString.call(v) === "[object Date]") {
+    return Utilities.formatDate(v, "Asia/Taipei", "yyyy-MM-dd HH:mm:ss");
+  }
+  return v;
+}
+function fmtDate_(v) {
+  if (Object.prototype.toString.call(v) === "[object Date]") {
+    return Utilities.formatDate(v, "Asia/Taipei", "yyyy-MM-dd");
+  }
+  return String(v || "");
+}
+function fmtTime_(v) {
+  if (Object.prototype.toString.call(v) === "[object Date]") {
+    return Utilities.formatDate(v, "Asia/Taipei", "HH:mm");
+  }
+  const s = String(v || "").trim();
+  const m = s.match(/(\d{1,2}):(\d{2})/);
+  return m ? String(m[1]).padStart(2, "0") + ":" + m[2] : s;
 }
 function doGet(e) {
   const ss=ss_(), cb=e.parameter.callback;
@@ -20,7 +36,7 @@ function doGet(e) {
   const x=ss.getSheetByName("경비").getDataRange().getValues();
   return out_({ok:true,
     checklist:c.slice(1).filter(r=>r[0]!=="").map((r,i)=>({row:i+2,item:fmt_(r[0]),owner:fmt_(r[1]),done:r[2]===true,note:fmt_(r[3])})),
-    trains:t.slice(1).filter(r=>r[0]!=="").map((r,i)=>({row:i+2,date:fmt_(r[0]),route:fmt_(r[1]),departure:fmt_(r[2]),arrival:fmt_(r[3]),trainNo:fmt_(r[4]),status:fmt_(r[5]),note:fmt_(r[6])})),
+    trains:t.slice(1).filter(r=>r[0]!=="").map((r,i)=>({row:i+2,date:fmtDate_(r[0]),route:fmt_(r[1]),departure:fmtTime_(r[2]),arrival:fmtTime_(r[3]),trainNo:fmt_(r[4]),status:fmt_(r[5]),note:fmt_(r[6])})),
     expenses:x.slice(1).filter(r=>r[0]!=="").map((r,i)=>({row:i+2,time:fmt_(r[0]),date:fmt_(r[1]),cat:fmt_(r[2]),cur:fmt_(r[3]),raw:Number(r[4])||0,pay:fmt_(r[5]),memo:fmt_(r[6]),rate:Number(r[7])||RATE_KRW_PER_TWD,krw:Number(r[8])||0,inputter:fmt_(r[9])})).reverse()
   },cb);
 }
