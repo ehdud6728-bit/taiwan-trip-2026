@@ -217,6 +217,14 @@ body{padding-bottom:96px}
 .atm-rank-item b{display:block;margin-bottom:5px;font-size:14px}
 .atm-rank-item .sub{font-size:12px;line-height:1.5;color:#64748b}
 
+
+.transport-guide{display:grid;gap:12px;margin-top:14px}
+.transport-card{background:linear-gradient(180deg,#fbfdff,#f8fafc);border:1px solid #e5edf6;border-radius:18px;padding:14px}
+.transport-card h3{margin:0 0 9px;font-size:15px;font-weight:900;color:#0f172a}
+.transport-card .tip{font-size:13px;line-height:1.6;color:#475569}
+.transport-card .tip b{color:#0f172a}
+.transport-card .phrase{margin-top:9px;padding:9px 10px;border-radius:12px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:800}
+
 </style>
 </head>
 <body>
@@ -477,54 +485,75 @@ function renderTrain(){
     return;
   }
   let a=SHARED.trains||[];
-  document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🚆 열차시간</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(displayTrainTime(x.departure)||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(displayTrainTime(x.arrival))}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}</div></section>`;
+  document.getElementById('main').innerHTML=`<section class="section">
+    <div class="card">
+      <h2>🚆 열차시간</h2>
+      <div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div>
+      <div class="btnrow"><button class="btn" onclick="refreshTrain()">↻ 새로고침</button></div>
+      ${a.map(x=>`<div class="listrow"><span>${esc(x.date)}</span><div><b>${esc(x.route)}</b><div class="notice">${esc(x.trainNo?'열차 '+x.trainNo+' · ':'')}${esc(x.status||'')}<br>${esc(x.note||'')}</div></div><div style="text-align:right"><strong>${esc(displayTrainTime(x.departure)||'미정')}</strong>${x.arrival?`<div class="notice">→ ${esc(displayTrainTime(x.arrival))}</div>`:''}${x.row?`<br><button class="rowbtn" onclick="editTrain(${x.row})">수정</button>`:''}</div></div>`).join('')}
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h2>🧭 대만 이동 가이드</h2>
+      <div class="transport-guide">
+        <div class="transport-card">
+          <h3>🚇 타이베이 MRT 이용</h3>
+          <div class="tip">
+            <b>가장 간단:</b> Visa·Mastercard·JCB 등 비접촉식 카드 또는 Apple Pay·Google Pay·Samsung Pay로 개찰구에서 바로 탭.<br>
+            <b>중요:</b> 들어갈 때와 나올 때 <b>같은 카드/같은 휴대폰</b>을 사용하세요.<br>
+            카드 탑승은 일반 1회권 요금이 청구되며, 교통카드의 환승 할인은 적용되지 않습니다.
+          </div>
+          <div class="btnrow" style="margin-top:10px">
+            <a class="btn" target="_blank" href="https://english.metro.taipei/News_Content.aspx?n=034BD8E0AB821D47&s=19CEC09373C12170&sms=5B794C46F3CDE718">MRT 카드탑승 공식안내</a>
+            <a class="btn" target="_blank" href="https://english.metro.taipei/cp.aspx?n=BECC2E7AC426F659&s=74E62C405BBE3069">요금·티켓 안내</a>
+          </div>
+        </div>
+
+        <div class="transport-card">
+          <h3>🚕 택시 이용 · 카드결제</h3>
+          <div class="tip">
+            대만 일반 택시는 <b>현금은 기본적으로 가능</b>하지만, 모든 택시가 카드결제를 받는 것은 아닙니다.<br>
+            길에서 잡은 택시에서 카드로 결제하려면 <b>출발 전에 기사에게 카드 가능 여부를 확인</b>하는 게 안전합니다.<br>
+            카드결제를 확실히 하고 싶으면 LINE GO 같은 호출 플랫폼에서 <b>온라인 결제수단을 미리 설정</b>하는 편이 편합니다.
+          </div>
+          <div class="phrase">기사에게 보여주기: 可以刷卡嗎？ · Kěyǐ shuākǎ ma? · 카드 결제 되나요?</div>
+          <div class="btnrow" style="margin-top:10px">
+            <a class="btn" target="_blank" href="https://eng.taiwan.net.tw/m1.aspx?sNo=0029050">대만 관광청 택시 안내</a>
+          </div>
+        </div>
+
+        <div class="transport-card">
+          <h3>📱 LINE으로 택시 부르기 · LINE GO</h3>
+          <div class="tip">
+            <b>별도 앱을 꼭 설치할 필요 없이 LINE에서 LINE GO를 이용</b>할 수 있습니다.<br>
+            ① LINE에서 <b>LINE GO</b> 검색/공식계정 진입 → ② 휴대폰 번호 인증 → ③ <b>地圖叫車(지도 호출)</b> → ④ 출발지·목적지 입력 → ⑤ 차량/예상요금 확인 → 호출.<br>
+            카드로 탈 계획이면 호출 전에 <b>설정 → 결제수단</b>에서 신용카드 또는 지원되는 온라인 결제를 먼저 등록해두는 것이 좋습니다.
+          </div>
+          <div class="phrase">팁: 숙소 주소와 화롄역·렌탈샵 주소를 LINE GO에 복사해 넣으면 중국어 주소 입력이 훨씬 편합니다.</div>
+          <div class="btnrow" style="margin-top:10px">
+            <a class="btn" target="_blank" href="https://www.linego.me/">LINE GO 공식</a>
+            <a class="btn" target="_blank" href="https://www.linego.me/news/672">온라인 결제 설정방법</a>
+          </div>
+        </div>
+
+        <div class="transport-card">
+          <h3>💡 우리 4명 기준 팁</h3>
+          <div class="tip">
+            짧은 시내 이동은 <b>MRT</b>, 화롄에서 4명이 함께 움직이거나 짐이 있을 때는 <b>택시</b>가 편합니다.<br>
+            길거리 택시는 현금 백업을 준비하고, 카드가 꼭 필요하면 <b>LINE GO에서 결제수단을 미리 설정</b>해두는 방식이 가장 간단합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
 }
-let TRAIN_EDIT_ROW=null;
-let TRAIN_PERIOD={dep:'AM',arr:'AM'};
-function parse24(v){
-  const s=String(v||'').trim();
-  const m=s.match(/(\d{1,2}):(\d{2})/);
-  if(!m)return {period:'AM',hour:'12',minute:'00'};
-  let h=parseInt(m[1],10), min=m[2], period=h>=12?'PM':'AM';
-  let h12=h%12; if(h12===0)h12=12;
-  return {period,hour:String(h12),minute:min};
-}
-function ensureTimeOptions(){
-  ['depHour','arrHour'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el && !el.options.length){
-      for(let i=1;i<=12;i++){let o=document.createElement('option');o.value=String(i);o.textContent=String(i);el.appendChild(o)}
-    }
-  });
-  ['depMinute','arrMinute'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el && !el.options.length){
-      for(let i=0;i<60;i+=5){let v=String(i).padStart(2,'0'),o=document.createElement('option');o.value=v;o.textContent=v;el.appendChild(o)}
-    }
-  });
-}
-function setPeriod(which,period){
-  TRAIN_PERIOD[which]=period;
-  const am=document.getElementById(which+'AM'), pm=document.getElementById(which+'PM');
-  if(am)am.classList.toggle('active',period==='AM');
-  if(pm)pm.classList.toggle('active',period==='PM');
-}
-function applyTime(which,value){
-  ensureTimeOptions();
-  const t=parse24(value);
-  setPeriod(which,t.period);
-  document.getElementById(which+'Hour').value=t.hour;
-  let m=parseInt(t.minute||'0',10);
-  m=Math.max(0,Math.min(55,Math.round(m/5)*5));
-  document.getElementById(which+'Minute').value=String(m).padStart(2,'0');
-}
-function to24(which){
-  let h=parseInt(document.getElementById(which+'Hour').value||'12',10);
-  const m=document.getElementById(which+'Minute').value||'00';
-  const period=TRAIN_PERIOD[which]||'AM';
-  if(period==='AM' && h===12)h=0;
-  if(period==='PM' && h!==12)h+=12;
-  return String(h).padStart(2,'0')+':'+m;
+async function refreshTrain(){
+  if(!ready()){renderTrain();return;}
+  SHARED_LOADED=false;
+  renderTrain();
+  const ok=await loadShared(true);
+  if(ok)LAST_SHARED_SIG=sharedSignature(SHARED);
+  renderTrain();
 }
 function editTrain(row){
   const x=SHARED.trains.find(v=>v.row===row); if(!x)return;
