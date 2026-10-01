@@ -43,6 +43,10 @@ input,select{border:1px solid #dbe1e8;border-radius:10px;padding:10px;font-size:
 .dot{width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block}.dot.ok{background:#16a34a}.dot.err{background:#dc2626}
 .rowbtn{border:0;background:#eff6ff;color:#1d4ed8;border-radius:8px;padding:7px 8px;font-size:10px;font-weight:800}.danger{color:#dc2626;background:#fff1f2}
 
+
+/* bottom navigation: 4 utility tabs */
+.bottom-nav,.dock,.bottomnav{grid-template-columns:repeat(4,1fr)!important}
+
 </style>
 </head>
 <body>
@@ -76,25 +80,62 @@ input,select{border:1px solid #dbe1e8;border-radius:10px;padding:10px;font-size:
  </div>
 </div>
 
-<div class="bottom"><div class="inner">
- <button onclick="show('d1')"><span>📅</span>일정</button>
- <button onclick="show('check')"><span>🎒</span>준비물</button>
- <button onclick="show('train')"><span>🚆</span>열차</button>
- <button onclick="show('money')"><span>💰</span>경비</button>
+<div class="bottom">
+<button onclick="show('check')">🎒<span>준비물</span></button>
+<button onclick="show('train')">🚆<span>열차</span></button>
+<button onclick="show('money')">💰<span>경비</span></button>
+<button onclick="show('stay')">🏨<span>숙소·렌탈</span></button>
+</span>경비</button>
 </div></div>
 </div>
 
 <script>
 let DATA=null,active='d1',cat='식비',pay='현금',SHARED={checklist:[],trains:[],expenses:[]};
-const SHEETS_API_URL='__PASTE_APPS_SCRIPT_WEB_APP_EXEC_URL__';
+const SHEETS_API_URL='https://script.google.com/macros/s/AKfycbz7r_9lHuw-whMyaSm2pm9lOO__SXbtcS3gWEwM4sipHiI1maRHW8MVxQJb0zD78v6T/exec';
 const cats=['식비','야시장','교통','카페/간식','온천/입장','편의점','기타'];
 const pays=['현금','총무카드','개인카드','모바일페이'];
 const ready=()=>SHEETS_API_URL.startsWith('https://script.google.com/');
 async function load(){DATA=await fetch('trip-data.json?v='+Date.now()).then(r=>r.json());document.getElementById('meta').textContent=DATA.meta.dates+' · '+DATA.meta.people+'명';renderNav();renderChips();if(ready())await loadShared();else{SHARED.checklist=DATA.checklist||[];SHARED.trains=DATA.trains||[];SHARED.expenses=getLocal()}renderMoney();show('d1')}
 function loadShared(){return new Promise(res=>{const cb='cb_'+Date.now(),s=document.createElement('script');window[cb]=r=>{if(r&&r.ok){SHARED=r}delete window[cb];s.remove();res(true)};s.onerror=()=>res(false);s.src=SHEETS_API_URL+'?action=all&callback='+cb+'&_='+Date.now();document.head.appendChild(s)})}
 function postShared(o,after){if(!ready())return alert('Apps Script 주소 설정이 필요합니다.');let f=document.createElement('form'),i;f.method='POST';f.action=SHEETS_API_URL;f.target='gas_sink';f.style.display='none';Object.entries(o).forEach(([k,v])=>{i=document.createElement('input');i.name=k;i.value=v??'';f.appendChild(i)});document.body.appendChild(f);f.submit();f.remove();setTimeout(async()=>{await loadShared();renderMoney();after?after():show(active)},1200)}
-function renderNav(){document.getElementById('nav').innerHTML=DATA.days.map(d=>`<button id="n-${d.id}" onclick="show('${d.id}')">${d.date}</button>`).join('')+`<button id="n-check" onclick="show('check')">준비물</button><button id="n-train" onclick="show('train')">열차</button><button id="n-money" onclick="show('money')">경비</button>`}
-function show(id){active=id;document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));let b=document.getElementById('n-'+id);if(b)b.classList.add('active');let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage()}
+function renderNav(){
+  document.getElementById('nav').innerHTML=
+    DATA.days.map(d=>`<button id="n-${d.id}" onclick="show('${d.id}')">${d.date}</button>`).join('');
+}" onclick="show('${d.id}')">${d.date}</button>`).join('')+`<button id="n-check" onclick="show('check')">준비물</button><button id="n-train" onclick="show('train')">열차</button><button id="n-money" onclick="show('money')">경비</button>`}
+function show(id){active=id;document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));let b=document.getElementById('n-'+id);if(b)b.classList.add('active');let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='stay')renderStay()}
+
+function renderStay(){
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <h2>🏨 숙소 · 🚲 렌탈</h2>
+
+    <div class="link-sections">
+      <div class="link-sector">
+        <h3>🏨 화롄 숙소 · 10/5~10/8</h3>
+        <div class="notice" style="margin-bottom:8px">No. 13, Haibin Street, Hualien City, Taiwan 970</div>
+        <div class="btnrow">
+          <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=No.+13,+Haibin+Street,+Hualien+City,+Taiwan+970">지도 열기</a>
+        </div>
+      </div>
+
+      <div class="link-sector">
+        <h3>🚲 화롄 자전거 렌탈샵</h3>
+        <div class="notice" style="margin-bottom:8px">No. 127, Guolian 1st Rd., Guolian Vill., Hualien City, Hualien County 970</div>
+        <div class="btnrow">
+          <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=No.+127,+Guolian+1st+Rd.,+Guolian+Vill.,+Hualien+City,+Hualien+County+970">지도 열기</a>
+        </div>
+      </div>
+
+      <div class="link-sector">
+        <h3>🏨 타이베이 숙소 · 10/8~10/9</h3>
+        <div class="notice" style="margin-bottom:8px">No. 80, Huayin Street, 建明里, Taipei City 103</div>
+        <div class="btnrow">
+          <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=No.+80,+Huayin+Street,+Taipei+City+103">지도 열기</a>
+        </div>
+      </div>
+    </div>
+  </div></section>`;
+}
+
 function renderCheck(){let a=SHARED.checklist||[];document.getElementById('main').innerHTML=`<section class="section"><div class="card"><h2>🎒 준비물</h2><div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'연결 전'}</div><div class="btnrow"><button class="btn dark" onclick="addChecklist()">＋ 준비물</button><button class="btn" onclick="loadShared().then(renderCheck)">↻</button></div>${a.map(x=>`<div class="listrow"><input type="checkbox" ${x.done?'checked':''} onchange="toggleCheck(${x.row||0},this.checked)"><div><b>${esc(x.item)}</b><div class="notice">${esc(x.note||'')}</div></div><div style="text-align:right">${esc(x.owner||'')}${x.row?`<br><button class="rowbtn danger" onclick="delCheck(${x.row})">삭제</button>`:''}</div></div>`).join('')}</div></section>`}
 function toggleCheck(row,done){if(row)postShared({action:'setChecklist',row,done},renderCheck)}
 function addChecklist(){let item=prompt('준비물');if(!item)return;postShared({action:'addChecklist',item,owner:prompt('담당','각자')||'',note:prompt('메모','')||''},renderCheck)}
