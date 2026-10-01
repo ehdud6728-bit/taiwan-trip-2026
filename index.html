@@ -384,6 +384,22 @@ body{padding-bottom:105px!important}
   margin-right:4px!important;
 }
 
+
+.food-pick{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  margin-bottom:8px;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#c2410c;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:-.2px;
+}
+
 </style>
 </head>
 <body>
@@ -602,6 +618,7 @@ function renderFood(){
     ${guide.map(g=>`<div class="food-region">
       <h3>📍 ${esc(g.region)}</h3>
       ${(g.items||[]).map(x=>`<div class="food-card">
+        ${x.pick?`<div class="food-pick">⭐ ${esc(x.pick)}</div>`:''}
         <div class="food-name">${esc(x.name)}</div>
         <div class="food-type">${esc(x.food)}</div>
         <div class="food-desc">${esc(x.desc)}</div>
