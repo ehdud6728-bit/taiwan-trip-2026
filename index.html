@@ -206,6 +206,13 @@ body{padding-bottom:96px}
 .hm-selects select{min-height:46px;font-size:18px!important;font-weight:800;text-align:center}
 .hm-colon{font-size:22px;font-weight:900;color:#475569}
 
+
+.atm-gallery{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
+.atm-shot{background:#f8fafc;border:1px solid #e5edf6;border-radius:18px;padding:12px}
+.atm-shot img{width:100%;display:block;border-radius:14px}
+.atm-shot h4{margin:0 0 8px;font-size:15px;font-weight:900;color:#0f172a}
+.atm-shot .caption{margin-top:8px;font-size:13px;line-height:1.5;color:#475569}
+
 </style>
 </head>
 <body>
@@ -603,6 +610,22 @@ function renderMoneyPage(){
             4. 환율변환 화면이 나오면 <b>Defer Conversion</b> 또는 <b>Decline Conversion</b><br>
             5. 통화 선택은 <b>TWD</b><br><br>
             <b>원화(KRW) 환율변환을 선택하지 않는 게 핵심입니다.</b> ATM 자체 수수료가 표시되면 그 화면이 최종 기준입니다.
+          </div>
+        </div>
+
+        <div class="link-sector">
+          <h3>🖼 ATM 예시 이미지</h3>
+          <div class="atm-gallery">
+            <div class="atm-shot">
+              <h4>예시 1 · Cathay United Bank ATM 찾기</h4>
+              <img src="assets/atm-cathay-example.jpg" alt="Cathay United Bank ATM 예시">
+              <div class="caption">초록 나무 로고와 <b>Cathay United Bank ATM</b> 간판을 찾으면 됩니다. 여행 중에는 공항·역 주변에서 이 간판이 보이면 후보 ATM으로 보면 됩니다.</div>
+            </div>
+            <div class="atm-shot">
+              <h4>예시 2 · 실제 인출 순서 요약</h4>
+              <img src="assets/atm-guide-steps.jpg" alt="대만 ATM 인출 순서 예시">
+              <div class="caption"><b>초록 나무 간판 찾기 → 카드 → 비밀번호 → Default Account → 금액 선택 → Defer Conversion → 인출</b> 순서로 진행하면 됩니다.</div>
+            </div>
           </div>
         </div>
       </div>
