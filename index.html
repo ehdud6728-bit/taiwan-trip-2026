@@ -47,6 +47,131 @@ input,select{border:1px solid #dbe1e8;border-radius:10px;padding:10px;font-size:
 /* bottom navigation: 4 utility tabs */
 .bottom-nav,.dock,.bottomnav{grid-template-columns:repeat(4,1fr)!important}
 
+
+/* ===== Mobile app polish v2 ===== */
+body{padding-bottom:96px}
+.nav{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:7px!important;
+  overflow:visible!important;
+  padding:12px 12px 11px!important;
+  background:#f7f9fded!important;
+}
+.nav button{
+  width:100%;
+  min-width:0;
+  padding:10px 4px!important;
+  border:1px solid #e7ecf4!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  color:#111827!important;
+  font-size:13px!important;
+  font-weight:900!important;
+  box-shadow:0 3px 10px #0f172a0a;
+  transition:.18s ease;
+}
+.nav button.active{
+  background:linear-gradient(135deg,#1d4ed8,#2563eb)!important;
+  border-color:transparent!important;
+  color:#fff!important;
+  box-shadow:0 8px 18px #2563eb35!important;
+  transform:translateY(-1px);
+}
+
+.section{padding:14px 12px 20px!important}
+.card{
+  border-radius:22px!important;
+  padding:17px!important;
+  box-shadow:0 10px 30px #0f172a12!important;
+}
+.card h2{font-size:19px!important;margin-bottom:13px!important}
+.link-sections{gap:12px!important}
+.link-sector{
+  border-radius:18px!important;
+  padding:14px!important;
+  background:linear-gradient(180deg,#fbfdff,#f8fafc)!important;
+}
+.link-sector h3{font-size:14px!important;margin-bottom:10px!important}
+.btn{
+  border-radius:12px!important;
+  padding:10px 12px!important;
+  font-size:12px!important;
+}
+.notice{font-size:12px!important}
+
+.bottom{
+  position:fixed!important;
+  left:10px!important;
+  right:10px!important;
+  bottom:8px!important;
+  z-index:50!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:5px!important;
+  padding:7px!important;
+  padding-bottom:calc(7px + env(safe-area-inset-bottom))!important;
+  background:rgba(255,255,255,.96)!important;
+  border:1px solid rgba(226,232,240,.95)!important;
+  border-radius:22px!important;
+  box-shadow:0 14px 38px #0f172a2b!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.bottom button{
+  min-width:0!important;
+  min-height:60px!important;
+  border:0!important;
+  border-radius:16px!important;
+  background:transparent!important;
+  color:#64748b!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3px!important;
+  padding:6px 2px!important;
+  transition:transform .16s ease,background .16s ease,color .16s ease,box-shadow .16s ease!important;
+}
+.bottom button .ico{
+  display:block!important;
+  font-size:24px!important;
+  line-height:1!important;
+  filter:saturate(.85);
+}
+.bottom button .label{
+  display:block!important;
+  font-size:11px!important;
+  line-height:1.05!important;
+  font-weight:900!important;
+  letter-spacing:-.3px!important;
+  white-space:nowrap!important;
+}
+.bottom button.active{
+  background:linear-gradient(135deg,#1d4ed8,#2563eb)!important;
+  color:#fff!important;
+  box-shadow:0 8px 18px #2563eb42!important;
+  transform:translateY(-3px)!important;
+}
+.bottom button.active .ico{
+  transform:scale(1.08);
+  filter:none;
+}
+
+.fab{
+  right:18px!important;
+  bottom:94px!important;
+  padding:14px 18px!important;
+  border-radius:18px!important;
+  font-size:14px!important;
+  box-shadow:0 12px 28px #0f172a33!important;
+}
+@media(max-width:370px){
+  .bottom button .label{font-size:10px!important}
+  .bottom button .ico{font-size:22px!important}
+  .nav button{font-size:12px!important}
+}
+
 </style>
 </head>
 <body>
@@ -81,10 +206,10 @@ input,select{border:1px solid #dbe1e8;border-radius:10px;padding:10px;font-size:
 </div>
 
 <div class="bottom">
-<button onclick="show('check')">🎒<span>준비물</span></button>
-<button onclick="show('train')">🚆<span>열차</span></button>
-<button onclick="show('money')">💰<span>경비</span></button>
-<button onclick="show('stay')">🏨<span>숙소·렌탈</span></button>
+<button id="u-check" onclick="show('check')"><span class="ico">🎒</span><span class="label">준비물</span></button>
+<button id="u-train" onclick="show('train')"><span class="ico">🚆</span><span class="label">열차</span></button>
+<button id="u-money" onclick="show('money')"><span class="ico">💰</span><span class="label">경비</span></button>
+<button id="u-stay" onclick="show('stay')"><span class="ico">🏨</span><span class="label">숙소·렌탈</span></button>
 </div>
 </div>
 
@@ -155,7 +280,12 @@ function renderNav(){
   document.getElementById('nav').innerHTML=
     DATA.days.map(d=>`<button id="n-${d.id}" onclick="show('${d.id}')">${d.date}</button>`).join('');
 }
-function show(id){active=id;document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));let b=document.getElementById('n-'+id);if(b)b.classList.add('active');let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='stay')renderStay()}
+function show(id){active=id;
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.bottom button').forEach(x=>x.classList.remove('active'));
+  let b=document.getElementById('n-'+id); if(b)b.classList.add('active');
+  let u=document.getElementById('u-'+id); if(u)u.classList.add('active');
+  let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='stay')renderStay()}
 
 function renderStay(){
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
