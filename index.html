@@ -346,6 +346,11 @@ body{padding-bottom:96px}
 body{padding-bottom:105px!important}
 .app{padding-bottom:105px!important}
 
+
+.food-meta{margin-top:10px;display:grid;gap:6px}
+.food-meta-row{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;color:#334155}
+.food-meta-row b{flex:0 0 68px;color:#0f172a}
+
 </style>
 </head>
 <body>
@@ -542,6 +547,11 @@ function renderFood(){
         <div class="food-name">${esc(x.name)}</div>
         <div class="food-type">${esc(x.food)}</div>
         <div class="food-desc">${esc(x.desc)}</div>
+        <div class="food-meta">
+          <div class="food-meta-row"><b>📍 기준점</b><span>${esc(x.near||'')}</span></div>
+          <div class="food-meta-row"><b>📏 거리감</b><span>${esc(x.distance||'')}</span></div>
+          <div class="food-meta-row"><b>🗓 추천</b><span>${esc(x.timing||'')}</span></div>
+        </div>
         <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
       </div>`).join('')}
     </div>`).join('')}

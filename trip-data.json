@@ -1172,49 +1172,73 @@
           "name": "炸蛋蔥油餅 黃車",
           "food": "계란파전 · 炸蛋蔥油餅",
           "desc": "반숙 계란이 들어간 바삭한 총유빙. 화롄 대표 간식.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E9%BB%83%E8%BB%8A+%E8%8A%B1%E8%93%AE+%E5%BE%A9%E8%88%88%E8%A1%97102%E8%99%9F"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E9%BB%83%E8%BB%8A+%E8%8A%B1%E8%93%AE+%E5%BE%A9%E8%88%88%E8%A1%97102%E8%99%9F",
+          "near": "화롄 시내 · 숙소/동대문야시장과 화롄역 사이",
+          "distance": "숙소에서 시내 이동 중 들르기 좋은 편",
+          "timing": "10/5 저녁 전 · 10/6~7 라이딩 복귀 후"
         },
         {
           "name": "老牌炸蛋蔥油餅",
           "food": "계란파전",
           "desc": "황차와 함께 유명한 오래된 화롄 계란파전집. 줄이 짧은 곳을 골라도 좋음.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E8%80%81%E7%89%8C%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E8%8A%B1%E8%93%AE"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%80%81%E7%89%8C%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E8%8A%B1%E8%93%AE",
+          "near": "화롄 시내 · 黃車 인근",
+          "distance": "黃車와 거의 같은 권역, 줄 짧은 곳 선택",
+          "timing": "10/5 저녁 전 · 라이딩 복귀 후"
         },
         {
           "name": "好正點港式點心",
           "food": "딤섬",
           "desc": "자전거 렌탈샵과 가까워 수령·반납 전후에 들르기 좋은 홍콩식 딤섬집.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE",
+          "near": "화롄역·자전거 렌탈샵 인근",
+          "distance": "렌탈샵과 같은 Guolian 1st Rd 권역, 매우 가까운 편",
+          "timing": "자전거 수령 전 · 반납 후"
         },
         {
           "name": "周家蒸餃小籠包",
           "food": "샤오롱바오 · 찐만두",
           "desc": "도톰한 피와 육즙감이 있는 화롄식 만두를 먹기 좋은 곳.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E5%AE%B6%E8%92%B8%E9%A4%83%E5%B0%8F%E7%B1%A0%E5%8C%85+%E8%8A%B1%E8%93%AE"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E5%AE%B6%E8%92%B8%E9%A4%83%E5%B0%8F%E7%B1%A0%E5%8C%85+%E8%8A%B1%E8%93%AE",
+          "near": "화롄 시내 · 역에서 숙소 쪽으로 내려오는 동선",
+          "distance": "화롄역과 동대문야시장 사이 시내권",
+          "timing": "10/5 첫날 · 10/6~7 저녁"
         },
         {
           "name": "公正包子",
           "food": "바오 · 만두",
           "desc": "여럿이 나눠 먹기 좋은 화롄 대표 간식집.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E5%85%AC%E6%AD%A3%E5%8C%85%E5%AD%90+%E8%8A%B1%E8%93%AE"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%85%AC%E6%AD%A3%E5%8C%85%E5%AD%90+%E8%8A%B1%E8%93%AE",
+          "near": "화롄 시내 중심 · 동대문야시장 권역",
+          "distance": "숙소/야시장 쪽에서 접근 쉬운 편",
+          "timing": "야시장 가기 전 간식 · 라이딩 후"
         },
         {
           "name": "花蓮鵝肉 阿城",
           "food": "거위고기",
           "desc": "화롄 로컬식 거위요리를 생강채와 소스에 곁들여 먹기 좋은 곳.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E9%B5%9D%E8%82%89+%E9%98%BF%E5%9F%8E"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E9%B5%9D%E8%82%89+%E9%98%BF%E5%9F%8E",
+          "near": "화롄 시내 · 숙소 남서쪽",
+          "distance": "숙소에서 택시/자전거로 짧게 이동하는 시내권",
+          "timing": "10/6 또는 10/7 저녁"
         },
         {
           "name": "鵝肉先生",
           "food": "거위고기",
           "desc": "관광객에게도 잘 알려진 대표 거위 전문점. 여러 반찬과 함께 주문하기 좋음.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E8%82%89%E5%85%88%E7%94%9F+%E8%8A%B1%E8%93%AE"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E8%82%89%E5%85%88%E7%94%9F+%E8%8A%B1%E8%93%AE",
+          "near": "화롄 시내 · 林森路 권역",
+          "distance": "숙소에서 시내 이동으로 접근 가능한 편",
+          "timing": "10/6 또는 10/7 저녁"
         },
         {
           "name": "화롄 대만식 아침",
           "food": "鹹豆漿 · 油條 · 燒餅油條",
           "desc": "짠두유(셴더우장)에 요우티아오를 곁들이거나 샤오빙에 끼워 먹는 대만식 조식.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E9%B9%B9%E8%B1%86%E6%BC%BF+%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%B9%B9%E8%B1%86%E6%BC%BF+%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90",
+          "near": "숙소·화롄역 주변 조식권",
+          "distance": "당일 영업 중인 가까운 두유집 검색",
+          "timing": "10/6 · 10/7 · 10/8 아침"
         }
       ]
     },
@@ -1225,25 +1249,37 @@
           "name": "東大門夜市 炸蛋蔥油餅 C26",
           "food": "계란파전",
           "desc": "야시장 안에서 편하게 먹을 수 있는 계란 총유빙.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+C26"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+C26",
+          "near": "동대문야시장",
+          "distance": "숙소에서 가장 편한 야시장 먹거리",
+          "timing": "10/5 첫날 밤 · 저녁 산책"
         },
         {
           "name": "原住民竹筒飯 · 馬告香腸",
           "food": "대나무밥 · 마가오 소시지",
           "desc": "화롄 원주민 향신료 마가오를 경험하기 좋은 야시장 메뉴.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%AB%B9%E7%AD%92%E9%A3%AF+%E9%A6%AC%E5%91%8A%E9%A6%99%E8%85%B8"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%AB%B9%E7%AD%92%E9%A3%AF+%E9%A6%AC%E5%91%8A%E9%A6%99%E8%85%B8",
+          "near": "동대문야시장",
+          "distance": "숙소에서 도보권 야시장",
+          "timing": "10/5 밤 · 10/6~7 저녁"
         },
         {
           "name": "東大門夜市 炭烤玉米",
           "food": "숯불 옥수수",
           "desc": "달고 짭짤한 소스를 발라 구워내는 대만 야시장 대표 간식.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%AD%E7%83%A4%E7%8E%89%E7%B1%B3"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%AD%E7%83%A4%E7%8E%89%E7%B1%B3",
+          "near": "동대문야시장",
+          "distance": "숙소에서 도보권 야시장",
+          "timing": "저녁 간식"
         },
         {
           "name": "東大門夜市 蚵仔煎",
           "food": "굴전",
           "desc": "굴과 달걀, 전분 반죽을 함께 부쳐 먹는 대만 야시장 대표 음식.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E8%9A%B5%E4%BB%94%E7%85%8E"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E8%9A%B5%E4%BB%94%E7%85%8E",
+          "near": "동대문야시장",
+          "distance": "숙소에서 도보권 야시장",
+          "timing": "저녁 식사/간식"
         }
       ]
     },
@@ -1254,13 +1290,19 @@
           "name": "신청성 카페 거리",
           "food": "커피 · 디저트",
           "desc": "북부해안 라이딩 중 타이루거 들어가기 전 쉬기 좋은 구간.",
-          "map": "https://www.google.com/maps/search/?api=1&query=cafe+Xincheng+Hualien+Taroko"
+          "map": "https://www.google.com/maps/search/?api=1&query=cafe+Xincheng+Hualien+Taroko",
+          "near": "신청성(Xincheng) · 타이루거 입구 전",
+          "distance": "10/6 북부해안 라이딩 동선상",
+          "timing": "타이루거 진입 전 휴식"
         },
         {
           "name": "칠성탄 카페",
           "food": "커피 · 간식",
           "desc": "해변 정차와 함께 커피나 디저트를 먹기 좋은 선택지.",
-          "map": "https://www.google.com/maps/search/?api=1&query=cafe+Qixingtan+Hualien"
+          "map": "https://www.google.com/maps/search/?api=1&query=cafe+Qixingtan+Hualien",
+          "near": "칠성탄 해변",
+          "distance": "10/6 라이딩 코스 바로 옆",
+          "timing": "오전 첫 휴식 · 복귀 중"
         }
       ]
     },
@@ -1271,19 +1313,28 @@
           "name": "鯉魚潭阿房小吃活跳蝦",
           "food": "활도약새우",
           "desc": "리위탄 라이딩 중 먹기 좋은 현지식 새우요리.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E9%AF%89%E9%AD%9A%E6%BD%AD%E9%98%BF%E6%88%BF%E5%B0%8F%E5%90%83%E6%B4%BB%E8%B7%B3%E8%9D%A6"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%AF%89%E9%AD%9A%E6%BD%AD%E9%98%BF%E6%88%BF%E5%B0%8F%E5%90%83%E6%B4%BB%E8%B7%B3%E8%9D%A6",
+          "near": "리위탄",
+          "distance": "10/7 라이딩 동선상",
+          "timing": "리위탄 도착 전후 점심"
         },
         {
           "name": "潭大陸小吃館",
           "food": "새우튀김 · 활도약새우",
           "desc": "리위탄 주변에서 여러 명이 열초·새우요리를 나눠 먹기 좋은 곳.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E6%BD%AD%E5%A4%A7%E9%99%B8%E5%B0%8F%E5%90%83%E9%A4%A8+%E9%AF%89%E9%AD%9A%E6%BD%AD"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%BD%AD%E5%A4%A7%E9%99%B8%E5%B0%8F%E5%90%83%E9%A4%A8+%E9%AF%89%E9%AD%9A%E6%BD%AD",
+          "near": "리위탄",
+          "distance": "10/7 라이딩 동선상",
+          "timing": "리위탄 점심 대안"
         },
         {
           "name": "立川漁場",
           "food": "황금조개 · 생선요리",
           "desc": "수펑 대표 양식장 식당. 라이딩 중 점심 정차로 잘 맞음.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E7%AB%8B%E5%B7%9D%E6%BC%81%E5%A0%B4+%E8%8A%B1%E8%93%AE+%E5%A3%BD%E8%B1%90"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E7%AB%8B%E5%B7%9D%E6%BC%81%E5%A0%B4+%E8%8A%B1%E8%93%AE+%E5%A3%BD%E8%B1%90",
+          "near": "수펑·리촨",
+          "distance": "10/7 East Rift Valley 코스와 잘 맞는 식사 포인트",
+          "timing": "10/7 점심 또는 오후"
         }
       ]
     },
@@ -1294,79 +1345,118 @@
           "name": "劉山東牛肉麵",
           "food": "우육면",
           "desc": "타이베이 메인역·화인제 숙소에서 접근하기 좋은 오래된 우육면집. 도착·출국 전 한 끼로 편함.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E5%B1%B1%E6%9D%B1%E7%89%9B%E8%82%89%E9%BA%B5+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E5%B1%B1%E6%9D%B1%E7%89%9B%E8%82%89%E9%BA%B5+Taipei",
+          "near": "타이베이 메인역·화인제 숙소 인근",
+          "distance": "10/8 숙소 체크인 전후 접근 매우 편한 편",
+          "timing": "10/8 타이베이 도착 후 · 10/9 이른 점심"
         },
         {
           "name": "富宏牛肉麵",
           "food": "우육면",
           "desc": "시먼딩 북쪽에서 늦게까지 우육면을 먹기 좋은 곳. 진한 국물과 푸짐한 양으로 유명한 편.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E5%AF%8C%E5%AE%8F%E7%89%9B%E8%82%89%E9%BA%B5+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%AF%8C%E5%AE%8F%E7%89%9B%E8%82%89%E9%BA%B5+Taipei",
+          "near": "시먼딩 북쪽",
+          "distance": "10/8 시먼딩 산책 동선에 붙이기 좋음",
+          "timing": "10/8 저녁 전후"
         },
         {
           "name": "阜杭豆漿",
           "food": "짠두유 · 요우티아오 · 샤오빙",
           "desc": "타이베이 대표 전통 아침식사. 10/9 출국일 아침에 일찍 움직인다면 좋은 선택.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E9%98%9C%E6%9D%AD%E8%B1%86%E6%BC%BF+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%98%9C%E6%9D%AD%E8%B1%86%E6%BC%BF+Taipei",
+          "near": "善導寺 · 타이베이 메인역 동쪽",
+          "distance": "숙소에서 MRT/도보로 이동 가능한 아침권",
+          "timing": "10/9 출국일 이른 아침"
         },
         {
           "name": "金峰魯肉飯",
           "food": "루러우판 · 동파육 계열 반찬",
           "desc": "중정기념당 근처 대표 루러우판집. 10/8 시내 이동 동선에 붙이기 좋음.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E9%87%91%E5%B3%B0%E9%AD%AF%E8%82%89%E9%A3%AF+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%87%91%E5%B3%B0%E9%AD%AF%E8%82%89%E9%A3%AF+Taipei",
+          "near": "중정기념당",
+          "distance": "10/8 중정기념당 일정과 바로 묶기 좋음",
+          "timing": "10/8 오후"
         },
         {
           "name": "鼎泰豐",
           "food": "샤오롱바오 · 딤섬",
           "desc": "시간이 맞으면 타이베이에서 한 번쯤 먹기 좋은 대표 샤오롱바오. 지점이 여러 곳이라 동선 맞춰 선택.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E6%B3%B0%E8%B1%90+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E6%B3%B0%E8%B1%90+Taipei",
+          "near": "타이베이 시내 여러 지점",
+          "distance": "10/8 동선에 맞는 지점 선택",
+          "timing": "10/8 점심·저녁"
         },
         {
           "name": "西門町 芒果冰",
           "food": "망고빙수",
           "desc": "시먼딩 산책 중 후식으로 넣기 좋은 망고빙수.",
-          "map": "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Ximending+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Ximending+Taipei",
+          "near": "시먼딩",
+          "distance": "10/8 시먼딩 산책 동선상",
+          "timing": "오후 디저트"
         },
         {
           "name": "西門町 珍珠奶茶",
           "food": "버블티 · 밀크티",
           "desc": "시먼딩 이동 중 간단하게 마시기 좋은 대만 대표 음료.",
-          "map": "https://www.google.com/maps/search/?api=1&query=bubble+tea+Ximending+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=bubble+tea+Ximending+Taipei",
+          "near": "시먼딩",
+          "distance": "10/8 시먼딩 산책 동선상",
+          "timing": "이동 중"
         },
         {
           "name": "寧夏夜市 方家雞肉飯",
           "food": "닭고기덮밥 · 루러우판",
           "desc": "닝샤야시장에서 든든하게 먹기 좋은 밥 메뉴.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E6%96%B9%E5%AE%B6%E9%9B%9E%E8%82%89%E9%A3%AF+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E6%96%B9%E5%AE%B6%E9%9B%9E%E8%82%89%E9%A3%AF+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82",
+          "near": "닝샤야시장",
+          "distance": "10/8 다다오청→닝샤야시장 동선에 적합",
+          "timing": "10/8 저녁"
         },
         {
           "name": "寧夏夜市 劉芋仔",
           "food": "타로볼 · 튀긴 토란",
           "desc": "닝샤야시장에서 유명한 디저트 간식. 여러 명이 하나씩 나눠 먹기 좋음.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E8%8A%8B%E4%BB%94+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E8%8A%8B%E4%BB%94+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82",
+          "near": "닝샤야시장",
+          "distance": "야시장 내부 간식",
+          "timing": "10/8 저녁 디저트"
         },
         {
           "name": "寧夏夜市 蚵仔煎",
           "food": "굴전",
           "desc": "굴·달걀·전분을 함께 부친 대만 야시장 대표 음식.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E8%9A%B5%E4%BB%94%E7%85%8E+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%9A%B5%E4%BB%94%E7%85%8E+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82",
+          "near": "닝샤야시장",
+          "distance": "야시장 내부",
+          "timing": "10/8 저녁"
         },
         {
           "name": "大稻埕 慈聖宮美食街",
           "food": "돼지고기·해산물·로컬 반찬",
           "desc": "다다오청 산책 중 로컬식 점심이나 간식을 골라 먹기 좋은 전통 먹거리 구역.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%A8%BB%E5%9F%95+%E6%85%88%E8%81%96%E5%AE%AE+%E7%BE%8E%E9%A3%9F+%E5%8F%B0%E5%8C%97"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%A8%BB%E5%9F%95+%E6%85%88%E8%81%96%E5%AE%AE+%E7%BE%8E%E9%A3%9F+%E5%8F%B0%E5%8C%97",
+          "near": "다다오청",
+          "distance": "10/8 다다오청 산책 동선상",
+          "timing": "오후 간식·이른 저녁"
         },
         {
           "name": "迪化街 디저트·차",
           "food": "전통 과자 · 차 · 건과일",
           "desc": "다다오청 디화제에서 기념품과 간식을 함께 보기 좋은 구간.",
-          "map": "https://www.google.com/maps/search/?api=1&query=%E8%BF%AA%E5%8C%96%E8%A1%97+dessert+tea+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=%E8%BF%AA%E5%8C%96%E8%A1%97+dessert+tea+Taipei",
+          "near": "디화제·다다오청",
+          "distance": "10/8 다다오청 산책 코스 바로 옆",
+          "timing": "오후 간식·기념품"
         },
         {
           "name": "北投 시장·온천 주변",
           "food": "온천라면 · 대만식 소吃",
           "desc": "베이터우 온천 일정 전후 간단히 먹을 수 있는 식당들을 모아보기 좋은 지역.",
-          "map": "https://www.google.com/maps/search/?api=1&query=Beitou+food+Taipei"
+          "map": "https://www.google.com/maps/search/?api=1&query=Beitou+food+Taipei",
+          "near": "베이터우",
+          "distance": "10/8 온천 일정과 묶기 좋음",
+          "timing": "온천 전후"
         }
       ]
     }
