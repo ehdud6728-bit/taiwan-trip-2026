@@ -236,6 +236,76 @@
           "🚲 Liangtan Bike Path 공식",
           "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=159&s=3376"
         ]
+      ],
+      "linkSections": [
+        {
+          "title": "📸 볼거리",
+          "links": [
+            [
+              "칠성탄 해변",
+              "https://www.google.com/maps/search/?api=1&query=Qixingtan+Beach+Hualien"
+            ],
+            [
+              "칠성탄 가쓰오 박물관",
+              "https://www.google.com/maps/search/?api=1&query=Chihsing+Tan+Katsuo+Museum+Hualien"
+            ],
+            [
+              "화롄항 경관교",
+              "https://www.google.com/maps/search/?api=1&query=Hualien+Port+Landscape+Bridge"
+            ],
+            [
+              "Pacific Park",
+              "https://www.google.com/maps/search/?api=1&query=Pacific+Park+Hualien"
+            ],
+            [
+              "Shuguang Bridge",
+              "https://www.google.com/maps/search/?api=1&query=Shuguang+Bridge+Hualien"
+            ]
+          ]
+        },
+        {
+          "title": "🍜 먹거리",
+          "links": [
+            [
+              "동대문야시장",
+              "https://www.google.com/maps/search/?api=1&query=Dongdamen+Night+Market+Hualien"
+            ],
+            [
+              "鼎吉大腸鮮蚵麵線 207 — 곱창·굴 면선",
+              "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E5%90%89%E5%A4%A7%E8%85%B8%E9%AE%AE%E8%9A%B5%E9%BA%B5%E7%B7%9A+%E8%8A%B1%E8%93%AE"
+            ],
+            [
+              "花蓮古早味大腸麵線 — 곱창국수",
+              "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E5%8F%A4%E6%97%A9%E5%91%B3%E5%A4%A7%E8%85%B8%E9%BA%B5%E7%B7%9A"
+            ]
+          ]
+        },
+        {
+          "title": "☕ 카페·휴식",
+          "links": [
+            [
+              "화롄 시내 카페 검색",
+              "https://www.google.com/maps/search/?api=1&query=specialty+coffee+Hualien+City"
+            ],
+            [
+              "칠성탄 카페 검색",
+              "https://www.google.com/maps/search/?api=1&query=cafe+Qixingtan+Hualien"
+            ]
+          ]
+        },
+        {
+          "title": "🗺 지도·공식정보",
+          "links": [
+            [
+              "화롄 자전거 전체 노선도",
+              "assets/hualien-bike-network-map.jpeg"
+            ],
+            [
+              "Liangtan Bike Path 공식",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=159&s=3376"
+            ]
+          ]
+        }
       ]
     },
     {
@@ -346,6 +416,80 @@
           "🗺 화동종곡 공식 추천명소",
           "https://www.erv-nsa.gov.tw/en/attractions/must-visit"
         ]
+      ],
+      "linkSections": [
+        {
+          "title": "📸 볼거리",
+          "links": [
+            [
+              "리위탄",
+              "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+Hualien"
+            ],
+            [
+              "리촨 양식장",
+              "https://www.google.com/maps/search/?api=1&query=Lichuan+Aquafarm+Hualien"
+            ],
+            [
+              "윈산수 꿈의호수",
+              "https://www.google.com/maps/search/?api=1&query=Yunshanshui+Dream+Lake+Hualien"
+            ],
+            [
+              "바이바오강 자전거 생태길",
+              "https://www.google.com/maps/search/?api=1&query=Baibao+River+Bike+Path+Hualien"
+            ]
+          ]
+        },
+        {
+          "title": "🍜 먹거리",
+          "links": [
+            [
+              "리위탄 활새우 요리",
+              "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+live+jumping+prawns+Hualien"
+            ],
+            [
+              "리촨 황금조개",
+              "https://www.google.com/maps/search/?api=1&query=Lichuan+Aquafarm+golden+clam+Hualien"
+            ],
+            [
+              "鼎吉大腸鮮蚵麵線 207 — 곱창·굴 면선",
+              "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E5%90%89%E5%A4%A7%E8%85%B8%E9%AE%AE%E8%9A%B5%E9%BA%B5%E7%B7%9A+%E8%8A%B1%E8%93%AE"
+            ]
+          ]
+        },
+        {
+          "title": "☕ 카페·브레이크",
+          "links": [
+            [
+              "黑屋 cafe — 리위탄 호수뷰",
+              "https://www.google.com/maps/search/?api=1&query=%E9%BB%91%E5%B1%8B+cafe+%E9%AF%89%E9%AD%9A%E6%BD%AD+%E8%8A%B1%E8%93%AE"
+            ],
+            [
+              "莫內花園咖啡農莊 — 리위탄 인근",
+              "https://www.google.com/maps/search/?api=1&query=%E8%8E%AB%E5%85%A7%E8%8A%B1%E5%9C%92%E5%92%96%E5%95%A1%E8%BE%B2%E8%8E%8A+%E8%8A%B1%E8%93%AE"
+            ],
+            [
+              "수펑 카페 검색",
+              "https://www.google.com/maps/search/?api=1&query=cafe+Shoufeng+Hualien"
+            ]
+          ]
+        },
+        {
+          "title": "🗺 지도·공식정보",
+          "links": [
+            [
+              "화동종곡 공식 안내",
+              "https://www.erv-nsa.gov.tw/en/"
+            ],
+            [
+              "화동종곡 지도",
+              "https://www.google.com/maps/search/?api=1&query=East+Rift+Valley+Hualien"
+            ],
+            [
+              "화롄 자전거 전체 노선도",
+              "assets/hualien-bike-network-map.jpeg"
+            ]
+          ]
+        }
       ]
     },
     {
@@ -427,6 +571,59 @@
           "🦐 리위탄 활새우 요리",
           "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+live+jumping+prawns+Hualien"
         ]
+      ],
+      "linkSections": [
+        {
+          "title": "🌅 새벽 라이딩",
+          "links": [
+            [
+              "리위탄 지도",
+              "https://www.google.com/maps/search/?api=1&query=Liyu+Lake+Hualien"
+            ],
+            [
+              "리위탄 순환 자전거길",
+              "https://tour-hualien.hl.gov.tw/en/TourContent.aspx?n=186&s=3386"
+            ],
+            [
+              "화롄 자전거 전체 노선도",
+              "assets/hualien-bike-network-map.jpeg"
+            ]
+          ]
+        },
+        {
+          "title": "☕ 카페·브런치",
+          "links": [
+            [
+              "黑屋 cafe — 리위탄 호수뷰",
+              "https://www.google.com/maps/search/?api=1&query=%E9%BB%91%E5%B1%8B+cafe+%E9%AF%89%E9%AD%9A%E6%BD%AD+%E8%8A%B1%E8%93%AE"
+            ],
+            [
+              "莫內花園咖啡農莊",
+              "https://www.google.com/maps/search/?api=1&query=%E8%8E%AB%E5%85%A7%E8%8A%B1%E5%9C%92%E5%92%96%E5%95%A1%E8%BE%B2%E8%8E%8A+%E8%8A%B1%E8%93%AE"
+            ],
+            [
+              "화롄 브런치 검색",
+              "https://www.google.com/maps/search/?api=1&query=brunch+Hualien+City"
+            ]
+          ]
+        },
+        {
+          "title": "♨️ 타이베이 오후",
+          "links": [
+            [
+              "베이터우 지열곡",
+              "https://www.google.com/maps/search/?api=1&query=Beitou+Thermal+Valley+Taipei"
+            ],
+            [
+              "중정기념당",
+              "https://www.google.com/maps/search/?api=1&query=Chiang+Kai-shek+Memorial+Hall+Taipei"
+            ],
+            [
+              "닝샤야시장",
+              "https://www.google.com/maps/search/?api=1&query=Ningxia+Night+Market+Taipei"
+            ]
+          ]
+        }
       ]
     },
     {
