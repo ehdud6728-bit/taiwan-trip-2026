@@ -473,6 +473,81 @@ body{padding-bottom:105px!important}
   color:#a16207!important;
 }
 
+
+/* FINAL: 아주 작은 노란 숟가락 UI */
+.spoon-svg{
+  width:13px!important;
+  height:13px!important;
+  display:inline-block!important;
+  vertical-align:-2px!important;
+}
+.spoon-svg .spoon-head{
+  fill:#facc15!important;
+  stroke:#ca8a04!important;
+  stroke-width:1.4!important;
+}
+.spoon-svg .spoon-handle{
+  fill:#fde047!important;
+  stroke:#ca8a04!important;
+  stroke-width:1.4!important;
+}
+.food-vote-count{
+  top:10px!important;
+  right:10px!important;
+  padding:3px 6px!important;
+  gap:2px!important;
+  border-radius:999px!important;
+  font-size:10px!important;
+  line-height:1!important;
+  color:#854d0e!important;
+  background:#fffbea!important;
+  border:1px solid #fde68a!important;
+  box-shadow:none!important;
+}
+.food-vote-count .spoon-svg{
+  width:12px!important;
+  height:12px!important;
+  vertical-align:-2px!important;
+}
+.food-spoon{
+  flex:0 0 32px!important;
+  width:32px!important;
+  min-width:32px!important;
+  height:32px!important;
+  padding:0!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:11px!important;
+  background:#fffdf2!important;
+  border:1px solid #fde68a!important;
+  box-shadow:0 2px 6px rgba(202,138,4,.10)!important;
+  transform:none!important;
+}
+.food-spoon .spoon-svg{
+  width:18px!important;
+  height:18px!important;
+}
+.food-spoon.mine{
+  background:#facc15!important;
+  border-color:#eab308!important;
+  box-shadow:0 3px 8px rgba(202,138,4,.20)!important;
+  transform:translateY(-1px)!important;
+}
+.food-spoon.mine .spoon-svg .spoon-head,
+.food-spoon.mine .spoon-svg .spoon-handle{
+  fill:#fff7b2!important;
+  stroke:#854d0e!important;
+}
+.food-bottom-actions{
+  gap:8px!important;
+}
+.food-voters .spoon-svg{
+  width:12px!important;
+  height:12px!important;
+}
+
 </style>
 </head>
 <body>
@@ -677,29 +752,36 @@ function voterId(){
   return id;
 }
 function voterName(){return (localStorage.getItem(VOTER_NAME_KEY)||'').trim()}
-function randomVoterName(){
-  const names=[
-    '배고픈오리','곰탕재료푸우','망고에진심인곰','우육면수호대',
-    '샤오롱바오헌터','버블티중독자','요우티아오요정','마라훠궈탐정',
-    '거위고기감별사','새우잡는펭귄','타이루거두더지','칠성탄갈매기',
-    '리위탄잉어','화롄먹보','타이베이너구리','자전거탄고양이',
-    '딤섬도둑','계란파전마왕','짠두유전도사','망고빙수기사',
-    '야시장방랑자','마가오너구리','에그타르트도깨비','볶음밥용사'
-  ];
-  return names[Math.floor(Math.random()*names.length)];
+function requestFoodNickname(force=false){
+  return new Promise(res=>{
+    if(!ready())return res('');
+    const id=voterId(), cb='fn_'+Date.now()+'_'+Math.random().toString(36).slice(2), s=document.createElement('script');
+    let done=false;
+    const finish=v=>{if(done)return;done=true;try{delete window[cb]}catch(e){};try{s.remove()}catch(e){};res(v||'')};
+    const timer=setTimeout(()=>finish(''),4000);
+    window[cb]=r=>{
+      clearTimeout(timer);
+      if(r&&r.ok&&r.nickname){
+        const n=String(r.nickname).trim();
+        localStorage.setItem(VOTER_NAME_KEY,n);
+        finish(n);
+      }else finish('');
+    };
+    s.onerror=()=>{clearTimeout(timer);finish('')};
+    s.src=SHEETS_API_URL+'?action=foodNickname&voterId='+encodeURIComponent(id)+'&callback='+encodeURIComponent(cb)+'&_='+Date.now();
+    document.head.appendChild(s);
+  });
 }
 function ensureVoterName(){
-  let n=voterName();
-  if(n)return n;
-  n=randomVoterName();
-  localStorage.setItem(VOTER_NAME_KEY,n);
-  voterId();
-  return n;
+  const n=voterName();
+  if(n)return Promise.resolve(n);
+  return requestFoodNickname(false);
 }
 function changeVoterName(){
-  const n=randomVoterName();
-  localStorage.setItem(VOTER_NAME_KEY,n);
-  postFoodAction({action:'renameFoodVoter',voterId:voterId(),voterName:n},async()=>{
+  if(!ready())return;
+  postFoodAction({action:'rerollFoodNickname',voterId:voterId()},async()=>{
+    localStorage.removeItem(VOTER_NAME_KEY);
+    const n=await requestFoodNickname(true);
     await loadFoodVotes(true);
     if(active==='food')renderFood();
   });
@@ -729,8 +811,8 @@ function postFoodAction(obj,after){
   document.body.appendChild(f);f.submit();f.remove();
   setTimeout(()=>{if(after)after()},350);
 }
-function toggleFoodVote(foodId){
-  const name=ensureVoterName(); if(!name)return;
+async function toggleFoodVote(foodId){
+  const name=await ensureVoterName(); if(!name)return alert('닉네임을 불러오지 못했습니다. 다시 눌러주세요.');
   const id=voterId(), arr=foodVotesFor(foodId).slice(), idx=arr.findIndex(v=>String(v.id)===id);
   if(idx>=0)arr.splice(idx,1); else arr.push({id:id,name:name});
   SHARED.foodVotes[foodId]=arr;
@@ -768,7 +850,8 @@ window.addEventListener('resize',syncFoodStickyTop,{passive:true});
 
 function spoonIcon(){
   return `<svg class="spoon-svg" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M8.5 2.5c-2.6 0-4.5 2.5-4.5 5.5 0 2.6 1.5 4.6 3.6 5.2l-.7 7.2c-.1.9.5 1.6 1.3 1.6s1.4-.7 1.3-1.6l-.7-7.2c2.1-.6 3.6-2.6 3.6-5.2 0-3-1.9-5.5-3.9-5.5z"/>
+    <ellipse class="spoon-head" cx="8.1" cy="6.8" rx="4.6" ry="5.3"/>
+    <path class="spoon-handle" d="M7.3 11.5c.2 2.5-.3 5.3-.8 8.1-.2 1.1.5 2 1.6 2s1.8-.9 1.6-2c-.5-2.8-1-5.6-.8-8.1z"/>
   </svg>`;
 }
 
@@ -778,8 +861,8 @@ function renderFood(){
     <h2>🍜 대만 맛집 가이드</h2>
     <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 숟가락은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
     <div class="food-voter-bar">
-      <span>👤 ${me?`내 닉네임: <b>${esc(me)}</b>`:'첫 투표 때 랜덤 닉네임이 자동으로 배정됩니다.'}</span>
-      ${me?`<button onclick="changeVoterName()">닉네임 새로받기</button>`:''}
+      <span>👤 ${me?`내 닉네임: <b>${esc(me)}</b>`:'첫 투표 때 중복되지 않는 랜덤 닉네임이 자동으로 배정됩니다.'}</span>
+      ${me?`<button onclick="changeVoterName()">다른 닉네임</button>`:''}
     </div>
     ${guide.map(g=>`<div class="food-region">
       <h3>📍 ${esc(g.region)}</h3>
