@@ -624,17 +624,111 @@ body{padding-bottom:105px!important}
 }
 
 
-/* 여행 번역 바로가기 */
-.quick-tools{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}
-.quick-tools button{appearance:none;border:1px solid #dbeafe;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;line-height:1}
-.phrase-panel{margin-top:10px;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;background:#fff}
-.phrase-panel summary{cursor:pointer;list-style:none;padding:11px 13px;font-size:13px;font-weight:900;background:#f8fafc}
-.phrase-panel summary::-webkit-details-marker{display:none}
-.phrase-list{display:grid;gap:8px;padding:10px}
-.phrase-item{border:1px solid #eef2f7;border-radius:12px;padding:10px;background:#fff}
-.phrase-ko{font-size:12px;font-weight:900;color:#111827;margin-bottom:4px}
-.phrase-zh{font-size:15px;font-weight:900;color:#0f172a}
-.phrase-pron{margin-top:3px;font-size:11px;color:#64748b}
+/* 여행회화 전용 페이지 */
+.bottom{
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+}
+.bottom button{
+  min-width:0!important;
+  padding-left:2px!important;
+  padding-right:2px!important;
+}
+.bottom .ico{font-size:17px!important}
+.bottom .label{font-size:9.5px!important}
+
+.phrase-top{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+.phrase-translate-btn{
+  border:0;
+  border-radius:999px;
+  padding:9px 12px;
+  background:#2563eb;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+}
+.phrase-grid{
+  display:grid;
+  gap:10px;
+}
+.phrase-card{
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:13px 14px;
+  background:#fff;
+  box-shadow:0 2px 8px rgba(15,23,42,.04);
+}
+.phrase-ko{
+  font-size:13px;
+  font-weight:900;
+  color:#475569;
+  margin-bottom:6px;
+}
+.phrase-zh{
+  font-size:22px;
+  line-height:1.28;
+  font-weight:1000;
+  color:#0f172a;
+  word-break:keep-all;
+}
+.phrase-pron{
+  margin-top:7px;
+  padding-top:7px;
+  border-top:1px dashed #e5e7eb;
+  font-size:18px;
+  line-height:1.35;
+  font-weight:1000;
+  color:#d97706;
+  word-break:keep-all;
+}
+.phrase-cat{
+  font-size:11px;
+  color:#64748b;
+  margin-bottom:5px;
+  font-weight:800;
+}
+
+
+.etiquette-box{
+  margin-top:16px;
+  border:1px solid #fde68a;
+  border-radius:16px;
+  overflow:hidden;
+  background:#fffbeb;
+}
+.etiquette-title{
+  padding:11px 13px;
+  font-size:14px;
+  font-weight:1000;
+  color:#92400e;
+  background:#fef3c7;
+}
+.etiquette-list{
+  display:grid;
+  gap:0;
+}
+.etiquette-item{
+  padding:11px 13px;
+  border-top:1px solid #fde68a;
+}
+.etiquette-item:first-child{border-top:0}
+.etiquette-item b{
+  display:block;
+  font-size:13px;
+  color:#78350f;
+  margin-bottom:3px;
+}
+.etiquette-item span{
+  display:block;
+  font-size:12px;
+  line-height:1.45;
+  color:#57534e;
+}
 
 </style>
 </head>
@@ -649,8 +743,6 @@ body{padding-bottom:105px!important}
     <div class="stat"><b id="spentTop">0원</b><span>누적 사용</span></div>
     <div class="stat"><b id="remainTop">160만원</b><span>남은 공동경비</span></div>
   </div>
-
-  <div class="quick-tools" id="globalTranslateBtn"><button type="button" onclick="openTranslator()">🌐 번역기</button></div>
 </header>
 
 <div class="nav" id="nav"></div>
@@ -678,6 +770,7 @@ body{padding-bottom:105px!important}
 <button id="u-money" onclick="show('money')"><span class="ico">💰</span><span class="label">경비</span></button>
 <button id="u-food" onclick="show('food')"><span class="ico">🍜</span><span class="label">맛집</span></button>
 <button id="u-stay" onclick="show('stay')"><span class="ico">🏨</span><span class="label">숙소·렌탈</span></button>
+<button id="u-phrase" onclick="show('phrase')"><span class="ico">🗣</span><span class="label">회화</span></button>
 </div>
 </div>
 
@@ -839,28 +932,6 @@ function syncStickyHeaderHeights(){
 }
 window.addEventListener('resize',syncStickyHeaderHeights,{passive:true});
 
-
-const TRAVEL_PHRASES=[
-  {ko:'4명입니다.',zh:'我們四位。',pron:'워먼 쓰웨이'},
-  {ko:'카드 결제 되나요?',zh:'可以刷卡嗎？',pron:'커이 슈아카 마?'},
-  {ko:'안 맵게 해주세요.',zh:'請不要辣。',pron:'칭 부야오 라'},
-  {ko:'이거 하나 주세요.',zh:'這個一個，謝謝。',pron:'저거 이거, 셰셰'},
-  {ko:'기차역이 어디예요?',zh:'火車站在哪裡？',pron:'훠처잔 짜이 날리?'},
-  {ko:'자전거를 보관할 수 있나요?',zh:'可以寄放自行車嗎？',pron:'커이 지팡 즈싱처 마?'}
-];
-function openTranslator(){
-  window.open('https://translate.google.com/?sl=ko&tl=zh-TW&op=translate','_blank','noopener');
-}
-function travelPhraseHtml(){
-  return `<div class="quick-tools"><button type="button" onclick="openTranslator()">🌐 번역기 열기</button></div>
-  <details class="phrase-panel">
-    <summary>🗣 필수 여행회화 6개</summary>
-    <div class="phrase-list">
-      ${TRAVEL_PHRASES.map(p=>`<div class="phrase-item"><div class="phrase-ko">${esc(p.ko)}</div><div class="phrase-zh">${esc(p.zh)}</div><div class="phrase-pron">${esc(p.pron)}</div></div>`).join('')}
-    </div>
-  </details>`;
-}
-
 function renderNav(){
   document.getElementById('nav').innerHTML=
     DATA.days.map(d=>`<button id="n-${d.id}" onclick="show('${d.id}')">${d.date}</button>`).join('');
@@ -870,7 +941,7 @@ function show(id){active=id;
   document.querySelectorAll('.bottom button').forEach(x=>x.classList.remove('active'));
   let b=document.getElementById('n-'+id); if(b)b.classList.add('active');
   let u=document.getElementById('u-'+id); if(u)u.classList.add('active');
-  let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='food'){renderFood();ensureVoterName().then(n=>{if(n&&active==='food')renderFood()})}if(id==='stay')renderStay()}
+  let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='food'){renderFood();ensureVoterName().then(n=>{if(n&&active==='food')renderFood()})}if(id==='stay')renderStay();if(id==='phrase')renderPhrase()}
 
 
 
@@ -1170,6 +1241,88 @@ function renderFood(){
   loadFoodVotes().then(ok=>{if(ok&&active==='food')renderFood()});
 }
 
+
+const TRAVEL_PHRASES=[
+  {cat:'기본',ko:'안녕하세요.',zh:'你好。',pron:'니 하오'},
+  {cat:'기본',ko:'감사합니다.',zh:'謝謝。',pron:'셰 셰'},
+  {cat:'기본',ko:'괜찮습니다 / 됐습니다. (정중한 거절)',zh:'不用了，謝謝。',pron:'부 용 러, 셰 셰'},
+  {cat:'기본',ko:'죄송합니다.',zh:'不好意思。',pron:'부 하오 이 쓰'},
+  {cat:'인원',ko:'4명입니다.',zh:'我們四位。',pron:'워먼 쓰 웨이'},
+  {cat:'주문',ko:'이거 하나 주세요.',zh:'這個一個，謝謝。',pron:'쩌거 이거, 셰셰'},
+  {cat:'주문',ko:'안 맵게 해주세요.',zh:'請不要辣。',pron:'칭 부 야오 라'},
+  {cat:'주문',ko:'물 좀 주세요.',zh:'請給我水。',pron:'칭 게이 워 쉐이'},
+  {cat:'결제',ko:'계산해주세요.',zh:'買單，謝謝。',pron:'마이 단, 셰 셰'},
+  {cat:'결제',ko:'카드 결제 되나요?',zh:'可以刷卡嗎？',pron:'커이 슈아카 마?'},
+  {cat:'결제',ko:'현금만 되나요?',zh:'只能付現金嗎？',pron:'즈 넝 푸 시엔 진 마?'},
+  {cat:'길찾기',ko:'기차역이 어디예요?',zh:'火車站在哪裡？',pron:'훠 처 잔 짜이 날 리?'},
+  {cat:'교통',ko:'이 주소로 가주세요.',zh:'請到這個地址。',pron:'칭 따오 쩌거 디즈'},
+  {cat:'자전거',ko:'자전거를 보관할 수 있나요?',zh:'可以寄放自行車嗎？',pron:'커이 지 팡 쯔 싱 처 마?'},
+  {cat:'자전거',ko:'자전거에 문제가 생겼어요.',zh:'我的自行車有問題。',pron:'워 더 쯔 싱 처 요우 원 티'},
+  {cat:'도움',ko:'번역기로 이야기해도 될까요?',zh:'可以用翻譯軟體溝通嗎？',pron:'커이 용 판 이 롼 티 꺼우 통 마?'}
+];
+
+function openTranslator(){
+  window.open('https://translate.google.com/?sl=ko&tl=zh-TW&op=translate','_blank','noopener');
+}
+
+function renderPhrase(){
+  document.getElementById('main').innerHTML=`<section class="section"><div class="card">
+    <div class="phrase-top">
+      <div>
+        <h2 style="margin:0">🗣 대만 여행회화</h2>
+        <div class="notice" style="margin-top:6px">번체 중국어와 한글 발음을 크게 표시합니다.</div>
+      </div>
+      <button class="phrase-translate-btn" onclick="openTranslator()">🌐 번역기</button>
+    </div>
+    <div class="phrase-grid">
+      ${TRAVEL_PHRASES.map(p=>`<div class="phrase-card">
+        <div class="phrase-cat">${esc(p.cat)}</div>
+        <div class="phrase-ko">${esc(p.ko)}</div>
+        <div class="phrase-zh">${esc(p.zh)}</div>
+        <div class="phrase-pron">🔊 ${esc(p.pron)}</div>
+      </div>`).join('')}
+    </div>
+
+    <div class="etiquette-box">
+      <div class="etiquette-title">🇹🇼 대만에서 알아두면 좋은 기본 예절</div>
+      <div class="etiquette-list">
+        <div class="etiquette-item">
+          <b>인사·감사 표현을 자주 하기</b>
+          <span>가벼운 상황에서도 “謝謝(셰셰)”를 자주 쓰면 좋습니다.</span>
+        </div>
+        <div class="etiquette-item">
+          <b>거절할 때는 부드럽게</b>
+          <span>딱 잘라 “아니요”보다 “不用了，謝謝(부용러, 셰셰)”처럼 감사 표현을 붙이면 자연스럽습니다.</span>
+        </div>
+        <div class="etiquette-item">
+          <b>줄 서기·승하차 순서 지키기</b>
+          <span>MRT·기차·엘리베이터에서 먼저 내린 뒤 타고, 줄 표시를 따르는 게 좋습니다.</span>
+        </div>
+        <div class="etiquette-item">
+          <b>대중교통에서는 목소리 낮추기</b>
+          <span>MRT나 기차에서는 큰 소리 통화나 단체 대화를 피하는 편이 좋습니다.</span>
+        </div>
+        <div class="etiquette-item">
+          <b>우선석은 비워두기</b>
+          <span>노약자·임산부·장애인 우선석은 필요로 하는 사람이 있으면 바로 양보하는 게 좋습니다.</span>
+        </div>
+        <div class="etiquette-item">
+          <b>식당에서는 직원 호출을 너무 크게 하지 않기</b>
+          <span>눈을 맞추거나 손을 살짝 들고 “不好意思(부하오이스)”라고 부르면 무난합니다.</span>
+        </div>
+        <div class="etiquette-item">
+          <b>현금·카드 모두 준비</b>
+          <span>야시장과 소규모 가게는 현금만 받는 곳이 있어 소액 현금을 준비하면 편합니다.</span>
+        </div>
+        <div class="etiquette-item">
+          <b>사진 촬영 전 한 번 확인하기</b>
+          <span>사람, 작은 가게 내부, 사찰·종교 공간은 촬영 가능 여부를 먼저 확인하면 좋습니다.</span>
+        </div>
+      </div>
+    </div>
+  </div></section>`;
+}
+
 function renderStay(){
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
     <h2>🏨 숙소 · 🚲 렌탈</h2>
@@ -1199,7 +1352,7 @@ function renderStay(){
         </div>
       </div>
     </div>
-  </div></section>${travelPhraseHtml()}`;
+  </div></section>`;
 }
 
 function getLocalChecklistState(){try{return JSON.parse(localStorage.getItem('tw_check_state_v1')||'{}')}catch(e){return{}}}
