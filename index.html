@@ -426,6 +426,20 @@ body{padding-bottom:105px!important}
 .food-voter-bar button{border:0;background:none;color:#2563eb;font-weight:800}
 .food-name{padding-right:72px}
 
+
+/* 이모지 대신 앱용 둥근 숟가락 SVG */
+.spoon-svg{width:20px;height:20px;display:inline-block;vertical-align:-4px}
+.spoon-svg path{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.food-vote-count .spoon-svg{width:16px;height:16px;vertical-align:-3px}
+.food-spoon .spoon-svg{width:28px;height:28px}
+.food-spoon{color:#64748b}
+.food-spoon.mine{
+  color:#2563eb!important;
+  background:#eff6ff!important;
+  border-color:#93c5fd!important;
+  box-shadow:0 3px 12px rgba(37,99,235,.14)!important
+}
+
 </style>
 </head>
 <body>
@@ -712,11 +726,18 @@ function syncFoodStickyTop(){
 window.addEventListener('scroll',syncFoodStickyTop,{passive:true});
 window.addEventListener('resize',syncFoodStickyTop,{passive:true});
 
+
+function spoonIcon(){
+  return `<svg class="spoon-svg" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M8.5 2.5c-2.6 0-4.5 2.5-4.5 5.5 0 2.6 1.5 4.6 3.6 5.2l-.7 7.2c-.1.9.5 1.6 1.3 1.6s1.4-.7 1.3-1.6l-.7-7.2c2.1-.6 3.6-2.6 3.6-5.2 0-3-1.9-5.5-3.9-5.5z"/>
+  </svg>`;
+}
+
 function renderFood(){
   const guide=(DATA&&DATA.foodGuide)||[], me=voterName();
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
     <h2>🍜 대만 맛집 가이드</h2>
-    <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 🥄은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
+    <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 숟가락은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
     <div class="food-voter-bar">
       <span>👤 ${me?`내 투표 이름: <b>${esc(me)}</b>`:'숟가락을 누르면 이름을 한 번 입력합니다.'}</span>
       ${me?`<button onclick="changeVoterName()">이름 변경</button>`:''}
@@ -726,12 +747,12 @@ function renderFood(){
       ${(g.items||[]).map(x=>{
         const v=foodVotesFor(x.voteId), mine=isMyFoodVote(x.voteId), names=v.map(a=>a.name).filter(Boolean);
         return `<div class="food-card ${x.pick?'has-pick':''}">
-          <div class="food-vote-count">🥄 × ${v.length}</div>
+          <div class="food-vote-count">${spoonIcon()} × ${v.length}</div>
           ${x.pick?`<div class="food-pick">⭐ ${esc(x.pick)}</div>`:''}
           <div class="food-name">${esc(x.name)}${x.krName?` (${esc(x.krName)})`:''}</div>
           <div class="food-type">${esc(x.food)}</div>
           <div class="food-desc">${esc(x.desc)}</div>
-          ${names.length?`<div class="food-voters">🥄 ${names.map(esc).join(' · ')}</div>`:''}
+          ${names.length?`<div class="food-voters">${spoonIcon()} ${names.map(esc).join(' · ')}</div>`:''}
           <div class="food-meta">
             <div class="food-meta-row"><b>📍 기준점</b><span>${esc(x.near||'')}</span></div>
             <div class="food-meta-row"><b>📏 거리감</b><span>${esc(x.distance||'')}</span></div>
@@ -739,7 +760,7 @@ function renderFood(){
           </div>
           <div class="food-bottom-actions">
             <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
-            <button class="food-spoon ${mine?'mine':''}" onclick="toggleFoodVote('${esc(x.voteId)}')" aria-label="먹고 싶은 식당 투표">${mine?'🥄✓':'🥄'}</button>
+            <button class="food-spoon ${mine?'mine':''}" onclick="toggleFoodVote('${esc(x.voteId)}')" aria-label="먹고 싶은 식당 투표">${spoonIcon()}</button>
           </div>
         </div>`;
       }).join('')}
