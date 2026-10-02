@@ -560,11 +560,43 @@ body{padding-bottom:105px!important}
 
 .food-me.error{background:#fff1f2!important;border-color:#fecdd3!important;color:#be123c!important}
 
+
+/* 최상단 우측 닉네임 배지 */
+.hero{position:relative!important}
+#topNickname{
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:30;
+  display:none;
+  max-width:44%;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+  line-height:1.15;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+#topNickname.show{display:block}
+#topNickname.loading{opacity:.72}
+#topNickname.error{
+  background:rgba(190,24,93,.85);
+  border-color:rgba(255,255,255,.35);
+}
+
 </style>
 </head>
 <body>
 <div class="app">
 <header class="hero">
+  <div id="topNickname"></div>
   <h1>🇹🇼 대만여행 2026</h1>
   <p id="meta">불러오는 중…</p>
   <div class="stats">
@@ -604,7 +636,7 @@ body{padding-bottom:105px!important}
 
 <script>
 let DATA=null,active='d1',cat='식비',pay='현금',SHARED={checklist:[],trains:[],expenses:[],foodVotes:{}},SHARED_LOADED=false,SHARED_LOADING=false,AUTO_REFRESH_TIMER=null,LAST_SHARED_SIG='';
-const SHEETS_API_URL='https://script.google.com/macros/s/AKfycbz7r_9lHuw-whMyaSm2pm9lOO__SXbtcS3gWEwM4sipHiI1maRHW8MVxQJb0zD78v6T/exec';
+const SHEETS_API_URL='https://script.google.com/macros/s/AKfycbwQgeabBH9rcoJtd7E1yQiU7gsWrJCnwKvkzR2TndcaZD0N0-sSGtj5rUxk27g2ssnq/exec';
 const cats=['식비','야시장','교통','카페/간식','온천/입장','편의점','기타'];
 const pays=['현금','총무카드','개인카드','모바일페이'];
 const ready=()=>SHEETS_API_URL.startsWith('https://script.google.com/');
@@ -761,7 +793,7 @@ function voterId(){
     id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():('v_'+Date.now()+'_'+Math.random().toString(36).slice(2));
     localStorage.setItem(VOTER_ID_KEY,id);
   }
-  return id;
+  return id;updateTopNickname();
 }
 function voterName(){return (localStorage.getItem(VOTER_NAME_KEY)||'').trim()}
 
@@ -813,6 +845,7 @@ function requestFoodNickname(force=false,retry=0){
         const n=String(r.nickname).trim();
         localStorage.setItem(VOTER_NAME_KEY,n);
         FOOD_NICK_ERROR='';
+        updateTopNickname();
         finish(n);
       }else{
         FOOD_NICK_ERROR=(r&&r.error)?String(r.error):'Apps Script 새 버전 재배포 필요';
@@ -928,13 +961,33 @@ function spoonIcon(){
   </svg>`;
 }
 
+
+function updateTopNickname(){
+  const el=document.getElementById('topNickname');
+  if(!el)return;
+  if(active!=='food'){
+    el.className='';
+    el.textContent='';
+    return;
+  }
+  const me=voterName();
+  if(me){
+    el.className='show';
+    el.textContent='👤 '+me;
+  }else if(FOOD_NICK_ERROR){
+    el.className='show error';
+    el.textContent='⚠ '+FOOD_NICK_ERROR;
+  }else{
+    el.className='show loading';
+    el.textContent='닉네임 배정 중…';
+  }
+}
+
 function renderFood(){
+  updateTopNickname();
   const guide=(DATA&&DATA.foodGuide)||[], me=voterName();
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
-    <div class="food-header-row">
-      <h2>🍜 대만 맛집 가이드</h2>
-      <div class="food-me ${FOOD_NICK_ERROR?'error':(me?'':'loading')}">${me?`👤 ${esc(me)}`:(FOOD_NICK_ERROR?`⚠ ${esc(FOOD_NICK_ERROR)}`:'닉네임 배정 중…')}</div>
-    </div>
+    <h2>🍜 대만 맛집 가이드</h2>
     <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 숟가락은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
     ${guide.map(g=>`<div class="food-region">
       <h3>📍 ${esc(g.region)}</h3>
