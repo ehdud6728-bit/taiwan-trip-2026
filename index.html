@@ -730,7 +730,75 @@ body{padding-bottom:105px!important}
   color:#57534e;
 }
 
+
+/* 화면 정보량 최적화: 너무 작지 않게 상하 여백만 살짝 압축 */
+.hero{
+  padding-top:10px!important;
+  padding-bottom:9px!important;
+  min-height:auto!important;
+}
+.hero h1{
+  margin-top:0!important;
+  margin-bottom:3px!important;
+  font-size:20px!important;
+  line-height:1.15!important;
+}
+.hero .sub,
+.hero .meta,
+.hero p{
+  margin-top:2px!important;
+  margin-bottom:2px!important;
+  line-height:1.25!important;
+}
+.nav{
+  padding-top:5px!important;
+  padding-bottom:5px!important;
+  min-height:auto!important;
+}
+.nav button{
+  padding-top:6px!important;
+  padding-bottom:6px!important;
+  min-height:34px!important;
+}
+.section{
+  padding-top:10px!important;
+  padding-bottom:84px!important;
+}
+.card{
+  margin-bottom:10px!important;
+}
+.bottom{
+  padding-top:5px!important;
+  padding-bottom:calc(5px + env(safe-area-inset-bottom))!important;
+  min-height:54px!important;
+}
+.bottom button{
+  min-height:44px!important;
+}
+.bottom .ico{
+  line-height:1!important;
+  margin-bottom:2px!important;
+}
+.bottom .label{
+  line-height:1.05!important;
+}
+body{
+  padding-bottom:env(safe-area-inset-bottom)!important;
+}
+@media (display-mode: standalone){
+  body{overscroll-behavior-y:contain}
+}
+
 </style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f4c81">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="대만여행 2026">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+
 </head>
 <body>
 <div class="app">
@@ -1574,6 +1642,13 @@ function delE(row){if(confirm('이 경비를 삭제할까요?'))postShared({acti
 function exportCsv(){let a=SHARED.expenses||[];if(!a.length)return alert('경비 내역이 없습니다.');let rows=[['시간','분류','결제수단','금액','통화','KRW환산','메모'],...a.slice().reverse().map(x=>[x.time||x.local,x.cat,x.pay,x.raw,x.cur,Math.round(x.krw),x.memo])],csv='\uFEFF'+rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\n'),blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),u=URL.createObjectURL(blob),aa=document.createElement('a');aa.href=u;aa.download='대만여행_공동경비.csv';aa.click();setTimeout(()=>URL.revokeObjectURL(u),500)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 load();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  });
+}
+
 </script>
 <iframe name="gas_sink" id="gas_sink" style="display:none"></iframe>
 
