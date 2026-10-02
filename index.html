@@ -689,6 +689,7 @@ function renderActiveSharedIfNeeded(){
 async function backgroundRefresh(){
   if(!ready() || document.hidden || SHARED_LOADING) return;
   if(active==='food'){
+    if(FOOD_VOTE_PENDING>0)return;
     const ok=await loadFoodVotes(true);
     if(ok&&active==='food')renderFood();
     return;
@@ -838,7 +839,7 @@ function show(id){active=id;
 
 
 const VOTER_ID_KEY='tw_food_voter_id_v1', VOTER_NAME_KEY='tw_food_voter_name_v1';
-let FOOD_VOTES_LOADING=false, FOOD_VOTES_LOADED_AT=0, FOOD_NICK_LOADING=false, FOOD_NICK_ERROR='';
+let FOOD_VOTES_LOADING=false, FOOD_VOTES_LOADED_AT=0, FOOD_NICK_LOADING=false, FOOD_NICK_ERROR='', FOOD_VOTE_PENDING=0;
 
 function voterId(){
   let id=localStorage.getItem(VOTER_ID_KEY);
@@ -949,6 +950,7 @@ function foodVotesFor(id){return (SHARED.foodVotes&&SHARED.foodVotes[id])||[]}
 function isMyFoodVote(id){const me=voterId();return foodVotesFor(id).some(v=>String(v.id)===me)}
 function loadFoodVotes(force=false){
   if(!ready())return Promise.resolve(false);
+  if(FOOD_VOTE_PENDING>0)return Promise.resolve(false);
   if(!force && FOOD_VOTES_LOADED_AT && Date.now()-FOOD_VOTES_LOADED_AT<15000)return Promise.resolve(false);
   if(FOOD_VOTES_LOADING&&!force)return Promise.resolve(false);
   FOOD_VOTES_LOADING=true;
@@ -965,21 +967,74 @@ function loadFoodVotes(force=false){
 }
 function postFoodAction(obj,after){
   if(!ready())return alert('Apps Script 주소 설정이 필요합니다.');
-  const f=document.createElement('form');f.method='POST';f.action=SHEETS_API_URL;f.target='gas_sink';f.style.display='none';
-  Object.entries(obj).forEach(([k,v])=>{const i=document.createElement('input');i.name=k;i.value=v??'';f.appendChild(i)});
-  document.body.appendChild(f);f.submit();f.remove();
-  setTimeout(()=>{if(after)after()},350);
+  const token='foodpost_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  const frame=document.createElement('iframe');
+  frame.name=token;
+  frame.style.display='none';
+  document.body.appendChild(frame);
+
+  const f=document.createElement('form');
+  f.method='POST';
+  f.action=SHEETS_API_URL;
+  f.target=token;
+  f.style.display='none';
+  Object.entries(obj).forEach(([k,v])=>{
+    const i=document.createElement('input');
+    i.name=k;i.value=v??'';
+    f.appendChild(i);
+  });
+  document.body.appendChild(f);
+
+  let submitted=false, finished=false;
+  const finish=()=>{
+    if(finished)return;
+    finished=true;
+    setTimeout(()=>{
+      try{f.remove()}catch(e){}
+      try{frame.remove()}catch(e){}
+    },50);
+    if(after)after();
+  };
+  frame.addEventListener('load',()=>{
+    if(submitted)finish();
+  });
+  f.submit();
+  submitted=true;
+
+  // Fallback only if the iframe load event is unusually delayed.
+  setTimeout(finish,5000);
 }
 async function toggleFoodVote(foodId){
-  const name=await ensureVoterName(); if(!name)return alert('닉네임을 불러오지 못했습니다. 다시 눌러주세요.');
-  const id=voterId(), arr=foodVotesFor(foodId).slice(), idx=arr.findIndex(v=>String(v.id)===id);
-  if(idx>=0)arr.splice(idx,1); else arr.push({id:id,name:name});
+  const name=await ensureVoterName();
+  if(!name)return alert('닉네임을 불러오지 못했습니다. 다시 눌러주세요.');
+
+  // Do not allow repeated taps on the same write cycle.
+  if(FOOD_VOTE_PENDING>0)return;
+
+  const id=voterId();
+  const before=foodVotesFor(foodId).slice();
+  const arr=before.slice();
+  const idx=arr.findIndex(v=>String(v.id)===id);
+  if(idx>=0)arr.splice(idx,1);
+  else arr.push({id:id,name:name});
+
+  // Optimistic UI, but lock server refresh until POST is really complete.
+  FOOD_VOTE_PENDING++;
   SHARED.foodVotes[foodId]=arr;
   if(active==='food')renderFood();
-  postFoodAction({action:'toggleFoodVote',foodId:foodId,voterId:id,voterName:name},async()=>{
-    await loadFoodVotes(true);
-    if(active==='food')renderFood();
-  });
+
+  postFoodAction(
+    {action:'toggleFoodVote',foodId:foodId,voterId:id,voterName:name},
+    async()=>{
+      FOOD_VOTE_PENDING=Math.max(0,FOOD_VOTE_PENDING-1);
+      const ok=await loadFoodVotes(true);
+      if(!ok){
+        // Keep the optimistic state rather than reverting to a stale server snapshot.
+        SHARED.foodVotes[foodId]=arr;
+      }
+      if(active==='food')renderFood();
+    }
+  );
 }
 
 let FOOD_STICKY_RAF=0;
@@ -1062,7 +1117,7 @@ function renderFood(){
           </div>
           <div class="food-bottom-actions">
             <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
-            <button class="food-spoon ${mine?'mine':''}" ${me?'':'disabled'} onclick="toggleFoodVote('${esc(x.voteId)}')" aria-label="먹고 싶은 식당 투표">${spoonIcon()}</button>
+            <button class="food-spoon ${mine?'mine':''}" ${(me&&FOOD_VOTE_PENDING===0)?'':'disabled'} onclick="toggleFoodVote('${esc(x.voteId)}')" aria-label="먹고 싶은 식당 투표">${spoonIcon()}</button>
           </div>
         </div>`;
       }).join('')}
