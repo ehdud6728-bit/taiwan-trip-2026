@@ -1204,7 +1204,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E9%BB%83%E8%BB%8A+%E8%8A%B1%E8%93%AE+%E5%BE%A9%E8%88%88%E8%A1%97102%E8%99%9F",
           "near": "화롄 시내 · 숙소/동대문야시장과 화롄역 사이",
           "distance": "숙소에서 시내 이동 중 들르기 좋은 편",
-          "timing": "10/5 저녁 전 · 10/6~7 라이딩 복귀 후"
+          "timing": "10/5 저녁 전 · 10/6~7 라이딩 복귀 후",
+          "voteId": "f_af25730f6570",
+          "krName": "자단 충요우빙 황처"
         },
         {
           "name": "老牌炸蛋蔥油餅",
@@ -1213,7 +1215,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E8%80%81%E7%89%8C%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E8%8A%B1%E8%93%AE",
           "near": "화롄 시내 · 黃車 인근",
           "distance": "黃車와 거의 같은 권역, 줄 짧은 곳 선택",
-          "timing": "10/5 저녁 전 · 라이딩 복귀 후"
+          "timing": "10/5 저녁 전 · 라이딩 복귀 후",
+          "voteId": "f_2ff5b5217e42",
+          "krName": "라오파이 자단 충요우빙"
         },
         {
           "name": "好正點港式點心",
@@ -1222,7 +1226,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE",
           "near": "화롄역·자전거 렌탈샵 인근",
           "distance": "렌탈샵과 같은 Guolian 1st Rd 권역, 매우 가까운 편",
-          "timing": "자전거 수령 전 · 반납 후"
+          "timing": "자전거 수령 전 · 반납 후",
+          "voteId": "f_ded2648bb2f6",
+          "krName": "하오정뎬 강스뎬신"
         },
         {
           "name": "周家蒸餃小籠包",
@@ -1231,7 +1237,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E5%AE%B6%E8%92%B8%E9%A4%83%E5%B0%8F%E7%B1%A0%E5%8C%85+%E8%8A%B1%E8%93%AE",
           "near": "화롄 시내 · 역에서 숙소 쪽으로 내려오는 동선",
           "distance": "화롄역과 동대문야시장 사이 시내권",
-          "timing": "10/5 첫날 · 10/6~7 저녁"
+          "timing": "10/5 첫날 · 10/6~7 저녁",
+          "voteId": "f_71c7e1fb6337",
+          "krName": "저우자 정자오 샤오룽바오"
         },
         {
           "name": "公正包子",
@@ -1240,7 +1248,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%85%AC%E6%AD%A3%E5%8C%85%E5%AD%90+%E8%8A%B1%E8%93%AE",
           "near": "화롄 시내 중심 · 동대문야시장 권역",
           "distance": "숙소/야시장 쪽에서 접근 쉬운 편",
-          "timing": "야시장 가기 전 간식 · 라이딩 후"
+          "timing": "야시장 가기 전 간식 · 라이딩 후",
+          "voteId": "f_7911c4fba2f9",
+          "krName": "궁정 바오쯔"
         },
         {
           "name": "花蓮鵝肉 阿城",
@@ -1249,7 +1259,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E9%B5%9D%E8%82%89+%E9%98%BF%E5%9F%8E",
           "near": "화롄 시내 · 숙소 남서쪽",
           "distance": "숙소에서 택시/자전거로 짧게 이동하는 시내권",
-          "timing": "10/6 또는 10/7 저녁"
+          "timing": "10/6 또는 10/7 저녁",
+          "voteId": "f_7a09b5582e92",
+          "krName": "화롄 어러우 아청"
         },
         {
           "name": "鵝肉先生",
@@ -1258,7 +1270,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E8%82%89%E5%85%88%E7%94%9F+%E8%8A%B1%E8%93%AE",
           "near": "화롄 시내 · 林森路 권역",
           "distance": "숙소에서 시내 이동으로 접근 가능한 편",
-          "timing": "10/6 또는 10/7 저녁"
+          "timing": "10/6 또는 10/7 저녁",
+          "voteId": "f_ea73a5eb2a7b",
+          "krName": "어러우 셴성"
         },
         {
           "name": "화롄 대만식 아침",
@@ -1267,7 +1281,8 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E9%B9%B9%E8%B1%86%E6%BC%BF+%E6%B2%B9%E6%A2%9D+%E8%8A%B1%E8%93%AE+%E6%97%A9%E9%A4%90",
           "near": "숙소·화롄역 주변 조식권",
           "distance": "당일 영업 중인 가까운 두유집 검색",
-          "timing": "10/6 · 10/7 · 10/8 아침"
+          "timing": "10/6 · 10/7 · 10/8 아침",
+          "voteId": "f_27b4c85d3adc"
         }
       ]
     },
@@ -1281,7 +1296,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+C26",
           "near": "동대문야시장",
           "distance": "숙소에서 가장 편한 야시장 먹거리",
-          "timing": "10/5 첫날 밤 · 저녁 산책"
+          "timing": "10/5 첫날 밤 · 저녁 산책",
+          "voteId": "f_960585f40849",
+          "krName": "둥다먼 예스 자단 충요우빙 C26"
         },
         {
           "name": "原住民竹筒飯 · 馬告香腸",
@@ -1290,7 +1307,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%AB%B9%E7%AD%92%E9%A3%AF+%E9%A6%AC%E5%91%8A%E9%A6%99%E8%85%B8",
           "near": "동대문야시장",
           "distance": "숙소에서 도보권 야시장",
-          "timing": "10/5 밤 · 10/6~7 저녁"
+          "timing": "10/5 밤 · 10/6~7 저녁",
+          "voteId": "f_ad80bd25abf8",
+          "krName": "위안주민 주퉁판 · 마가오 샹창"
         },
         {
           "name": "東大門夜市 炭烤玉米",
@@ -1299,7 +1318,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%AD%E7%83%A4%E7%8E%89%E7%B1%B3",
           "near": "동대문야시장",
           "distance": "숙소에서 도보권 야시장",
-          "timing": "저녁 간식"
+          "timing": "저녁 간식",
+          "voteId": "f_39b0df0894ff",
+          "krName": "둥다먼 예스 탄카오 위미"
         },
         {
           "name": "東大門夜市 蚵仔煎",
@@ -1308,7 +1329,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E8%9A%B5%E4%BB%94%E7%85%8E",
           "near": "동대문야시장",
           "distance": "숙소에서 도보권 야시장",
-          "timing": "저녁 식사/간식"
+          "timing": "저녁 식사/간식",
+          "voteId": "f_e11cfc5f7a3d",
+          "krName": "둥다먼 예스 어아젠"
         }
       ]
     },
@@ -1322,7 +1345,8 @@
           "map": "https://www.google.com/maps/search/?api=1&query=cafe+Xincheng+Hualien+Taroko",
           "near": "신청성(Xincheng) · 타이루거 입구 전",
           "distance": "10/6 북부해안 라이딩 동선상",
-          "timing": "타이루거 진입 전 휴식"
+          "timing": "타이루거 진입 전 휴식",
+          "voteId": "f_033f4ec28736"
         },
         {
           "name": "칠성탄 카페",
@@ -1331,7 +1355,8 @@
           "map": "https://www.google.com/maps/search/?api=1&query=cafe+Qixingtan+Hualien",
           "near": "칠성탄 해변",
           "distance": "10/6 라이딩 코스 바로 옆",
-          "timing": "오전 첫 휴식 · 복귀 중"
+          "timing": "오전 첫 휴식 · 복귀 중",
+          "voteId": "f_bf6559841c97"
         }
       ]
     },
@@ -1345,7 +1370,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E9%AF%89%E9%AD%9A%E6%BD%AD%E9%98%BF%E6%88%BF%E5%B0%8F%E5%90%83%E6%B4%BB%E8%B7%B3%E8%9D%A6",
           "near": "리위탄",
           "distance": "10/7 라이딩 동선상",
-          "timing": "리위탄 도착 전후 점심"
+          "timing": "리위탄 도착 전후 점심",
+          "voteId": "f_9b2b7d84075b",
+          "krName": "리위탄 아팡 샤오츠 훠탸오샤"
         },
         {
           "name": "潭大陸小吃館",
@@ -1354,7 +1381,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%BD%AD%E5%A4%A7%E9%99%B8%E5%B0%8F%E5%90%83%E9%A4%A8+%E9%AF%89%E9%AD%9A%E6%BD%AD",
           "near": "리위탄",
           "distance": "10/7 라이딩 동선상",
-          "timing": "리위탄 점심 대안"
+          "timing": "리위탄 점심 대안",
+          "voteId": "f_73085aa1f60c",
+          "krName": "탄다루 샤오츠관"
         },
         {
           "name": "立川漁場",
@@ -1363,7 +1392,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E7%AB%8B%E5%B7%9D%E6%BC%81%E5%A0%B4+%E8%8A%B1%E8%93%AE+%E5%A3%BD%E8%B1%90",
           "near": "수펑·리촨",
           "distance": "10/7 East Rift Valley 코스와 잘 맞는 식사 포인트",
-          "timing": "10/7 점심 또는 오후"
+          "timing": "10/7 점심 또는 오후",
+          "voteId": "f_7d132e994822",
+          "krName": "리촨 위창"
         }
       ]
     },
@@ -1378,7 +1409,9 @@
           "near": "용캉제 · 동먼역 / 중정기념당 동쪽",
           "distance": "10/8 중정기념당 일정에서 동쪽으로 짧게 우회하는 편",
           "timing": "10/8 중정기념당 전후 점심·간식",
-          "pick": "은율 픽"
+          "pick": "은율 픽",
+          "voteId": "f_cb979e7655f6",
+          "krName": "하오궁다오 진지원"
         },
         {
           "name": "林洋港生猛活海鮮",
@@ -1388,7 +1421,9 @@
           "near": "중샤오신성역 권역",
           "distance": "타이베이 메인역/중정기념당에서 동쪽으로 이동하는 별도 저녁 코스",
           "timing": "10/8 저녁을 야시장 대신 푸짐하게 먹고 싶을 때",
-          "pick": "은율 픽"
+          "pick": "은율 픽",
+          "voteId": "f_a1c67d559fa3",
+          "krName": "린양강 성멍 훠하이셴"
         },
         {
           "name": "御品元冰火湯圓",
@@ -1398,7 +1433,9 @@
           "near": "린장제 야시장 · 신이안허역",
           "distance": "현재 10/8 서쪽 동선에서는 동쪽으로 꽤 우회. 안데스 에그타르트와 묶으면 효율적",
           "timing": "10/8 저녁 디저트를 특별히 먹고 싶을 때",
-          "pick": "은율 픽"
+          "pick": "은율 픽",
+          "voteId": "f_58ffac8b3773",
+          "krName": "위핀위안 빙훠 탕위안"
         },
         {
           "name": "品都串燒攤 忠孝",
@@ -1408,7 +1445,9 @@
           "near": "중샤오둔화역 · 충샤오동로 4단",
           "distance": "10/8 기본 동선보다 동쪽. 중샤오신성/신이안허 맛집과 묶는 대안 저녁권",
           "timing": "10/8 야시장 대신 꼬지·맥주 분위기를 원할 때",
-          "pick": "은율 픽"
+          "pick": "은율 픽",
+          "voteId": "f_fd2025c778cf",
+          "krName": "핀두 촨사오탄 중샤오"
         },
         {
           "name": "皇家帝國麻辣火鍋",
@@ -1418,7 +1457,9 @@
           "near": "시먼역 · 시먼딩",
           "distance": "10/8 계획된 시먼딩 동선에 거의 바로 붙는 편",
           "timing": "10/8 저녁 메인 식사 최우선 후보 중 하나",
-          "pick": "은율 픽"
+          "pick": "은율 픽",
+          "voteId": "f_28d1b69bccac",
+          "krName": "황자 디궈 마라 훠궈"
         },
         {
           "name": "安德斯葡式蛋撻 信義店",
@@ -1428,7 +1469,9 @@
           "near": "신이안허역 권역",
           "distance": "御品元冰火湯圓과 같은 동쪽 권역이라 둘을 함께 들르면 효율적",
           "timing": "10/8 신이안허 쪽으로 우회할 경우 디저트",
-          "pick": "은율 픽"
+          "pick": "은율 픽",
+          "voteId": "f_cd2f415e12aa",
+          "krName": "안더쓰 푸스 단타 신이뎬"
         },
         {
           "name": "劉山東牛肉麵",
@@ -1437,7 +1480,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E5%B1%B1%E6%9D%B1%E7%89%9B%E8%82%89%E9%BA%B5+Taipei",
           "near": "타이베이 메인역·화인제 숙소 인근",
           "distance": "10/8 숙소 체크인 전후 접근 매우 편한 편",
-          "timing": "10/8 타이베이 도착 후 · 10/9 이른 점심"
+          "timing": "10/8 타이베이 도착 후 · 10/9 이른 점심",
+          "voteId": "f_c5f54b6ab243",
+          "krName": "류산둥 뉴러우몐"
         },
         {
           "name": "富宏牛肉麵",
@@ -1446,7 +1491,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%AF%8C%E5%AE%8F%E7%89%9B%E8%82%89%E9%BA%B5+Taipei",
           "near": "시먼딩 북쪽",
           "distance": "10/8 시먼딩 산책 동선에 붙이기 좋음",
-          "timing": "10/8 저녁 전후"
+          "timing": "10/8 저녁 전후",
+          "voteId": "f_816ef37b4060",
+          "krName": "푸훙 뉴러우몐"
         },
         {
           "name": "阜杭豆漿",
@@ -1455,7 +1502,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E9%98%9C%E6%9D%AD%E8%B1%86%E6%BC%BF+Taipei",
           "near": "善導寺 · 타이베이 메인역 동쪽",
           "distance": "숙소에서 MRT/도보로 이동 가능한 아침권",
-          "timing": "10/9 출국일 이른 아침"
+          "timing": "10/9 출국일 이른 아침",
+          "voteId": "f_3537bcc8f526",
+          "krName": "푸항 더우장"
         },
         {
           "name": "金峰魯肉飯",
@@ -1464,7 +1513,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E9%87%91%E5%B3%B0%E9%AD%AF%E8%82%89%E9%A3%AF+Taipei",
           "near": "중정기념당",
           "distance": "10/8 중정기념당 일정과 바로 묶기 좋음",
-          "timing": "10/8 오후"
+          "timing": "10/8 오후",
+          "voteId": "f_1a5bbf289c96",
+          "krName": "진펑 루러우판"
         },
         {
           "name": "鼎泰豐",
@@ -1473,7 +1524,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E9%BC%8E%E6%B3%B0%E8%B1%90+Taipei",
           "near": "타이베이 시내 여러 지점",
           "distance": "10/8 동선에 맞는 지점 선택",
-          "timing": "10/8 점심·저녁"
+          "timing": "10/8 점심·저녁",
+          "voteId": "f_a76229ca7cdc",
+          "krName": "딩타이펑"
         },
         {
           "name": "西門町 芒果冰",
@@ -1482,7 +1535,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=mango+shaved+ice+Ximending+Taipei",
           "near": "시먼딩",
           "distance": "10/8 시먼딩 산책 동선상",
-          "timing": "오후 디저트"
+          "timing": "오후 디저트",
+          "voteId": "f_fc2dfe0d93b9",
+          "krName": "시먼딩 망궈빙"
         },
         {
           "name": "西門町 珍珠奶茶",
@@ -1491,7 +1546,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=bubble+tea+Ximending+Taipei",
           "near": "시먼딩",
           "distance": "10/8 시먼딩 산책 동선상",
-          "timing": "이동 중"
+          "timing": "이동 중",
+          "voteId": "f_299d27aa457d",
+          "krName": "시먼딩 전주 나이차"
         },
         {
           "name": "寧夏夜市 方家雞肉飯",
@@ -1500,7 +1557,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%96%B9%E5%AE%B6%E9%9B%9E%E8%82%89%E9%A3%AF+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82",
           "near": "닝샤야시장",
           "distance": "10/8 다다오청→닝샤야시장 동선에 적합",
-          "timing": "10/8 저녁"
+          "timing": "10/8 저녁",
+          "voteId": "f_af79e1104727",
+          "krName": "닝샤 예스 팡자 지러우판"
         },
         {
           "name": "寧夏夜市 劉芋仔",
@@ -1509,7 +1568,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%8A%89%E8%8A%8B%E4%BB%94+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82",
           "near": "닝샤야시장",
           "distance": "야시장 내부 간식",
-          "timing": "10/8 저녁 디저트"
+          "timing": "10/8 저녁 디저트",
+          "voteId": "f_e2d5f39cc992",
+          "krName": "닝샤 예스 류위짜이"
         },
         {
           "name": "寧夏夜市 蚵仔煎",
@@ -1518,7 +1579,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E8%9A%B5%E4%BB%94%E7%85%8E+%E5%AF%A7%E5%A4%8F%E5%A4%9C%E5%B8%82",
           "near": "닝샤야시장",
           "distance": "야시장 내부",
-          "timing": "10/8 저녁"
+          "timing": "10/8 저녁",
+          "voteId": "f_405cb3bb3021",
+          "krName": "닝샤 예스 어아젠"
         },
         {
           "name": "大稻埕 慈聖宮美食街",
@@ -1527,7 +1590,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%A8%BB%E5%9F%95+%E6%85%88%E8%81%96%E5%AE%AE+%E7%BE%8E%E9%A3%9F+%E5%8F%B0%E5%8C%97",
           "near": "다다오청",
           "distance": "10/8 다다오청 산책 동선상",
-          "timing": "오후 간식·이른 저녁"
+          "timing": "오후 간식·이른 저녁",
+          "voteId": "f_d4298cde71ad",
+          "krName": "다다오청 츠성궁 메이스제"
         },
         {
           "name": "迪化街 디저트·차",
@@ -1536,7 +1601,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=%E8%BF%AA%E5%8C%96%E8%A1%97+dessert+tea+Taipei",
           "near": "디화제·다다오청",
           "distance": "10/8 다다오청 산책 코스 바로 옆",
-          "timing": "오후 간식·기념품"
+          "timing": "오후 간식·기념품",
+          "voteId": "f_2402aae0c769",
+          "krName": "디화제"
         },
         {
           "name": "北投 시장·온천 주변",
@@ -1545,7 +1612,9 @@
           "map": "https://www.google.com/maps/search/?api=1&query=Beitou+food+Taipei",
           "near": "베이터우",
           "distance": "10/8 온천 일정과 묶기 좋음",
-          "timing": "온천 전후"
+          "timing": "온천 전후",
+          "voteId": "f_254887b49ac6",
+          "krName": "베이터우"
         }
       ]
     }

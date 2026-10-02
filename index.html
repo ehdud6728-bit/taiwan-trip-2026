@@ -400,6 +400,32 @@ body{padding-bottom:105px!important}
   letter-spacing:-.2px;
 }
 
+
+/* 맛집 숟가락 투표 */
+.food-card{position:relative}
+.food-vote-count{
+  position:absolute;top:12px;right:12px;
+  display:inline-flex;align-items:center;gap:3px;
+  padding:5px 8px;border-radius:999px;
+  background:#f8fafc;border:1px solid #e2e8f0;
+  font-size:12px;font-weight:900;color:#334155
+}
+.food-card.has-pick .food-vote-count{top:12px}
+.food-voters{margin:7px 0 0;font-size:11.5px;line-height:1.4;color:#64748b}
+.food-bottom-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.food-bottom-actions .food-map{margin-top:0!important}
+.food-spoon{
+  flex:0 0 54px;height:48px;border:1px solid #dbe4ee;border-radius:16px;
+  background:#fff;font-size:25px;cursor:pointer;box-shadow:0 3px 10px rgba(15,23,42,.07)
+}
+.food-spoon.mine{background:#fff7ed;border-color:#fb923c;box-shadow:0 3px 12px rgba(249,115,22,.16)}
+.food-voter-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:10px 0 16px;padding:10px 12px;border-radius:15px;background:#f8fafc;border:1px solid #e2e8f0
+}
+.food-voter-bar button{border:0;background:none;color:#2563eb;font-weight:800}
+.food-name{padding-right:72px}
+
 </style>
 </head>
 <body>
@@ -443,7 +469,7 @@ body{padding-bottom:105px!important}
 </div>
 
 <script>
-let DATA=null,active='d1',cat='식비',pay='현금',SHARED={checklist:[],trains:[],expenses:[]},SHARED_LOADED=false,SHARED_LOADING=false,AUTO_REFRESH_TIMER=null,LAST_SHARED_SIG='';
+let DATA=null,active='d1',cat='식비',pay='현금',SHARED={checklist:[],trains:[],expenses:[],foodVotes:{}},SHARED_LOADED=false,SHARED_LOADING=false,AUTO_REFRESH_TIMER=null,LAST_SHARED_SIG='';
 const SHEETS_API_URL='https://script.google.com/macros/s/AKfycbz7r_9lHuw-whMyaSm2pm9lOO__SXbtcS3gWEwM4sipHiI1maRHW8MVxQJb0zD78v6T/exec';
 const cats=['식비','야시장','교통','카페/간식','온천/입장','편의점','기타'];
 const pays=['현금','총무카드','개인카드','모바일페이'];
@@ -464,6 +490,11 @@ function renderActiveSharedIfNeeded(){
 }
 async function backgroundRefresh(){
   if(!ready() || document.hidden || SHARED_LOADING) return;
+  if(active==='food'){
+    const ok=await loadFoodVotes(true);
+    if(ok&&active==='food')renderFood();
+    return;
+  }
   const before=LAST_SHARED_SIG || sharedSignature(SHARED);
   const ok=await loadShared(true);
   if(!ok) return;
@@ -586,6 +617,77 @@ function show(id){active=id;
 
 
 
+
+const VOTER_ID_KEY='tw_food_voter_id_v1', VOTER_NAME_KEY='tw_food_voter_name_v1';
+let FOOD_VOTES_LOADING=false, FOOD_VOTES_LOADED_AT=0;
+
+function voterId(){
+  let id=localStorage.getItem(VOTER_ID_KEY);
+  if(!id){
+    id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():('v_'+Date.now()+'_'+Math.random().toString(36).slice(2));
+    localStorage.setItem(VOTER_ID_KEY,id);
+  }
+  return id;
+}
+function voterName(){return (localStorage.getItem(VOTER_NAME_KEY)||'').trim()}
+function ensureVoterName(){
+  let n=voterName();
+  if(n)return n;
+  n=(prompt('숟가락 투표에 사용할 이름을 입력해주세요.\\n예: 도영, 은율')||'').trim();
+  if(!n)return '';
+  n=n.slice(0,20);
+  localStorage.setItem(VOTER_NAME_KEY,n);
+  voterId();
+  return n;
+}
+function changeVoterName(){
+  const old=voterName();
+  let n=(prompt('투표에 표시할 이름',old)||'').trim();
+  if(!n)return;
+  n=n.slice(0,20);
+  localStorage.setItem(VOTER_NAME_KEY,n);
+  postFoodAction({action:'renameFoodVoter',voterId:voterId(),voterName:n},async()=>{
+    await loadFoodVotes(true);
+    if(active==='food')renderFood();
+  });
+}
+function foodVotesFor(id){return (SHARED.foodVotes&&SHARED.foodVotes[id])||[]}
+function isMyFoodVote(id){const me=voterId();return foodVotesFor(id).some(v=>String(v.id)===me)}
+function loadFoodVotes(force=false){
+  if(!ready())return Promise.resolve(false);
+  if(!force && FOOD_VOTES_LOADED_AT && Date.now()-FOOD_VOTES_LOADED_AT<15000)return Promise.resolve(false);
+  if(FOOD_VOTES_LOADING&&!force)return Promise.resolve(false);
+  FOOD_VOTES_LOADING=true;
+  return new Promise(res=>{
+    const cb='fv_'+Date.now()+'_'+Math.random().toString(36).slice(2),s=document.createElement('script');
+    let done=false;
+    const finish=ok=>{if(done)return;done=true;FOOD_VOTES_LOADING=false;try{delete window[cb]}catch(e){};try{s.remove()}catch(e){};res(ok)};
+    const timer=setTimeout(()=>finish(false),4000);
+    window[cb]=r=>{clearTimeout(timer);if(r&&r.ok){SHARED.foodVotes=r.foodVotes||{};FOOD_VOTES_LOADED_AT=Date.now();finish(true)}else finish(false)};
+    s.onerror=()=>{clearTimeout(timer);finish(false)};
+    s.src=SHEETS_API_URL+'?action=foodVotes&callback='+encodeURIComponent(cb)+'&_='+Date.now();
+    document.head.appendChild(s);
+  });
+}
+function postFoodAction(obj,after){
+  if(!ready())return alert('Apps Script 주소 설정이 필요합니다.');
+  const f=document.createElement('form');f.method='POST';f.action=SHEETS_API_URL;f.target='gas_sink';f.style.display='none';
+  Object.entries(obj).forEach(([k,v])=>{const i=document.createElement('input');i.name=k;i.value=v??'';f.appendChild(i)});
+  document.body.appendChild(f);f.submit();f.remove();
+  setTimeout(()=>{if(after)after()},350);
+}
+function toggleFoodVote(foodId){
+  const name=ensureVoterName(); if(!name)return;
+  const id=voterId(), arr=foodVotesFor(foodId).slice(), idx=arr.findIndex(v=>String(v.id)===id);
+  if(idx>=0)arr.splice(idx,1); else arr.push({id:id,name:name});
+  SHARED.foodVotes[foodId]=arr;
+  if(active==='food')renderFood();
+  postFoodAction({action:'toggleFoodVote',foodId:foodId,voterId:id,voterName:name},async()=>{
+    await loadFoodVotes(true);
+    if(active==='food')renderFood();
+  });
+}
+
 let FOOD_STICKY_RAF=0;
 function syncFoodStickyTop(){
   if(active!=='food') return;
@@ -611,27 +713,40 @@ window.addEventListener('scroll',syncFoodStickyTop,{passive:true});
 window.addEventListener('resize',syncFoodStickyTop,{passive:true});
 
 function renderFood(){
-  const guide=(DATA&&DATA.foodGuide)||[];
+  const guide=(DATA&&DATA.foodGuide)||[], me=voterName();
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
     <h2>🍜 대만 맛집 가이드</h2>
-    <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 여기서는 여행 전체 맛집을 지역별로 한 번에 볼 수 있습니다.</p>
+    <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 🥄은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
+    <div class="food-voter-bar">
+      <span>👤 ${me?`내 투표 이름: <b>${esc(me)}</b>`:'숟가락을 누르면 이름을 한 번 입력합니다.'}</span>
+      ${me?`<button onclick="changeVoterName()">이름 변경</button>`:''}
+    </div>
     ${guide.map(g=>`<div class="food-region">
       <h3>📍 ${esc(g.region)}</h3>
-      ${(g.items||[]).map(x=>`<div class="food-card">
-        ${x.pick?`<div class="food-pick">⭐ ${esc(x.pick)}</div>`:''}
-        <div class="food-name">${esc(x.name)}</div>
-        <div class="food-type">${esc(x.food)}</div>
-        <div class="food-desc">${esc(x.desc)}</div>
-        <div class="food-meta">
-          <div class="food-meta-row"><b>📍 기준점</b><span>${esc(x.near||'')}</span></div>
-          <div class="food-meta-row"><b>📏 거리감</b><span>${esc(x.distance||'')}</span></div>
-          <div class="food-meta-row"><b>🗓 추천</b><span>${esc(x.timing||'')}</span></div>
-        </div>
-        <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
-      </div>`).join('')}
+      ${(g.items||[]).map(x=>{
+        const v=foodVotesFor(x.voteId), mine=isMyFoodVote(x.voteId), names=v.map(a=>a.name).filter(Boolean);
+        return `<div class="food-card ${x.pick?'has-pick':''}">
+          <div class="food-vote-count">🥄 × ${v.length}</div>
+          ${x.pick?`<div class="food-pick">⭐ ${esc(x.pick)}</div>`:''}
+          <div class="food-name">${esc(x.name)}${x.krName?` (${esc(x.krName)})`:''}</div>
+          <div class="food-type">${esc(x.food)}</div>
+          <div class="food-desc">${esc(x.desc)}</div>
+          ${names.length?`<div class="food-voters">🥄 ${names.map(esc).join(' · ')}</div>`:''}
+          <div class="food-meta">
+            <div class="food-meta-row"><b>📍 기준점</b><span>${esc(x.near||'')}</span></div>
+            <div class="food-meta-row"><b>📏 거리감</b><span>${esc(x.distance||'')}</span></div>
+            <div class="food-meta-row"><b>🗓 추천</b><span>${esc(x.timing||'')}</span></div>
+          </div>
+          <div class="food-bottom-actions">
+            <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
+            <button class="food-spoon ${mine?'mine':''}" onclick="toggleFoodVote('${esc(x.voteId)}')" aria-label="먹고 싶은 식당 투표">${mine?'🥄✓':'🥄'}</button>
+          </div>
+        </div>`;
+      }).join('')}
     </div>`).join('')}
   </div></section>`;
   requestAnimationFrame(syncFoodStickyTop);
+  loadFoodVotes().then(ok=>{if(ok&&active==='food')renderFood()});
 }
 
 function renderStay(){
