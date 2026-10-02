@@ -591,6 +591,38 @@ body{padding-bottom:105px!important}
   border-color:rgba(255,255,255,.35);
 }
 
+
+/* 전역 닉네임 + 노란 사람 아이콘 */
+.person-mini{
+  width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:4px
+}
+.person-mini .head,.person-mini .body{
+  fill:#facc15;stroke:#ca8a04;stroke-width:1.2
+}
+#topNickname{
+  display:block!important;
+}
+
+
+/* 닉네임 준비 전 투표 잠금 */
+.food-spoon:disabled{
+  opacity:.38!important;
+  cursor:not-allowed!important;
+  filter:grayscale(.25);
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+
+/* 상단 날짜 바 고정 */
+:root{--hero-h:105px}
+.hero{position:sticky!important;top:0!important;z-index:40!important}
+.nav{
+  position:sticky!important;
+  top:var(--hero-h)!important;
+  z-index:35!important;
+}
+
 </style>
 </head>
 <body>
@@ -692,6 +724,7 @@ async function load(){
     document.getElementById('meta').textContent=DATA.meta.dates+' · '+DATA.meta.people+'명';
     renderNav();
     renderChips();
+    requestAnimationFrame(syncStickyHeaderHeights);
 
     // First render immediately from local/static data so the app never stays blank.
     if(ready()){
@@ -709,6 +742,16 @@ async function load(){
     }
 
     show('d1');
+
+    // Assign a unique nickname as soon as the app starts, regardless of the current page.
+    updateTopNickname();
+    checkNicknameServer().then(ok=>{
+      if(ok){
+        ensureVoterName().then(()=>updateTopNickname());
+      }else{
+        updateTopNickname();
+      }
+    });
 
     // Load all shared data once at startup. Tab switches use in-memory data instantly.
     if(ready()){
@@ -770,6 +813,16 @@ function postShared(o,after){if(!ready())return alert('Apps Script 주소 설정
     renderMoney();
     after?after():show(active);
   },700)}
+
+function syncStickyHeaderHeights(){
+  const hero=document.querySelector('.hero');
+  if(!hero)return;
+  const h=Math.ceil(hero.getBoundingClientRect().height);
+  document.documentElement.style.setProperty('--hero-h',h+'px');
+  if(active==='food')requestAnimationFrame(syncFoodStickyTop);
+}
+window.addEventListener('resize',syncStickyHeaderHeights,{passive:true});
+
 function renderNav(){
   document.getElementById('nav').innerHTML=
     DATA.days.map(d=>`<button id="n-${d.id}" onclick="show('${d.id}')">${d.date}</button>`).join('');
@@ -962,18 +1015,21 @@ function spoonIcon(){
 }
 
 
+
+function personIcon(){
+  return `<svg class="person-mini" viewBox="0 0 24 24" aria-hidden="true">
+    <circle class="head" cx="12" cy="7" r="4"/>
+    <path class="body" d="M5.5 21c.5-5 3-7.5 6.5-7.5s6 2.5 6.5 7.5z"/>
+  </svg>`;
+}
+
 function updateTopNickname(){
   const el=document.getElementById('topNickname');
   if(!el)return;
-  if(active!=='food'){
-    el.className='';
-    el.textContent='';
-    return;
-  }
   const me=voterName();
   if(me){
     el.className='show';
-    el.textContent='👤 '+me;
+    el.innerHTML=personIcon()+esc(me);
   }else if(FOOD_NICK_ERROR){
     el.className='show error';
     el.textContent='⚠ '+FOOD_NICK_ERROR;
@@ -992,14 +1048,13 @@ function renderFood(){
     ${guide.map(g=>`<div class="food-region">
       <h3>📍 ${esc(g.region)}</h3>
       ${(g.items||[]).map(x=>{
-        const v=foodVotesFor(x.voteId), mine=isMyFoodVote(x.voteId), names=v.map(a=>a.name).filter(Boolean);
+        const v=foodVotesFor(x.voteId), mine=isMyFoodVote(x.voteId);
         return `<div class="food-card ${x.pick?'has-pick':''}">
           <div class="food-vote-count">${spoonIcon()} × ${v.length}</div>
           ${x.pick?`<div class="food-pick">⭐ ${esc(x.pick)}</div>`:''}
           <div class="food-name">${esc(x.name)}${x.krName?` (${esc(x.krName)})`:''}</div>
           <div class="food-type">${esc(x.food)}</div>
           <div class="food-desc">${esc(x.desc)}</div>
-          ${names.length?`<div class="food-voters">${spoonIcon()} ${names.map(esc).join(' · ')}</div>`:''}
           <div class="food-meta">
             <div class="food-meta-row"><b>📍 기준점</b><span>${esc(x.near||'')}</span></div>
             <div class="food-meta-row"><b>📏 거리감</b><span>${esc(x.distance||'')}</span></div>
@@ -1007,7 +1062,7 @@ function renderFood(){
           </div>
           <div class="food-bottom-actions">
             <a class="btn food-map" target="_blank" href="${esc(x.map)}">📍 지도 보기</a>
-            <button class="food-spoon ${mine?'mine':''}" onclick="toggleFoodVote('${esc(x.voteId)}')" aria-label="먹고 싶은 식당 투표">${spoonIcon()}</button>
+            <button class="food-spoon ${mine?'mine':''}" ${me?'':'disabled'} onclick="toggleFoodVote('${esc(x.voteId)}')" aria-label="먹고 싶은 식당 투표">${spoonIcon()}</button>
           </div>
         </div>`;
       }).join('')}
