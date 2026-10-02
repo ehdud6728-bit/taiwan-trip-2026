@@ -548,6 +548,15 @@ body{padding-bottom:105px!important}
   height:12px!important;
 }
 
+
+.food-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px}
+.food-header-row h2{margin:0!important}
+.food-me{flex:0 0 auto;max-width:48%;padding:6px 9px;border-radius:999px;background:#f8fafc;border:1px solid #e2e8f0;color:#334155;font-size:11px;font-weight:900;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.food-me.loading{color:#94a3b8}
+
+
+.food-me{cursor:default!important;user-select:none}
+
 </style>
 </head>
 <body>
@@ -735,13 +744,13 @@ function show(id){active=id;
   document.querySelectorAll('.bottom button').forEach(x=>x.classList.remove('active'));
   let b=document.getElementById('n-'+id); if(b)b.classList.add('active');
   let u=document.getElementById('u-'+id); if(u)u.classList.add('active');
-  let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='food')renderFood();if(id==='stay')renderStay()}
+  let d=DATA.days.find(x=>x.id===id);if(d){document.getElementById('main').innerHTML=`<section class="section"><div class="card">${d.tags.map(t=>`<span class="badge">${t}</span>`).join('')}<h2>${d.date} · ${d.title}</h2><div class="timeline">${d.items.map(i=>`<div class="item"><div class="time">${i[0]}</div><div class="title">${i[1]}</div><div class="desc">${i[2]}</div></div>`).join('')}</div>${d.linkSections?`<div class="link-sections">${d.linkSections.map(s=>`<div class="link-sector"><h3>${s.title}</h3><div class="btnrow">${s.links.map(l=>`<a class="btn" target="_blank" href="${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('')}</div>`:''}</div></section>`;return}if(id==='check')renderCheck();if(id==='train')renderTrain();if(id==='money')renderMoneyPage();if(id==='food'){renderFood();ensureVoterName().then(n=>{if(n&&active==='food')renderFood()})}if(id==='stay')renderStay()}
 
 
 
 
 const VOTER_ID_KEY='tw_food_voter_id_v1', VOTER_NAME_KEY='tw_food_voter_name_v1';
-let FOOD_VOTES_LOADING=false, FOOD_VOTES_LOADED_AT=0;
+let FOOD_VOTES_LOADING=false, FOOD_VOTES_LOADED_AT=0, FOOD_NICK_LOADING=false;
 
 function voterId(){
   let id=localStorage.getItem(VOTER_ID_KEY);
@@ -775,13 +784,34 @@ function requestFoodNickname(force=false){
 function ensureVoterName(){
   const n=voterName();
   if(n)return Promise.resolve(n);
-  return requestFoodNickname(false);
+  if(FOOD_NICK_LOADING){
+    return new Promise(res=>{
+      let tries=0;
+      const t=setInterval(()=>{
+        const v=voterName();
+        if(v || ++tries>40){clearInterval(t);res(v||'')}
+      },100);
+    });
+  }
+  FOOD_NICK_LOADING=true;
+  return requestFoodNickname(false).then(n=>{
+    FOOD_NICK_LOADING=false;
+    return n;
+  }).catch(()=>{
+    FOOD_NICK_LOADING=false;
+    return '';
+  });
 }
-function changeVoterName(){
+async function changeVoterName(){
   if(!ready())return;
+  if(!voterName()){
+    await ensureVoterName();
+    if(active==='food')renderFood();
+    return;
+  }
   postFoodAction({action:'rerollFoodNickname',voterId:voterId()},async()=>{
     localStorage.removeItem(VOTER_NAME_KEY);
-    const n=await requestFoodNickname(true);
+    await requestFoodNickname(true);
     await loadFoodVotes(true);
     if(active==='food')renderFood();
   });
@@ -858,12 +888,11 @@ function spoonIcon(){
 function renderFood(){
   const guide=(DATA&&DATA.foodGuide)||[], me=voterName();
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
-    <h2>🍜 대만 맛집 가이드</h2>
-    <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 숟가락은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
-    <div class="food-voter-bar">
-      <span>👤 ${me?`내 닉네임: <b>${esc(me)}</b>`:'첫 투표 때 중복되지 않는 랜덤 닉네임이 자동으로 배정됩니다.'}</span>
-      ${me?`<button onclick="changeVoterName()">다른 닉네임</button>`:''}
+    <div class="food-header-row">
+      <h2>🍜 대만 맛집 가이드</h2>
+      <div class="food-me ${me?'':'loading'}">${me?`👤 ${esc(me)}`:'닉네임 배정 중…'}</div>
     </div>
+    <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 숟가락은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
     ${guide.map(g=>`<div class="food-region">
       <h3>📍 ${esc(g.region)}</h3>
       ${(g.items||[]).map(x=>{
@@ -889,6 +918,7 @@ function renderFood(){
     </div>`).join('')}
   </div></section>`;
   requestAnimationFrame(syncFoodStickyTop);
+  if(!me)ensureVoterName().then(n=>{if(n&&active==='food')renderFood()});
   loadFoodVotes().then(ok=>{if(ok&&active==='food')renderFood()});
 }
 
