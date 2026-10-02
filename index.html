@@ -623,6 +623,19 @@ body{padding-bottom:105px!important}
   z-index:35!important;
 }
 
+
+/* 여행 번역 바로가기 */
+.quick-tools{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}
+.quick-tools button{appearance:none;border:1px solid #dbeafe;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;line-height:1}
+.phrase-panel{margin-top:10px;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;background:#fff}
+.phrase-panel summary{cursor:pointer;list-style:none;padding:11px 13px;font-size:13px;font-weight:900;background:#f8fafc}
+.phrase-panel summary::-webkit-details-marker{display:none}
+.phrase-list{display:grid;gap:8px;padding:10px}
+.phrase-item{border:1px solid #eef2f7;border-radius:12px;padding:10px;background:#fff}
+.phrase-ko{font-size:12px;font-weight:900;color:#111827;margin-bottom:4px}
+.phrase-zh{font-size:15px;font-weight:900;color:#0f172a}
+.phrase-pron{margin-top:3px;font-size:11px;color:#64748b}
+
 </style>
 </head>
 <body>
@@ -636,6 +649,8 @@ body{padding-bottom:105px!important}
     <div class="stat"><b id="spentTop">0원</b><span>누적 사용</span></div>
     <div class="stat"><b id="remainTop">160만원</b><span>남은 공동경비</span></div>
   </div>
+
+  <div class="quick-tools" id="globalTranslateBtn"><button type="button" onclick="openTranslator()">🌐 번역기</button></div>
 </header>
 
 <div class="nav" id="nav"></div>
@@ -823,6 +838,28 @@ function syncStickyHeaderHeights(){
   if(active==='food')requestAnimationFrame(syncFoodStickyTop);
 }
 window.addEventListener('resize',syncStickyHeaderHeights,{passive:true});
+
+
+const TRAVEL_PHRASES=[
+  {ko:'4명입니다.',zh:'我們四位。',pron:'워먼 쓰웨이'},
+  {ko:'카드 결제 되나요?',zh:'可以刷卡嗎？',pron:'커이 슈아카 마?'},
+  {ko:'안 맵게 해주세요.',zh:'請不要辣。',pron:'칭 부야오 라'},
+  {ko:'이거 하나 주세요.',zh:'這個一個，謝謝。',pron:'저거 이거, 셰셰'},
+  {ko:'기차역이 어디예요?',zh:'火車站在哪裡？',pron:'훠처잔 짜이 날리?'},
+  {ko:'자전거를 보관할 수 있나요?',zh:'可以寄放自行車嗎？',pron:'커이 지팡 즈싱처 마?'}
+];
+function openTranslator(){
+  window.open('https://translate.google.com/?sl=ko&tl=zh-TW&op=translate','_blank','noopener');
+}
+function travelPhraseHtml(){
+  return `<div class="quick-tools"><button type="button" onclick="openTranslator()">🌐 번역기 열기</button></div>
+  <details class="phrase-panel">
+    <summary>🗣 필수 여행회화 6개</summary>
+    <div class="phrase-list">
+      ${TRAVEL_PHRASES.map(p=>`<div class="phrase-item"><div class="phrase-ko">${esc(p.ko)}</div><div class="phrase-zh">${esc(p.zh)}</div><div class="phrase-pron">${esc(p.pron)}</div></div>`).join('')}
+    </div>
+  </details>`;
+}
 
 function renderNav(){
   document.getElementById('nav').innerHTML=
@@ -1162,7 +1199,7 @@ function renderStay(){
         </div>
       </div>
     </div>
-  </div></section>`;
+  </div></section>${travelPhraseHtml()}`;
 }
 
 function getLocalChecklistState(){try{return JSON.parse(localStorage.getItem('tw_check_state_v1')||'{}')}catch(e){return{}}}
