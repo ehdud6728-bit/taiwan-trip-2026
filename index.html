@@ -806,6 +806,40 @@ body{
   to{transform:scale(1);opacity:1}
 }
 
+
+/* 맛집 필터 */
+.food-filters{
+  display:flex;
+  gap:7px;
+  margin:8px 0 12px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.food-filters::-webkit-scrollbar{display:none}
+.food-filter-btn{
+  flex:0 0 auto;
+  border:1px solid #e2e8f0;
+  background:#fff;
+  color:#475569;
+  border-radius:999px;
+  padding:7px 11px;
+  font-size:12px;
+  font-weight:900;
+}
+.food-filter-btn.active{
+  background:#0f4c81;
+  border-color:#0f4c81;
+  color:#fff;
+}
+.food-empty{
+  padding:20px 12px;
+  text-align:center;
+  color:#64748b;
+  font-size:13px;
+  font-weight:800;
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -1033,6 +1067,7 @@ function show(id){active=id;
 
 const VOTER_ID_KEY='tw_food_voter_id_v1', VOTER_NAME_KEY='tw_food_voter_name_v1';
 let FOOD_VOTES_LOADING=false, FOOD_VOTES_LOADED_AT=0, FOOD_NICK_LOADING=false, FOOD_NICK_ERROR='', FOOD_VOTE_PENDING=0;
+let FOOD_FILTER='all';
 
 function voterId(){
   let id=localStorage.getItem(VOTER_ID_KEY);
@@ -1287,15 +1322,45 @@ function updateTopNickname(){
   }
 }
 
+
+function setFoodFilter(mode){
+  FOOD_FILTER=mode||'all';
+  if(active==='food')renderFood();
+}
+function foodMatchesFilter(x){
+  if(FOOD_FILTER==='mine') return isMyFoodVote(x.voteId);
+  if(FOOD_FILTER==='hot') return foodVotesFor(x.voteId).length>=3;
+  return true;
+}
+
 function renderFood(){
   updateTopNickname();
   const guide=(DATA&&DATA.foodGuide)||[], me=voterName();
+  const filteredGuide=guide
+    .map(g=>({...g,items:(g.items||[]).filter(foodMatchesFilter)}))
+    .filter(g=>g.items.length>0);
+
   document.getElementById('main').innerHTML=`<section class="section"><div class="card">
     <h2>🍜 대만 맛집 가이드</h2>
     <p class="notice">각 날짜 일정 아래의 추천 음식은 그대로 유지합니다. 숟가락은 한 사람당 한 식당에 1개만 줄 수 있고, 여러 식당에는 자유롭게 투표할 수 있습니다.</p>
-    ${guide.map(g=>`<div class="food-region">
+
+    <div class="food-filters">
+      <button class="food-filter-btn ${FOOD_FILTER==='all'?'active':''}" onclick="setFoodFilter('all')">전체</button>
+      <button class="food-filter-btn ${FOOD_FILTER==='mine'?'active':''}" onclick="setFoodFilter('mine')">내 투표</button>
+      <button class="food-filter-btn ${FOOD_FILTER==='hot'?'active':''}" onclick="setFoodFilter('hot')">🔥 3표 이상</button>
+    </div>
+
+    ${filteredGuide.length===0?`<div class="food-empty">${
+      FOOD_FILTER==='mine'
+        ? '아직 내가 투표한 맛집이 없습니다.'
+        : FOOD_FILTER==='hot'
+          ? '아직 3표 이상 받은 맛집이 없습니다.'
+          : '표시할 맛집이 없습니다.'
+    }</div>`:''}
+
+    ${filteredGuide.map(g=>`<div class="food-region">
       <h3>📍 ${esc(g.region)}</h3>
-      ${(g.items||[]).map(x=>{
+      ${g.items.map(x=>{
         const v=foodVotesFor(x.voteId), mine=isMyFoodVote(x.voteId);
         return `<div class="food-card ${x.pick?'has-pick':''}">
           <div class="food-vote-count">${spoonIcon()} × ${v.length}${v.length>=3?`<span class="food-hot" title="3표 이상 인기 맛집">🔥</span>`:""}</div>
