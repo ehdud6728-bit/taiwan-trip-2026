@@ -1,3 +1,4 @@
+const APP_SCRIPT_VERSION = "2026-10-02-NICKNAME-V2";
 const SPREADSHEET_ID = "1ASQQ3T5BMuxPRzBsvU3dE5ud-hJiZRmN2hHct3hiHSk";
 const RATE_KRW_PER_TWD = 42.78;
 
@@ -224,6 +225,7 @@ function renameFoodVoter_(voterId,voterName) {
 
 function doGet(e) {
   const cb=e.parameter.callback, action=String(e.parameter.action||"");
+  if(action==="health") return out_({ok:true,version:APP_SCRIPT_VERSION,foodNickname:true,foodVotes:true,cache:true},cb);
   if(action==="foodVotes") return out_({ok:true,foodVotes:foodVotePayload_()},cb);
   if(action==="foodNickname") {
     try { return out_({ok:true,nickname:assignFoodNickname_(e.parameter.voterId)},cb); }
