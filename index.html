@@ -789,6 +789,23 @@ body{
   body{overscroll-behavior-y:contain}
 }
 
+
+/* 3표 이상 인기 맛집 불꽃 표시 */
+.food-hot{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-left:3px;
+  font-size:14px;
+  line-height:1;
+  filter:drop-shadow(0 1px 1px rgba(180,83,9,.15));
+  animation:hotPop .22s ease-out;
+}
+@keyframes hotPop{
+  from{transform:scale(.65);opacity:.2}
+  to{transform:scale(1);opacity:1}
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -1281,7 +1298,7 @@ function renderFood(){
       ${(g.items||[]).map(x=>{
         const v=foodVotesFor(x.voteId), mine=isMyFoodVote(x.voteId);
         return `<div class="food-card ${x.pick?'has-pick':''}">
-          <div class="food-vote-count">${spoonIcon()} × ${v.length}</div>
+          <div class="food-vote-count">${spoonIcon()} × ${v.length}${v.length>=3?`<span class="food-hot" title="3표 이상 인기 맛집">🔥</span>`:""}</div>
           ${x.pick?`<div class="food-pick">⭐ ${esc(x.pick)}</div>`:''}
           <div class="food-name">${esc(x.name)}${x.krName?` (${esc(x.krName)})`:''}</div>
           <div class="food-type">${esc(x.food)}</div>
