@@ -29,8 +29,77 @@ function fmtTime_(v) {
   const m = s.match(/(\d{1,2}):(\d{2})/);
   return m ? String(m[1]).padStart(2, "0") + ":" + m[2] : s;
 }
+
+const FOOD_VOTES_PROP = "FOOD_VOTES_V1";
+
+function foodVotes_() {
+  try {
+    return JSON.parse(PropertiesService.getScriptProperties().getProperty(FOOD_VOTES_PROP) || "{}");
+  } catch(e) {
+    return {};
+  }
+}
+function saveFoodVotes_(v) {
+  PropertiesService.getScriptProperties().setProperty(FOOD_VOTES_PROP, JSON.stringify(v || {}));
+}
+function cleanName_(s) {
+  return String(s || "").trim().replace(/\s+/g," ").slice(0,20);
+}
+function foodVotePayload_() {
+  const src=foodVotes_(), out={};
+  Object.keys(src).forEach(k=>{
+    const arr=Array.isArray(src[k])?src[k]:[];
+    out[k]=arr.map(v=>({id:String(v.id||""),name:cleanName_(v.name)})).filter(v=>v.id&&v.name);
+  });
+  return out;
+}
+function toggleFoodVote_(foodId,voterId,voterName) {
+  foodId=String(foodId||"").trim();
+  voterId=String(voterId||"").trim().slice(0,80);
+  voterName=cleanName_(voterName);
+  if(!foodId || !voterId || !voterName) throw new Error("투표 정보가 부족합니다.");
+  const lock=LockService.getScriptLock();
+  lock.waitLock(5000);
+  try{
+    const all=foodVotes_(), arr=Array.isArray(all[foodId])?all[foodId]:[];
+    const idx=arr.findIndex(v=>String(v.id)===voterId);
+    let selected=false;
+    if(idx>=0){
+      arr.splice(idx,1);
+    }else{
+      arr.push({id:voterId,name:voterName});
+      selected=true;
+    }
+    all[foodId]=arr;
+    saveFoodVotes_(all);
+    return {selected:selected,votes:arr.length};
+  }finally{
+    lock.releaseLock();
+  }
+}
+function renameFoodVoter_(voterId,voterName) {
+  voterId=String(voterId||"").trim().slice(0,80);
+  voterName=cleanName_(voterName);
+  if(!voterId || !voterName) throw new Error("이름 정보가 부족합니다.");
+  const lock=LockService.getScriptLock();
+  lock.waitLock(5000);
+  try{
+    const all=foodVotes_();
+    Object.keys(all).forEach(k=>{
+      const arr=Array.isArray(all[k])?all[k]:[];
+      arr.forEach(v=>{ if(String(v.id)===voterId) v.name=voterName; });
+      all[k]=arr;
+    });
+    saveFoodVotes_(all);
+  }finally{
+    lock.releaseLock();
+  }
+}
+
 function doGet(e) {
-  const ss=ss_(), cb=e.parameter.callback;
+  const cb=e.parameter.callback, action=String(e.parameter.action||"");
+  if(action==="foodVotes") return out_({ok:true,foodVotes:foodVotePayload_()},cb);
+  const ss=ss_();
   const c=ss.getSheetByName("준비물").getDataRange().getValues();
   const t=ss.getSheetByName("열차").getDataRange().getValues();
   const x=ss.getSheetByName("경비").getDataRange().getValues();
@@ -42,7 +111,16 @@ function doGet(e) {
 }
 function doPost(e) {
   try {
-    const p=e.parameter||{}, a=p.action, ss=ss_();
+    const p=e.parameter||{}, a=p.action;
+    if(a==="toggleFoodVote") {
+      const result=toggleFoodVote_(p.foodId,p.voterId,p.voterName);
+      return out_({ok:true,result:result});
+    }
+    if(a==="renameFoodVoter") {
+      renameFoodVoter_(p.voterId,p.voterName);
+      return out_({ok:true});
+    }
+    const ss=ss_();
     if(a==="setChecklist") ss.getSheetByName("준비물").getRange(Number(p.row),3).setValue(String(p.done)==="true");
     else if(a==="addChecklist") ss.getSheetByName("준비물").appendRow([p.item||"",p.owner||"",false,p.note||""]);
     else if(a==="deleteChecklist") ss.getSheetByName("준비물").deleteRow(Number(p.row));
