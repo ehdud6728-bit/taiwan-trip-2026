@@ -30,6 +30,44 @@ function fmtTime_(v) {
   return m ? String(m[1]).padStart(2, "0") + ":" + m[2] : s;
 }
 
+
+const SHARED_CACHE_KEY = "TAIWAN_TRIP_SHARED_V1";
+const SHARED_CACHE_SECONDS = 120;
+
+function buildSharedPayload_() {
+  const ss=ss_();
+  const c=ss.getSheetByName("준비물").getDataRange().getValues();
+  const t=ss.getSheetByName("열차").getDataRange().getValues();
+  const x=ss.getSheetByName("경비").getDataRange().getValues();
+  return {
+    checklist:c.slice(1).filter(r=>r[0]!=="").map((r,i)=>({
+      row:i+2,item:fmt_(r[0]),owner:fmt_(r[1]),done:r[2]===true,note:fmt_(r[3])
+    })),
+    trains:t.slice(1).filter(r=>r[0]!=="").map((r,i)=>({
+      row:i+2,date:fmtDate_(r[0]),route:fmt_(r[1]),departure:fmtTime_(r[2]),
+      arrival:fmtTime_(r[3]),trainNo:fmt_(r[4]),status:fmt_(r[5]),note:fmt_(r[6])
+    })),
+    expenses:x.slice(1).filter(r=>r[0]!=="").map((r,i)=>({
+      row:i+2,time:fmt_(r[0]),date:fmt_(r[1]),cat:fmt_(r[2]),cur:fmt_(r[3]),
+      raw:Number(r[4])||0,pay:fmt_(r[5]),memo:fmt_(r[6]),
+      rate:Number(r[7])||RATE_KRW_PER_TWD,krw:Number(r[8])||0,inputter:fmt_(r[9])
+    })).reverse()
+  };
+}
+function sharedPayloadCached_() {
+  const cache=CacheService.getScriptCache();
+  const raw=cache.get(SHARED_CACHE_KEY);
+  if(raw){
+    try { return JSON.parse(raw); } catch(e) {}
+  }
+  const payload=buildSharedPayload_();
+  try { cache.put(SHARED_CACHE_KEY,JSON.stringify(payload),SHARED_CACHE_SECONDS); } catch(e) {}
+  return payload;
+}
+function clearSharedCache_() {
+  try { CacheService.getScriptCache().remove(SHARED_CACHE_KEY); } catch(e) {}
+}
+
 const FOOD_VOTES_PROP = "FOOD_VOTES_V1";
 
 function foodVotes_() {
@@ -99,14 +137,13 @@ function renameFoodVoter_(voterId,voterName) {
 function doGet(e) {
   const cb=e.parameter.callback, action=String(e.parameter.action||"");
   if(action==="foodVotes") return out_({ok:true,foodVotes:foodVotePayload_()},cb);
-  const ss=ss_();
-  const c=ss.getSheetByName("준비물").getDataRange().getValues();
-  const t=ss.getSheetByName("열차").getDataRange().getValues();
-  const x=ss.getSheetByName("경비").getDataRange().getValues();
-  return out_({ok:true,
-    checklist:c.slice(1).filter(r=>r[0]!=="").map((r,i)=>({row:i+2,item:fmt_(r[0]),owner:fmt_(r[1]),done:r[2]===true,note:fmt_(r[3])})),
-    trains:t.slice(1).filter(r=>r[0]!=="").map((r,i)=>({row:i+2,date:fmtDate_(r[0]),route:fmt_(r[1]),departure:fmtTime_(r[2]),arrival:fmtTime_(r[3]),trainNo:fmt_(r[4]),status:fmt_(r[5]),note:fmt_(r[6])})),
-    expenses:x.slice(1).filter(r=>r[0]!=="").map((r,i)=>({row:i+2,time:fmt_(r[0]),date:fmt_(r[1]),cat:fmt_(r[2]),cur:fmt_(r[3]),raw:Number(r[4])||0,pay:fmt_(r[5]),memo:fmt_(r[6]),rate:Number(r[7])||RATE_KRW_PER_TWD,krw:Number(r[8])||0,inputter:fmt_(r[9])})).reverse()
+
+  const shared=sharedPayloadCached_();
+  return out_({
+    ok:true,
+    checklist:shared.checklist||[],
+    trains:shared.trains||[],
+    expenses:shared.expenses||[]
   },cb);
 }
 function doPost(e) {
@@ -132,6 +169,7 @@ function doPost(e) {
     }
     else if(a==="deleteExpense") ss.getSheetByName("경비").deleteRow(Number(p.row));
     else return out_({ok:false,error:"unknown action"});
+    clearSharedCache_();
     return out_({ok:true});
   } catch(err) { return out_({ok:false,error:String(err)}); }
 }
