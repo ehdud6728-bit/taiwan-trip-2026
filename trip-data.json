@@ -1195,6 +1195,66 @@
   ],
   "foodGuide": [
     {
+      "region": "타오위안공항",
+      "items": [
+        {
+          "name": "牛肉麵",
+          "krName": "우육면",
+          "food": "대만 대표 우육면",
+          "desc": "소고기 + 진한 국물 + 면. 공항에서 첫 대만식 한 끼로 가장 무난한 선택. 추천 ★★★★★",
+          "near": "타오위안 국제공항 터미널 식당가",
+          "distance": "공항 내부",
+          "timing": "10/5 도착 직후 또는 10/9 출국 전",
+          "map": "https://www.google.com/maps/search/?api=1&query=Taoyuan+International+Airport+beef+noodles",
+          "voteId": "food_89fdb32c0e"
+        },
+        {
+          "name": "台式海南雞飯",
+          "krName": "대만식 하이난 치킨라이스",
+          "food": "닭고기 + 밥 + 대만식 소스",
+          "desc": "담백하고 든든해서 이동 전후 한 끼로 좋음. 추천 ★★★★★",
+          "near": "타오위안 국제공항 터미널 식당가",
+          "distance": "공항 내부",
+          "timing": "10/5 도착 직후 또는 10/9 출국 전",
+          "map": "https://www.google.com/maps/search/?api=1&query=Taoyuan+International+Airport+Hainan+chicken+rice",
+          "voteId": "food_d69d945935"
+        },
+        {
+          "name": "極厚切豬排飯",
+          "krName": "두툼한 돼지고기 덮밥",
+          "food": "두툼한 돼지고기 + 밥",
+          "desc": "배가 많이 고플 때 든든하게 먹기 좋은 메뉴. 추천 ★★★★☆",
+          "near": "타오위안 국제공항 터미널 식당가",
+          "distance": "공항 내부",
+          "timing": "10/5 도착 직후 또는 10/9 출국 전",
+          "map": "https://www.google.com/maps/search/?api=1&query=Taoyuan+International+Airport+pork+rice",
+          "voteId": "food_e9f42f9b04"
+        },
+        {
+          "name": "台式滷味 / 滷豬腳",
+          "krName": "대만식 간장조림 / 족발",
+          "food": "향신료와 간장으로 푹 조린 돼지고기",
+          "desc": "장조림이나 족발류를 좋아하면 추천. 향신료 풍미가 있는 대만식 조림요리. 추천 ★★★★☆",
+          "near": "타오위안 국제공항 터미널 식당가",
+          "distance": "공항 내부",
+          "timing": "10/5 도착 직후 또는 10/9 출국 전",
+          "map": "https://www.google.com/maps/search/?api=1&query=Taoyuan+International+Airport+braised+pork",
+          "voteId": "food_dcef922acf"
+        },
+        {
+          "name": "台南擔仔麵",
+          "krName": "타이난 단짜이면",
+          "food": "타이난 대표 면요리",
+          "desc": "우육면보다 가볍게 먹기 좋은 작은 면요리. 출국 전 부담 적은 메뉴로도 좋음. 추천 ★★★★☆",
+          "near": "타오위안 국제공항 터미널 식당가",
+          "distance": "공항 내부",
+          "timing": "10/5 도착 직후 또는 10/9 출국 전",
+          "map": "https://www.google.com/maps/search/?api=1&query=Taoyuan+International+Airport+Danzi+noodles",
+          "voteId": "food_cccbc031b1"
+        }
+      ]
+    },
+    {
       "region": "화롄 시내",
       "items": [
         {
