@@ -1262,9 +1262,9 @@
           "food": "계란파전 · 炸蛋蔥油餅",
           "desc": "반숙 계란이 들어간 바삭한 총유빙. 화롄 대표 간식.",
           "map": "https://www.google.com/maps/search/?api=1&query=No.+27,+Minsheng+Rd,+Minyun+Village,+Hualien+City,+Hualien+County,+Taiwan+970",
-          "near": "화롄 시내 · 숙소/동대문야시장과 화롄역 사이",
-          "distance": "숙소에서 시내 이동 중 들르기 좋은 편",
-          "timing": "10/5 저녁 전 · 10/6~7 라이딩 복귀 후",
+          "near": "화롄 시내 · 復興街",
+          "distance": "새 숙소(民生路)에서 시내·동대문야시장 방향으로 이동할 때 들르기 좋은 편",
+          "timing": "10/5 시내 이동 중 · 10/6~7 라이딩 복귀 후",
           "voteId": "f_af25730f6570",
           "krName": "자단 충요우빙 황처"
         },
@@ -1273,9 +1273,9 @@
           "food": "계란파전",
           "desc": "황차와 함께 유명한 오래된 화롄 계란파전집. 줄이 짧은 곳을 골라도 좋음.",
           "map": "https://www.google.com/maps/search/?api=1&query=%E8%80%81%E7%89%8C%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+%E8%8A%B1%E8%93%AE",
-          "near": "화롄 시내 · 黃車 인근",
-          "distance": "黃車와 거의 같은 권역, 줄 짧은 곳 선택",
-          "timing": "10/5 저녁 전 · 라이딩 복귀 후",
+          "near": "화롄 시내 · 黃車 인근 復興街",
+          "distance": "黃車와 거의 같은 권역. 새 숙소에서 시내 방향으로 이동할 때 함께 비교 가능",
+          "timing": "10/5 시내 이동 중 · 라이딩 복귀 후",
           "voteId": "f_2ff5b5217e42",
           "krName": "라오파이 자단 충요우빙"
         },
@@ -1285,7 +1285,7 @@
           "desc": "자전거 렌탈샵과 가까워 수령·반납 전후에 들르기 좋은 홍콩식 딤섬집.",
           "map": "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83+%E8%8A%B1%E8%93%AE",
           "near": "화롄역·자전거 렌탈샵 인근",
-          "distance": "렌탈샵과 같은 Guolian 1st Rd 권역, 매우 가까운 편",
+          "distance": "렌탈샵과 같은 Guolian 1st Rd 권역. 숙소보다 렌탈샵 일정과 묶는 편이 효율적",
           "timing": "자전거 수령 전 · 반납 후",
           "voteId": "f_ded2648bb2f6",
           "krName": "하오정뎬 강스뎬신"
@@ -1295,8 +1295,8 @@
           "food": "샤오롱바오 · 찐만두",
           "desc": "도톰한 피와 육즙감이 있는 화롄식 만두를 먹기 좋은 곳.",
           "map": "https://www.google.com/maps/search/?api=1&query=No.+27,+Minsheng+Rd,+Minyun+Village,+Hualien+City,+Hualien+County,+Taiwan+970",
-          "near": "화롄 시내 · 역에서 숙소 쪽으로 내려오는 동선",
-          "distance": "화롄역과 동대문야시장 사이 시내권",
+          "near": "화롄 시내 · 역과 중심가 사이",
+          "distance": "새 숙소에서 시내 중심으로 이동하는 날 묶기 좋은 위치",
           "timing": "10/5 첫날 · 10/6~7 저녁",
           "voteId": "f_71c7e1fb6337",
           "krName": "저우자 정자오 샤오룽바오"
@@ -1306,9 +1306,9 @@
           "food": "바오 · 만두",
           "desc": "여럿이 나눠 먹기 좋은 화롄 대표 간식집.",
           "map": "https://www.google.com/maps/search/?api=1&query=No.+27,+Minsheng+Rd,+Minyun+Village,+Hualien+City,+Hualien+County,+Taiwan+970",
-          "near": "화롄 시내 중심 · 동대문야시장 권역",
-          "distance": "숙소/야시장 쪽에서 접근 쉬운 편",
-          "timing": "야시장 가기 전 간식 · 라이딩 후",
+          "near": "화롄 시내 중심 · 中山路",
+          "distance": "새 숙소 바로 앞은 아니며, 동대문야시장·중산로 시내 일정과 묶는 편이 좋음",
+          "timing": "야시장 가기 전 간식 · 라이딩 후 시내 이동 시",
           "voteId": "f_7911c4fba2f9",
           "krName": "궁정 바오쯔"
         },
@@ -1317,8 +1317,8 @@
           "food": "거위고기",
           "desc": "화롄 로컬식 거위요리를 생강채와 소스에 곁들여 먹기 좋은 곳.",
           "map": "https://www.google.com/maps/search/?api=1&query=No.+27,+Minsheng+Rd,+Minyun+Village,+Hualien+City,+Hualien+County,+Taiwan+970",
-          "near": "화롄 시내 · 숙소 남서쪽",
-          "distance": "숙소에서 택시/자전거로 짧게 이동하는 시내권",
+          "near": "화롄 시내 중심권",
+          "distance": "새 숙소에서 시내 식사하러 나갈 때 함께 잡기 좋은 편",
           "timing": "10/6 또는 10/7 저녁",
           "voteId": "f_7a09b5582e92",
           "krName": "화롄 어러우 아청"
@@ -1329,7 +1329,7 @@
           "desc": "관광객에게도 잘 알려진 대표 거위 전문점. 여러 반찬과 함께 주문하기 좋음.",
           "map": "https://www.google.com/maps/search/?api=1&query=No.+27,+Minsheng+Rd,+Minyun+Village,+Hualien+City,+Hualien+County,+Taiwan+970",
           "near": "화롄 시내 · 林森路 권역",
-          "distance": "숙소에서 시내 이동으로 접근 가능한 편",
+          "distance": "새 숙소에서 시내 중심으로 이동해 방문하는 저녁 식사 후보",
           "timing": "10/6 또는 10/7 저녁",
           "voteId": "f_ea73a5eb2a7b",
           "krName": "어러우 셴성"
@@ -1339,8 +1339,8 @@
           "food": "鹹豆漿 · 油條 · 燒餅油條",
           "desc": "짠두유(셴더우장)에 요우티아오를 곁들이거나 샤오빙에 끼워 먹는 대만식 조식.",
           "map": "https://www.google.com/maps/search/?api=1&query=No.+27,+Minsheng+Rd,+Minyun+Village,+Hualien+City,+Hualien+County,+Taiwan+970",
-          "near": "숙소·화롄역 주변 조식권",
-          "distance": "당일 영업 중인 가까운 두유집 검색",
+          "near": "새 숙소(民生路)·화롄역 주변 조식권",
+          "distance": "아침 출발 방향에 맞춰 숙소 또는 역 주변의 가까운 두유집 선택",
           "timing": "10/6 · 10/7 · 10/8 아침",
           "voteId": "f_27b4c85d3adc"
         }
@@ -1355,8 +1355,8 @@
           "desc": "야시장 안에서 편하게 먹을 수 있는 계란 총유빙.",
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%B8%E8%9B%8B%E8%94%A5%E6%B2%B9%E9%A4%85+C26",
           "near": "동대문야시장",
-          "distance": "숙소에서 가장 편한 야시장 먹거리",
-          "timing": "10/5 첫날 밤 · 저녁 산책",
+          "distance": "새 숙소 바로 앞은 아니므로 저녁에 시내·야시장으로 이동해 방문",
+          "timing": "10/5 첫날 밤 · 10/6~7 저녁 산책",
           "voteId": "f_960585f40849",
           "krName": "둥다먼 예스 자단 충요우빙 C26"
         },
@@ -1366,7 +1366,7 @@
           "desc": "화롄 원주민 향신료 마가오를 경험하기 좋은 야시장 메뉴.",
           "map": "https://www.google.com/maps/search/?api=1&query=No.+27,+Minsheng+Rd,+Minyun+Village,+Hualien+City,+Hualien+County,+Taiwan+970",
           "near": "동대문야시장",
-          "distance": "숙소에서 도보권 야시장",
+          "distance": "새 숙소에서 야시장으로 이동해 먹는 저녁 코스",
           "timing": "10/5 밤 · 10/6~7 저녁",
           "voteId": "f_ad80bd25abf8",
           "krName": "위안주민 주퉁판 · 마가오 샹창"
@@ -1377,8 +1377,8 @@
           "desc": "달고 짭짤한 소스를 발라 구워내는 대만 야시장 대표 간식.",
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E7%82%AD%E7%83%A4%E7%8E%89%E7%B1%B3",
           "near": "동대문야시장",
-          "distance": "숙소에서 도보권 야시장",
-          "timing": "저녁 간식",
+          "distance": "숙소 도보 바로 앞이 아니라 야시장 방문 일정에 맞춰 이동",
+          "timing": "저녁 산책 · 야시장 간식",
           "voteId": "f_39b0df0894ff",
           "krName": "둥다먼 예스 탄카오 위미"
         },
@@ -1388,8 +1388,8 @@
           "desc": "굴과 달걀, 전분 반죽을 함께 부쳐 먹는 대만 야시장 대표 음식.",
           "map": "https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E5%A4%A7%E9%96%80%E5%A4%9C%E5%B8%82+%E8%9A%B5%E4%BB%94%E7%85%8E",
           "near": "동대문야시장",
-          "distance": "숙소에서 도보권 야시장",
-          "timing": "저녁 식사/간식",
+          "distance": "새 숙소에서 야시장으로 이동하는 날 묶기 좋은 메뉴",
+          "timing": "저녁 식사 · 야시장 간식",
           "voteId": "f_e11cfc5f7a3d",
           "krName": "둥다먼 예스 어아젠"
         }
