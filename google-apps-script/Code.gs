@@ -265,6 +265,15 @@ function doPost(e) {
       const krw=cur==="KRW"?raw:Math.round(raw*rate);
       ss.getSheetByName("경비").appendRow([Utilities.formatDate(new Date(),"Asia/Taipei","yyyy-MM-dd HH:mm:ss"),p.date||"",p.cat||"기타",cur,raw,p.pay||"",p.memo||"",rate,krw,p.inputter||""]);
     }
+    else if(a==="updateExpense") {
+      const row=Number(p.row), raw=Number(p.amount)||0, cur=p.cur||"TWD", rate=Number(p.rate)||RATE_KRW_PER_TWD;
+      if(!row || row<2) throw new Error("잘못된 경비 행입니다.");
+      const krw=cur==="KRW"?raw:Math.round(raw*rate);
+      // C:I만 수정하여 최초 입력시간(A), 날짜(B), 입력자(J)는 유지한다.
+      ss.getSheetByName("경비").getRange(row,3,1,7).setValues([[
+        p.cat||"기타",cur,raw,p.pay||"",p.memo||"",rate,krw
+      ]]);
+    }
     else if(a==="deleteExpense") ss.getSheetByName("경비").deleteRow(Number(p.row));
     else return out_({ok:false,error:"unknown action"});
     clearSharedCache_();
