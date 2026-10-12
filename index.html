@@ -840,6 +840,25 @@ body{
   font-weight:800;
 }
 
+
+/* 경비 수정 버튼 */
+.expense-actions{
+  display:flex;
+  gap:4px;
+  flex:0 0 auto;
+  align-items:center;
+}
+.expense-actions button{
+  border:0;
+  background:none;
+  padding:6px 7px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:900;
+}
+.expense-edit-btn{color:#2563eb!important;background:#eff6ff!important}
+.expense-delete-btn{color:#dc2626!important}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -871,7 +890,7 @@ body{
 
 <div class="sheet" id="sheet" onclick="if(event.target.id==='sheet')closeExpense()">
  <div class="panel">
-  <h2 style="margin:0 0 8px">🧾 빠른 경비 입력</h2>
+  <h2 id="expenseTitle" style="margin:0 0 8px">🧾 빠른 경비 입력</h2>
   <div style="display:flex;gap:8px;align-items:end">
    <div style="flex:1"><small>금액</small><input id="amt" class="big" type="number" inputmode="decimal" placeholder="0"></div>
    <select id="cur"><option>TWD</option><option>KRW</option></select>
@@ -879,7 +898,7 @@ body{
   <small style="display:block;margin-top:10px">분류</small><div class="chips" id="cats"></div>
   <small style="display:block;margin-top:8px">결제수단</small><div class="chips" id="pays"></div>
   <input id="memo" style="width:100%;margin-top:8px" placeholder="메모(선택) 예: 우육면 4명">
-  <div class="actions"><button onclick="closeExpense()">취소</button><button style="background:#0f172a;color:#fff" onclick="saveExpense()">저장</button></div>
+  <div class="actions"><button onclick="closeExpense()">취소</button><button id="expenseSaveBtn" style="background:#0f172a;color:#fff" onclick="saveExpense()">저장</button></div>
  </div>
 </div>
 
@@ -894,7 +913,7 @@ body{
 </div>
 
 <script>
-let DATA=null,active='d1',cat='식비',pay='현금',SHARED={checklist:[],trains:[],expenses:[],foodVotes:{}},SHARED_LOADED=false,SHARED_LOADING=false,AUTO_REFRESH_TIMER=null,LAST_SHARED_SIG='';
+let DATA=null,active='d1',cat='식비',pay='현금',EXPENSE_EDIT_ROW=null,SHARED={checklist:[],trains:[],expenses:[],foodVotes:{}},SHARED_LOADED=false,SHARED_LOADING=false,AUTO_REFRESH_TIMER=null,LAST_SHARED_SIG='';
 const SHEETS_API_URL='https://script.google.com/macros/s/AKfycbwQgeabBH9rcoJtd7E1yQiU7gsWrJCnwKvkzR2TndcaZD0N0-sSGtj5rUxk27g2ssnq/exec';
 const cats=['식비','야시장','교통','카페/간식','온천/입장','편의점','기타'];
 const pays=['현금','총무카드','개인카드','모바일페이'];
@@ -1676,7 +1695,7 @@ function renderMoneyPage(){
       <div class="syncbar"><span class="dot ${ready()?'ok':''}"></span>${ready()?'Google Sheet 공동 저장':'이 기기 임시 저장'}</div>
       <div class="grid2"><div class="kv"><small>누적 사용</small><strong>${total.toLocaleString()}원</strong></div><div class="kv"><small>남은 경비</small><strong>${Math.max(0,budget-total).toLocaleString()}원</strong></div></div>
       <div class="btnrow"><button class="btn dark" onclick="openExpense()">＋ 경비 입력</button><button class="btn" onclick="refreshMoney()">↻ 새로고침</button><button class="btn" onclick="exportCsv()">CSV</button></div>
-      <div style="margin-top:8px">${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<button onclick="delE(${x.row})" style="border:0;background:none;color:#dc2626">삭제</button>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}</div>
+      <div style="margin-top:8px">${a.map(x=>`<div class="expense"><div><b>${esc(x.cat)}</b> · ${x.cur==='TWD'?'NT$':''}${Number(x.raw).toLocaleString()}${x.cur==='KRW'?'원':''}<div class="notice">${esc(x.pay||'')}${x.memo?' · '+esc(x.memo):''} · ${esc(x.time||x.local||'')}</div></div>${x.row?`<div class="expense-actions"><button class="expense-edit-btn" onclick="editExpense(${x.row})">수정</button><button class="expense-delete-btn" onclick="delE(${x.row})">삭제</button></div>`:''}</div>`).join('')||'<p class="notice">아직 경비가 없습니다.</p>'}</div>
     </div>
 
     <div class="card" style="margin-top:14px">
@@ -1716,10 +1735,82 @@ async function refreshMoney(){
   if(ok){LAST_SHARED_SIG=sharedSignature(SHARED);renderMoney();renderMoneyPage();}
   else{setMoneyUnavailable();renderMoneyPage();}
 }
-function renderChips(){document.getElementById('cats').innerHTML=cats.map((x,i)=>`<button class="chip ${i===0?'active':''}" onclick="pick('cat',this,'${x}')">${x}</button>`).join('');document.getElementById('pays').innerHTML=pays.map((x,i)=>`<button class="chip ${i===0?'active':''}" onclick="pick('pay',this,'${x}')">${x}</button>`).join('')}
-function pick(t,b,v){b.parentElement.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');t==='cat'?cat=v:pay=v}
-function openExpense(){document.getElementById('sheet').classList.add('show');setTimeout(()=>document.getElementById('amt').focus(),100)}function closeExpense(){document.getElementById('sheet').classList.remove('show')}
-function saveExpense(){let raw=parseFloat(document.getElementById('amt').value||0);if(!raw)return;let cur=document.getElementById('cur').value,rate=DATA.meta.exchangeRateKRWPerTWD,memo=document.getElementById('memo').value.trim();if(ready())postShared({action:'addExpense',amount:raw,cur,rate,cat,pay,memo,date:new Date().toLocaleDateString('sv-SE'),inputter:''},()=>{document.getElementById('amt').value='';document.getElementById('memo').value='';closeExpense();renderMoneyPage()});else{let a=getLocal(),krw=cur==='KRW'?raw:raw*rate;a.unshift({raw,cur,krw,cat,pay,memo,local:new Date().toLocaleString('ko-KR')});localStorage.setItem('tw_expenses_v3',JSON.stringify(a));SHARED.expenses=a;renderMoney();closeExpense()}}
+function renderChips(){
+  document.getElementById('cats').innerHTML=cats.map(x=>`<button class="chip ${x===cat?'active':''}" onclick="pick('cat',this,'${x}')">${x}</button>`).join('');
+  document.getElementById('pays').innerHTML=pays.map(x=>`<button class="chip ${x===pay?'active':''}" onclick="pick('pay',this,'${x}')">${x}</button>`).join('');
+}
+function pick(t,b,v){
+  b.parentElement.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  t==='cat'?cat=v:pay=v;
+}
+function resetExpenseForm(){
+  EXPENSE_EDIT_ROW=null;
+  cat='식비';
+  pay='현금';
+  document.getElementById('amt').value='';
+  document.getElementById('cur').value='TWD';
+  document.getElementById('memo').value='';
+  document.getElementById('expenseTitle').textContent='🧾 빠른 경비 입력';
+  document.getElementById('expenseSaveBtn').textContent='저장';
+  renderChips();
+}
+function openExpense(){
+  resetExpenseForm();
+  document.getElementById('sheet').classList.add('show');
+  setTimeout(()=>document.getElementById('amt').focus(),100);
+}
+function editExpense(row){
+  const x=(SHARED.expenses||[]).find(v=>Number(v.row)===Number(row));
+  if(!x)return alert('경비 내역을 찾지 못했습니다. 새로고침 후 다시 시도해주세요.');
+  EXPENSE_EDIT_ROW=Number(row);
+  cat=x.cat||'기타';
+  pay=x.pay||'현금';
+  document.getElementById('amt').value=Number(x.raw)||'';
+  document.getElementById('cur').value=x.cur||'TWD';
+  document.getElementById('memo').value=x.memo||'';
+  document.getElementById('expenseTitle').textContent='✏️ 경비 수정';
+  document.getElementById('expenseSaveBtn').textContent='수정 저장';
+  renderChips();
+  document.getElementById('sheet').classList.add('show');
+  setTimeout(()=>document.getElementById('amt').focus(),100);
+}
+function closeExpense(){
+  document.getElementById('sheet').classList.remove('show');
+}
+function saveExpense(){
+  const raw=parseFloat(document.getElementById('amt').value||0);
+  if(!raw)return alert('금액을 입력해주세요.');
+  const cur=document.getElementById('cur').value;
+  const rate=DATA.meta.exchangeRateKRWPerTWD;
+  const memo=document.getElementById('memo').value.trim();
+
+  if(ready()){
+    const editing=Number(EXPENSE_EDIT_ROW)||0;
+    const payload=editing
+      ? {action:'updateExpense',row:editing,amount:raw,cur,rate,cat,pay,memo}
+      : {action:'addExpense',amount:raw,cur,rate,cat,pay,memo,date:new Date().toLocaleDateString('sv-SE'),inputter:''};
+
+    postShared(payload,()=>{
+      closeExpense();
+      resetExpenseForm();
+      renderMoneyPage();
+    });
+  }else{
+    let a=getLocal(),krw=cur==='KRW'?raw:raw*rate;
+    if(EXPENSE_EDIT_ROW!==null){
+      const i=a.findIndex((_,idx)=>idx===EXPENSE_EDIT_ROW);
+      if(i>=0)a[i]={...a[i],raw,cur,krw,cat,pay,memo};
+    }else{
+      a.unshift({raw,cur,krw,cat,pay,memo,local:new Date().toLocaleString('ko-KR')});
+    }
+    localStorage.setItem('tw_expenses_v3',JSON.stringify(a));
+    SHARED.expenses=a;
+    renderMoney();
+    closeExpense();
+    resetExpenseForm();
+  }
+}
 function delE(row){if(confirm('이 경비를 삭제할까요?'))postShared({action:'deleteExpense',row},()=>{renderMoney();renderMoneyPage()})}
 function exportCsv(){let a=SHARED.expenses||[];if(!a.length)return alert('경비 내역이 없습니다.');let rows=[['시간','분류','결제수단','금액','통화','KRW환산','메모'],...a.slice().reverse().map(x=>[x.time||x.local,x.cat,x.pay,x.raw,x.cur,Math.round(x.krw),x.memo])],csv='\uFEFF'+rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\n'),blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),u=URL.createObjectURL(blob),aa=document.createElement('a');aa.href=u;aa.download='대만여행_공동경비.csv';aa.click();setTimeout(()=>URL.revokeObjectURL(u),500)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
